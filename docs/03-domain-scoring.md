@@ -40,15 +40,17 @@ Persist with each aggregate row:
 
 Must meet WCAG 2.2 AA on light canvas.
 
-## Uncertainty (to freeze after Phase E)
+## Uncertainty (frozen Phase 2)
 
-Until exploration:
+| Label | Sample size `n` (circulations in cell) |
+|-------|------------------------------------------|
+| Banner « historique insuffisant » | `n < 30` (score still shown) |
+| **faible** | `n < 100` |
+| **moyen** | `100 ≤ n < 300` |
+| **fort** | `n ≥ 300` |
 
-- Placeholder rule: if `n < N_min` → banner « historique insuffisant » + still show score.
-- Labels: faible / moyen / fort from sample size buckets.
-- No fancy Bayesian interval unless trivial after E.
-
-Fill exact `N_min` and buckets here after gate E — do not invent before matrix.
+Constants: `lib/uncertainty.ts` (`N_MIN.banner=30`, `mid=100`, `high=300`).  
+No Bayesian interval in MVP.
 
 ## Alternative
 

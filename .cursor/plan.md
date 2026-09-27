@@ -38,19 +38,23 @@ Agents execute between human gates. Check boxes only when the gate evidence exis
 
 ## Phase 2 — ETL + KPI
 
-- [ ] Schema refs / agg / watermarks / weights
-- [ ] ETL hash → replace partition
-- [ ] Scoring + uncertainty (`N_min` frozen)
-- [ ] Tests etl/kpi + CI fixtures
-- [ ] Gate: double-run noop; storage OK
+- [x] Schema refs / agg / watermarks / weights
+- [x] ETL hash → replace partition
+- [x] Scoring + uncertainty (`N_min` frozen)
+- [x] Tests etl/kpi + CI fixtures
+- [x] Gate: double-run noop; storage OK
+
+**Gate 2:** human OK 2026-09-27 → Phase 3a.
 
 ## Phase 3 — Routes
 
 ### 3a Slice
 
-- [ ] Search + `/trajet/[from]-[to]` oriented
-- [ ] `noindex` + canonical self
-- [ ] Golden path DoD
+- [x] Search + `/trajet/[from]-[to]` oriented
+- [x] `noindex` + canonical self
+- [x] Golden path DoD
+
+**Gate 3a evidence:** home search → `/trajet/paris-gare-de-lyon--melun` ; score + uncertainty + alt ±30 + disclaimer + OG ; tests/lint/tsc green.
 
 ### 3b Browse (only if matrix OK)
 

@@ -1,6 +1,6 @@
 # Intent — LineTrust MVP (MonTER)
 
-Status: **locked** (Phase H) · Phase E gate signed 2026-09-27 · next = Phase 2  
+Status: **locked** · Phase 2+3a complete (awaiting human gate 3a) · next = Phase 4 UI polish  
 Last updated: 2026-09-27
 
 ## One-liner
@@ -76,6 +76,6 @@ Auth, native app, live realtime, freemium, France outside IDF, early indexing, h
 
 - Pilot corridor → **RER D Branche Melun** (gate E signed 2026-09-27)
 - Score grain → **pair × window** via ART S6 (signed)
-- `N_min` → freeze **30 / 100 / 300** in `docs/03` during Phase 2
-- Estimated times → include with `used_est` flag (default); document in `docs/04` Phase 2
+- `N_min` → **frozen** 30 / 100 / 300 in `docs/03` + `lib/uncertainty.ts`
+- Estimated times → **include** with `used_est` / `n_used_est` (default); see `docs/04`
 - Whitelist → `docs/exploration/source-whitelist.md` (S6 ART primary)

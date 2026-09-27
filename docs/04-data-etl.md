@@ -16,6 +16,29 @@ download → hash file → if unchanged: noop
 
 Row-level diff = v1 **only after** Phase E proves stable business keys.
 
+## Phase 2 implementation
+
+| Piece | Path |
+|-------|------|
+| Schema | `db/schema.sql` (Neon project `muddy-paper-90279472`) |
+| Stream ETL | `scripts/etl/art-melun-stream.py` (ART zip → `agg_pair_window` + rollup) |
+| Pure aggregate (tests) | `lib/etl/aggregate.ts` |
+| Watermark decision | `lib/etl/watermark.ts` |
+| Corridor codes | `lib/etl/corridor.ts` |
+
+**Corridor filter:** `tct=TBD` + OD endpoints Paris-Gare-de-Lyon (`686030` / alias `686006`) ↔ Melun (`682005`).  
+Directed pairs among jalons on those trips; window = 30 min floor of theoretical depart at `from`.
+
+### Estimated times (`dh_est_jalon`)
+
+**Choice (Phase 2):** include estimated arrivals when `dh_obs_jalon` is null, with `n_used_est` / future UI flag `used_est`.  
+Strict TPR (obs-only) is optional later — not the default score. Disclose share of estimated samples when material for the cell.
+
+### Cancellations / TSR
+
+No boolean cancel field in ART. **MVP:** `n_cancelled = 0`, `tsr = 0` (reliability term = 35 pts flat).  
+Do not invent missing circulations. TSR upgrade = explicit derivation vs GTFS (V2 / validated proxy).
+
 ## Watermarks
 
 Track per source: `source_id`, `partition_key` (e.g. `2025-01`), `content_hash`, `loaded_at`, `row_count`.

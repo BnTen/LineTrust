@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Source_Sans_3, JetBrains_Mono } from "next/font/google";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const fontDisplay = Outfit({
@@ -21,7 +23,10 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LineTrust",
+  title: {
+    default: "LineTrust",
+    template: "%s · LineTrust",
+  },
   description:
     "Fiabilité historique des trajets TER, Transilien et RER en Île-de-France.",
   robots: { index: false, follow: false },
@@ -33,7 +38,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="fr"
       className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
