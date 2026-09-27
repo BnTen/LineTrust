@@ -80,3 +80,24 @@ export function pickAlternative(
     return cellDelta < bestDelta ? cell : best;
   });
 }
+
+/**
+ * When the chosen créneau is empty: nearest windows with data first,
+ * then higher score / n. Excludes the user window.
+ */
+export function pickSuggestions(
+  userWindowStartMinutes: number,
+  candidates: WindowCell[],
+  limit = 3,
+): WindowCell[] {
+  return [...candidates]
+    .filter((cell) => cell.windowStartMinutes !== userWindowStartMinutes)
+    .sort((a, b) => {
+      const da = Math.abs(a.windowStartMinutes - userWindowStartMinutes);
+      const db = Math.abs(b.windowStartMinutes - userWindowStartMinutes);
+      if (da !== db) return da - db;
+      if (b.score !== a.score) return b.score - a.score;
+      return b.n - a.n;
+    })
+    .slice(0, limit);
+}

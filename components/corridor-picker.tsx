@@ -31,6 +31,11 @@ export interface CorridorPickerProps {
   onEditingChange?: (editing: CorridorEnd | null) => void;
   /** Keep a complete pair (trajet page) — no clear-to-incomplete. */
   lockPair?: boolean;
+  /**
+   * Slugs with no oriented OD for the armed end (layer 2).
+   * Current from/to stay selectable; others are greyed and inert.
+   */
+  unavailableSlugs?: ReadonlySet<string>;
   onChange?: (next: CorridorSelection) => void;
   className?: string;
 }
@@ -57,6 +62,7 @@ export function CorridorPicker({
   editing: editingProp,
   onEditingChange,
   lockPair = false,
+  unavailableSlugs,
   onChange,
   className = "",
 }: CorridorPickerProps) {
@@ -84,6 +90,13 @@ export function CorridorPicker({
   );
 
   function selectStation(slug: string) {
+    if (
+      unavailableSlugs?.has(slug) &&
+      slug !== fromSlug &&
+      slug !== toSlug
+    ) {
+      return;
+    }
     const next = applyCorridorClick(
       { fromSlug, toSlug, editing: armed },
       slug,
@@ -146,7 +159,9 @@ export function CorridorPicker({
             hasPair && from && to
               ? isStationOnSegment(station, from, to)
               : false;
-          const muted = hasPair && !onTrip;
+          const noData =
+            Boolean(unavailableSlugs?.has(station.slug)) && !selected;
+          const muted = (hasPair && !onTrip) || noData;
 
           return (
             <li key={station.slug} className="relative z-10">
@@ -154,21 +169,29 @@ export function CorridorPicker({
                 type="button"
                 aria-pressed={selected}
                 aria-current={isArmed ? "true" : undefined}
-                aria-label={corridorStationButtonLabel({
-                  name: station.nameDisplay,
-                  role,
-                  editing: armed,
-                })}
+                aria-disabled={noData || undefined}
+                disabled={noData}
+                aria-label={
+                  noData
+                    ? `${station.nameDisplay}, pas de données pour ce trajet`
+                    : corridorStationButtonLabel({
+                        name: station.nameDisplay,
+                        role,
+                        editing: armed,
+                      })
+                }
                 onClick={() => selectStation(station.slug)}
                 className={[
                   "flex w-full min-h-12 items-center gap-3.5 rounded-2xl py-2.5 pr-3 pl-1 text-left",
                   "outline-none transition-colors duration-150 motion-reduce:transition-none",
                   "focus-visible:ring-3 focus-visible:ring-ring/50",
-                  isArmed
-                    ? "bg-secondary ring-2 ring-ink/20"
-                    : selected
-                      ? "bg-secondary/70"
-                      : "hover:bg-secondary/50 active:bg-secondary/70",
+                  noData
+                    ? "cursor-not-allowed opacity-45"
+                    : isArmed
+                      ? "bg-secondary ring-2 ring-ink/20"
+                      : selected
+                        ? "bg-secondary/70"
+                        : "hover:bg-secondary/50 active:bg-secondary/70",
                 ].join(" ")}
               >
                 <span
@@ -205,6 +228,10 @@ export function CorridorPicker({
                       ].join(" ")}
                     >
                       {corridorEndBadge({ role, editing: armed })}
+                    </span>
+                  ) : noData ? (
+                    <span className="mt-0.5 block text-xs text-ink-muted/70">
+                      Pas de données
                     </span>
                   ) : null}
                 </span>

@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import {
   computeScore,
   pickAlternative,
+  pickSuggestions,
   scoreBand,
   WEIGHTS_W0,
 } from "@/lib/scoring";
@@ -74,5 +75,21 @@ describe("pickAlternative", () => {
       { windowStartMinutes: 8 * 60 + 15, score: 80, n: 50 },
     ]);
     expect(pick?.windowStartMinutes).toBe(8 * 60 + 15);
+  });
+});
+
+describe("pickSuggestions", () => {
+  it("returns nearest windows first, excluding the user créneau", () => {
+    const picks = pickSuggestions(8 * 60, [
+      { windowStartMinutes: 8 * 60, score: 70, n: 100 },
+      { windowStartMinutes: 10 * 60, score: 90, n: 40 },
+      { windowStartMinutes: 8 * 60 + 30, score: 60, n: 20 },
+      { windowStartMinutes: 7 * 60, score: 85, n: 30 },
+    ]);
+    expect(picks.map((p) => p.windowStartMinutes)).toEqual([
+      8 * 60 + 30,
+      7 * 60,
+      10 * 60,
+    ]);
   });
 });

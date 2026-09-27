@@ -1,11 +1,15 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useMemo, useRef, useState, useTransition } from "react";
 import { CorridorPicker } from "@/components/corridor-picker";
 import { ScoreReveal } from "@/components/score-reveal";
 import { TrajetControls } from "@/components/trajet-controls";
 import { TrajetScorePanel } from "@/components/trajet-score-panel";
 import { bandLabel } from "@/lib/copy";
+import {
+  hasOdEdge,
+  type OdCoverage,
+} from "@/lib/coverage";
 import type { CorridorEnd, CorridorSelection } from "@/lib/corridor-segment";
 import type { DayType } from "@/lib/scoring";
 import { buildTrajetSlug } from "@/lib/slugs";
@@ -50,9 +54,11 @@ export function TrajetView({
   initialWindowStartMinutes,
   initialResult,
   lineShort,
+  lineId,
   corridorId,
   corridorStations,
   lineLabel,
+  coverage,
 }: {
   initialFrom: Station;
   initialTo: Station;
@@ -64,6 +70,7 @@ export function TrajetView({
   corridorId: string | null;
   corridorStations: Station[];
   lineLabel: string;
+  coverage: OdCoverage;
 }) {
   const [from, setFrom] = useState(initialFrom);
   const [to, setTo] = useState(initialTo);
@@ -77,6 +84,21 @@ export function TrajetView({
   const [error, setError] = useState<string | null>(null);
   const fetchGen = useRef(0);
   const bySlug = new Map(corridorStations.map((s) => [s.slug, s]));
+
+  const unavailableSlugs = useMemo(() => {
+    const armed = editing ?? "to";
+    const fixed = armed === "to" ? from : to;
+    const disabled = new Set<string>();
+    for (const station of corridorStations) {
+      if (station.slug === from.slug || station.slug === to.slug) continue;
+      const ok =
+        armed === "to"
+          ? hasOdEdge(coverage, lineId, fixed.codeCi, station.codeCi)
+          : hasOdEdge(coverage, lineId, station.codeCi, fixed.codeCi);
+      if (!ok) disabled.add(station.slug);
+    }
+    return disabled;
+  }, [coverage, corridorStations, editing, from, lineId, to]);
 
   async function loadTrajet(
     nextFrom: Station,
@@ -213,6 +235,7 @@ export function TrajetView({
         <TrajetControls
           dayType={dayType}
           windowStartMinutes={windowStartMinutes}
+          availableWindows={result.availableWindows}
           onDayTypeChange={(d) => softUpdate({ dayType: d })}
           onWindowChange={(w) => softUpdate({ windowStartMinutes: w })}
         />
@@ -234,12 +257,19 @@ export function TrajetView({
             to={to}
             cell={result.cell}
             alternative={result.alternative}
+            suggestions={result.suggestions}
+            otherDaySuggestions={result.otherDaySuggestions}
+            odExists={result.odExists}
+            availableWindows={result.availableWindows}
             confidence={result.confidence}
             insufficientHistory={result.insufficientHistory}
             dayType={dayType}
             windowStartMinutes={windowStartMinutes}
             onReverse={() => softUpdate({ from: to, to: from })}
             onSelectWindow={(w) => softUpdate({ windowStartMinutes: w })}
+            onSelectDayAndWindow={(d, w) =>
+              softUpdate({ dayType: d, windowStartMinutes: w })
+            }
           />
         </div>
         <div className="order-2 lg:order-1">
@@ -252,6 +282,7 @@ export function TrajetView({
             editing={editing}
             onEditingChange={setEditing}
             lockPair
+            unavailableSlugs={unavailableSlugs}
             onChange={onCorridorChange}
           />
         </div>

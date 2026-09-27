@@ -182,3 +182,32 @@ export const reverseDirectionTitle = "Dans l’autre sens";
 export function reverseDirectionDetail(toName: string, fromName: string): string {
   return `${toName} vers ${fromName}`;
 }
+
+/** Empty trajet score — distinguish structural OD gap vs créneau gap. */
+export function emptySlotBody(opts: {
+  windowStartMinutes: number;
+  dayType: string;
+  odExists: boolean;
+  hasSameDayWindows: boolean;
+}): string {
+  if (!opts.odExists) {
+    return "Pas encore de données historiques pour ce trajet dans ce sens. Essaie une autre paire de gares, ou le trajet dans l’autre sens.";
+  }
+  if (!opts.hasSameDayWindows) {
+    const other =
+      opts.dayType === "weekend" ? "en semaine" : "le week-end";
+    return `Pas de trajets passés ${dayTypeLabel(opts.dayType)} pour ce parcours. Essaie ${other}, ou un autre créneau s’il apparaît ci-dessous.`;
+  }
+  return `Pas assez de trajets passés pour les départs ${formatSlotSpoken(opts.windowStartMinutes)} ${dayTypeLabel(opts.dayType)}. Essaie un autre créneau ci-dessous, ou le trajet dans l’autre sens.`;
+}
+
+export function suggestionChipLabel(opts: {
+  windowStartMinutes: number;
+  dayType: string;
+  score: number;
+}): string {
+  const slot = formatWindowLabel(opts.windowStartMinutes);
+  const day =
+    opts.dayType === "weekend" ? "week-end" : "semaine";
+  return `${slot} · ${day} · ${Math.round(opts.score)}`;
+}

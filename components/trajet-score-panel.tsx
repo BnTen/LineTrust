@@ -6,44 +6,133 @@ import { TrajetShare } from "@/components/trajet-share";
 import {
   confidenceSectionBody,
   contextSummaryLine,
-  dayTypeLabel,
+  emptySlotBody,
   estimatedTimesNote,
   formatSlotSpoken,
   lateLine,
   onTimeLine,
+  suggestionChipLabel,
   tripCountLabel,
 } from "@/lib/copy";
 import type { AggCell } from "@/lib/trajet";
 import type { ConfidenceLabel } from "@/lib/uncertainty";
 import type { Station } from "@/lib/stations";
 
+function SuggestionButtons({
+  suggestions,
+  onSelectWindow,
+  onSelectDayAndWindow,
+  dayType,
+}: {
+  suggestions: AggCell[];
+  dayType: string;
+  onSelectWindow?: (windowStartMinutes: number) => void;
+  onSelectDayAndWindow?: (
+    dayType: AggCell["dayType"],
+    windowStartMinutes: number,
+  ) => void;
+}) {
+  if (suggestions.length === 0) return null;
+  return (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {suggestions.map((s) => {
+        const label = suggestionChipLabel({
+          windowStartMinutes: s.windowStartMinutes,
+          dayType: s.dayType,
+          score: s.score,
+        });
+        const sameDay = s.dayType === dayType;
+        if (onSelectDayAndWindow || onSelectWindow) {
+          return (
+            <Button
+              key={`${s.dayType}-${s.windowStartMinutes}`}
+              type="button"
+              variant="secondary"
+              size="lg"
+              className="h-11 px-4"
+              onClick={() => {
+                if (!sameDay && onSelectDayAndWindow) {
+                  onSelectDayAndWindow(s.dayType, s.windowStartMinutes);
+                } else {
+                  onSelectWindow?.(s.windowStartMinutes);
+                }
+              }}
+            >
+              {label}
+            </Button>
+          );
+        }
+        return (
+          <Button
+            key={`${s.dayType}-${s.windowStartMinutes}`}
+            asChild
+            variant="secondary"
+            size="lg"
+            className="h-11 px-4"
+          >
+            <Link href={`?d=${s.dayType}&w=${s.windowStartMinutes}`}>
+              {label}
+            </Link>
+          </Button>
+        );
+      })}
+    </div>
+  );
+}
+
 export function TrajetScorePanel({
   from,
   to,
   cell,
   alternative,
+  suggestions = [],
+  otherDaySuggestions = [],
+  odExists = true,
+  availableWindows = [],
   confidence,
   insufficientHistory,
   dayType,
   windowStartMinutes,
   onReverse,
   onSelectWindow,
+  onSelectDayAndWindow,
 }: {
   from: Station;
   to: Station;
   cell: AggCell | null;
   alternative: AggCell | null;
+  suggestions?: AggCell[];
+  otherDaySuggestions?: AggCell[];
+  odExists?: boolean;
+  availableWindows?: readonly number[];
   confidence: ConfidenceLabel | null;
   insufficientHistory: boolean;
   dayType: string;
   windowStartMinutes: number;
   onReverse: () => void;
   onSelectWindow?: (windowStartMinutes: number) => void;
+  onSelectDayAndWindow?: (
+    dayType: AggCell["dayType"],
+    windowStartMinutes: number,
+  ) => void;
 }) {
   const shareTitle = `${from.nameDisplay} vers ${to.nameDisplay} · LineTrust`;
   const estNote = cell ? estimatedTimesNote(cell.nUsedEst) : null;
 
   if (!cell) {
+    const nearby =
+      alternative &&
+      !suggestions.some(
+        (s) => s.windowStartMinutes === alternative.windowStartMinutes,
+      )
+        ? [alternative, ...suggestions].slice(0, 3)
+        : suggestions.length > 0
+          ? suggestions
+          : alternative
+            ? [alternative]
+            : [];
+    const crossDay = nearby.length === 0 ? otherDaySuggestions : [];
+
     return (
       <div className="max-w-2xl space-y-8 lg:max-w-none">
         <section
@@ -54,10 +143,39 @@ export function TrajetScorePanel({
             Ce créneau
           </h2>
           <p className="mt-3 text-lg text-ink-muted">
-            Pas assez de trajets passés pour les départs{" "}
-            {formatSlotSpoken(windowStartMinutes)} {dayTypeLabel(dayType)}.
-            Essaie un autre créneau, ou le trajet dans l’autre sens.
+            {emptySlotBody({
+              windowStartMinutes,
+              dayType,
+              odExists,
+              hasSameDayWindows: availableWindows.length > 0,
+            })}
           </p>
+          {nearby.length > 0 ? (
+            <div className="mt-6">
+              <h3 className="text-sm font-medium text-ink">
+                Créneaux avec des données
+              </h3>
+              <SuggestionButtons
+                suggestions={nearby}
+                dayType={dayType}
+                onSelectWindow={onSelectWindow}
+                onSelectDayAndWindow={onSelectDayAndWindow}
+              />
+            </div>
+          ) : null}
+          {crossDay.length > 0 ? (
+            <div className="mt-6">
+              <h3 className="text-sm font-medium text-ink">
+                Essayer {dayType === "weekend" ? "en semaine" : "le week-end"}
+              </h3>
+              <SuggestionButtons
+                suggestions={crossDay}
+                dayType={dayType}
+                onSelectWindow={onSelectWindow}
+                onSelectDayAndWindow={onSelectDayAndWindow}
+              />
+            </div>
+          ) : null}
           <div className="mt-6">
             <ReverseDirectionCta from={from} to={to} onReverse={onReverse} />
           </div>

@@ -43,6 +43,58 @@ describe("ScoreReveal", () => {
 });
 
 describe("TrajetScorePanel", () => {
+  it("empty créneau offers suggestions when OD exists elsewhere", () => {
+    render(
+      <TrajetScorePanel
+        from={from}
+        to={to}
+        cell={null}
+        alternative={null}
+        suggestions={[
+          cell({ windowStartMinutes: 510, score: 78, n: 40 }),
+        ]}
+        odExists
+        availableWindows={[510]}
+        confidence={null}
+        insufficientHistory={false}
+        dayType="weekday"
+        windowStartMinutes={480}
+        onReverse={() => undefined}
+        onSelectWindow={() => undefined}
+      />,
+    );
+    expect(
+      screen.getByText(/pas assez de trajets passés/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /créneaux avec des données/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /08:30–09:00/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("empty OD explains there is no history for the pair", () => {
+    render(
+      <TrajetScorePanel
+        from={from}
+        to={to}
+        cell={null}
+        alternative={null}
+        odExists={false}
+        availableWindows={[]}
+        confidence={null}
+        insufficientHistory={false}
+        dayType="weekday"
+        windowStartMinutes={480}
+        onReverse={() => undefined}
+      />,
+    );
+    expect(
+      screen.getByText(/pas encore de données historiques pour ce trajet/i),
+    ).toBeInTheDocument();
+  });
+
   it("renders plain-language score, alternative, reverse, and share", () => {
     render(
       <TrajetScorePanel

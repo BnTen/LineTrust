@@ -38,12 +38,19 @@ export function TrajetControls({
   windowStartMinutes,
   onDayTypeChange,
   onWindowChange,
+  availableWindows,
 }: {
   dayType: DayType;
   windowStartMinutes: number;
   onDayTypeChange: (dayType: DayType) => void;
   onWindowChange: (windowStartMinutes: number) => void;
+  /** Windows with rollup data for the current OD + day_type. */
+  availableWindows?: readonly number[];
 }) {
+  const available = availableWindows
+    ? new Set(availableWindows)
+    : null;
+
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-6">
       <fieldset className="flex flex-col gap-2">
@@ -81,11 +88,21 @@ export function TrajetControls({
         >
           {GROUPED.map(({ period, windows }) => (
             <optgroup key={period} label={windowPeriodLabel[period]}>
-              {windows.map((w) => (
-                <option key={w} value={w}>
-                  {formatWindowOptionLabel(w)}
-                </option>
-              ))}
+              {windows.map((w) => {
+                const hasData = available === null || available.has(w);
+                const isCurrent = w === windowStartMinutes;
+                return (
+                  <option
+                    key={w}
+                    value={w}
+                    disabled={!hasData && !isCurrent}
+                  >
+                    {hasData
+                      ? formatWindowOptionLabel(w)
+                      : `${formatWindowOptionLabel(w)} · pas de données`}
+                  </option>
+                );
+              })}
             </optgroup>
           ))}
         </select>

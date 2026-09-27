@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { CorridorPicker } from "@/components/corridor-picker";
 import { StationSearch } from "@/components/station-search";
 import { MELUN_TEST_CATALOG } from "@/tests/fixtures/melun-catalog";
+import { MELUN_TEST_COVERAGE } from "@/tests/fixtures/melun-coverage";
 
 const push = vi.fn();
 
@@ -115,6 +116,7 @@ describe("StationSearch", () => {
     render(
       <StationSearch
         catalog={MELUN_TEST_CATALOG}
+        coverage={MELUN_TEST_COVERAGE}
         defaultFrom="paris-gare-de-lyon"
         defaultTo="paris-gare-de-lyon"
       />,
@@ -135,6 +137,7 @@ describe("StationSearch", () => {
     render(
       <StationSearch
         catalog={MELUN_TEST_CATALOG}
+        coverage={MELUN_TEST_COVERAGE}
         defaultFrom="paris-gare-de-lyon"
         defaultTo="melun"
       />,
@@ -153,6 +156,7 @@ describe("StationSearch", () => {
     render(
       <StationSearch
         catalog={MELUN_TEST_CATALOG}
+        coverage={MELUN_TEST_COVERAGE}
         defaultFrom="paris-gare-de-lyon"
         defaultTo="melun"
       />,
@@ -166,5 +170,30 @@ describe("StationSearch", () => {
     expect(
       screen.getByRole("button", { name: "Branche Melun" }),
     ).toBeInTheDocument();
+  });
+
+  it("greys arrival options with no OD from the selected départ", () => {
+    const coverage = {
+      edges: {
+        [MELUN_TEST_CATALOG.lines[0]!.lineId]: {
+          // Lyon → Yerres only (not Melun)
+          "686030": ["682112"],
+        },
+      },
+    };
+    render(
+      <StationSearch
+        catalog={MELUN_TEST_CATALOG}
+        coverage={coverage}
+        defaultCorridorId="rer-d-melun"
+        defaultFrom="paris-gare-de-lyon"
+        defaultTo=""
+      />,
+    );
+    const arrival = screen.getByLabelText("Arrivée") as HTMLSelectElement;
+    const melunOption = [...arrival.options].find((o) => o.value === "melun");
+    const yerresOption = [...arrival.options].find((o) => o.value === "yerres");
+    expect(melunOption?.disabled).toBe(true);
+    expect(yerresOption?.disabled).toBe(false);
   });
 });

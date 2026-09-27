@@ -26,9 +26,26 @@ const initialResult: TrajetResult = {
     weightsVersion: "w0",
   },
   alternative: null,
+  availableWindows: [480],
+  odExists: true,
+  suggestions: [],
+  otherDaySuggestions: [],
   confidence: "faible",
   insufficientHistory: false,
   band: "mid",
+};
+
+const denseCoverage = {
+  edges: {
+    "IDFM:C01728": Object.fromEntries(
+      CORRIDOR_STATIONS.map((s) => [
+        s.codeCi,
+        CORRIDOR_STATIONS.filter((o) => o.codeCi !== s.codeCi).map(
+          (o) => o.codeCi,
+        ),
+      ]),
+    ),
+  },
 };
 
 afterEach(() => {
@@ -74,6 +91,7 @@ describe("TrajetView soft updates", () => {
         corridorId="rer-d-melun"
         corridorStations={[...CORRIDOR_STATIONS]}
         lineLabel="RER D · Branche Melun"
+        coverage={denseCoverage}
       />,
     );
 

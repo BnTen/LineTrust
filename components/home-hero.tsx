@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { StationSearch } from "@/components/station-search";
+import type { OdCoverage } from "@/lib/coverage";
 import {
   DEFAULT_CORRIDOR_ID,
   DEFAULT_LINE_ID,
@@ -16,7 +17,13 @@ import {
  * brand + 1 headline + 1 sentence + search CTA + full-bleed rail plane.
  * Line pills + optional branch live inside StationSearch.
  */
-export function HomeHero({ catalog }: { catalog: NetworkCatalog }) {
+export function HomeHero({
+  catalog,
+  coverage,
+}: {
+  catalog: NetworkCatalog;
+  coverage: OdCoverage;
+}) {
   const [lineId, setLineId] = useState(DEFAULT_LINE_ID);
   const [corridorId, setCorridorId] = useState<string | null>(
     DEFAULT_CORRIDOR_ID,
@@ -71,6 +78,7 @@ export function HomeHero({ catalog }: { catalog: NetworkCatalog }) {
         >
           <StationSearch
             catalog={catalog}
+            coverage={coverage}
             defaultLineId={DEFAULT_LINE_ID}
             defaultCorridorId={DEFAULT_CORRIDOR_ID}
             defaultFrom="paris-gare-de-lyon"

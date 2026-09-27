@@ -4,6 +4,7 @@ import { TrajetView } from "@/components/trajet-view";
 import type { DayType } from "@/lib/scoring";
 import { robotsPolicy } from "@/lib/seo";
 import { parseTrajetSlug } from "@/lib/slugs";
+import { getOdCoverage } from "@/lib/coverage";
 import { getTrajetResult } from "@/lib/trajet";
 import {
   DEFAULT_LINE_ID,
@@ -77,7 +78,10 @@ export async function generateMetadata({
 export default async function TrajetPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const sp = await searchParams;
-  const catalog = await getNetworkCatalog();
+  const [catalog, coverage] = await Promise.all([
+    getNetworkCatalog(),
+    getOdCoverage(),
+  ]);
   const lineId = lineIdFromShort(sp.line);
   const lineShort = shortFromLineId(lineId);
   const preferredCorridor = sp.c ?? null;
@@ -135,6 +139,7 @@ export default async function TrajetPage({ params, searchParams }: PageProps) {
         corridorId={corridorId}
         corridorStations={corridorStations}
         lineLabel={lineLabel}
+        coverage={coverage}
       />
     </main>
   );
