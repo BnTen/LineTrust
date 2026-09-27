@@ -211,3 +211,94 @@ export function suggestionChipLabel(opts: {
     opts.dayType === "weekend" ? "week-end" : "semaine";
   return `${slot} · ${day} · ${Math.round(opts.score)}`;
 }
+
+/** Day-profile chart — one job: compare créneaux of a directed OD. */
+export const dayProfileTitle = "Profil de la journée";
+
+export function dayProfileHint(filledCount: number): string {
+  if (filledCount === 0) {
+    return "Aucun créneau avec des données pour ce jour — les cases vides restent vides.";
+  }
+  return "Chaque barre = un créneau de 30 min. Les trous = pas assez d’historique. L’opacité suit le nombre d’exemples.";
+}
+
+export function dayProfileSlotLabel(opts: {
+  windowStartMinutes: number;
+  score: number | null;
+  n: number | null;
+  selected: boolean;
+}): string {
+  const slot = formatWindowLabel(opts.windowStartMinutes);
+  if (opts.score == null || opts.n == null) {
+    return `${slot}, pas de données${opts.selected ? ", sélectionné" : ""}`;
+  }
+  return `${slot}, fiabilité ${Math.round(opts.score)}, ${tripCountLabel(opts.n)}${
+    opts.selected ? ", sélectionné" : ""
+  }`;
+}
+
+export function bestHourBody(opts: {
+  windowStartMinutes: number;
+  score: number;
+  n: number;
+  dayType: string;
+}): string {
+  return `Meilleur créneau ${dayTypeLabel(opts.dayType)} : départs ${formatSlotSpoken(opts.windowStartMinutes)} — score ${Math.round(opts.score)}, d’après ${tripCountLabel(opts.n)}.`;
+}
+
+export const profilPageEyebrow = "Explorer";
+export const profilCtaTrajet = "Voir le score de ce créneau";
+export const trajetCtaProfil = "Voir toute la journée";
+
+export const monthlyTrendTitle = "Sur l’année";
+
+export function monthlyTrendHint(filledMonths: number): string {
+  if (filledMonths === 0) {
+    return "Pas assez de mois pour ce créneau — les cases vides restent vides.";
+  }
+  return "Un point par mois pour ce créneau. Les trous = mois sans assez d’historique.";
+}
+
+export function volatilityBody(
+  label: "stable" | "moderee" | "variable",
+  sd: number,
+): string {
+  const rounded = Math.round(sd * 10) / 10;
+  if (label === "stable") {
+    return `Score plutôt stable d’un mois à l’autre (écart ≈ ${rounded}).`;
+  }
+  if (label === "moderee") {
+    return `Score un peu variable selon les mois (écart ≈ ${rounded}).`;
+  }
+  return `Score très variable selon les mois (écart ≈ ${rounded}) — à prendre avec prudence.`;
+}
+
+export function bestHourBanner(opts: {
+  windowStartMinutes: number;
+  score: number;
+  isSelected: boolean;
+}): string {
+  if (opts.isSelected) {
+    return `C’est le meilleur créneau de la journée (score ${Math.round(opts.score)}).`;
+  }
+  return `Meilleur créneau de la journée : ${formatWindowLabel(opts.windowStartMinutes)} (score ${Math.round(opts.score)}).`;
+}
+
+export const reverseCompareTitle = "Dans l’autre sens";
+
+export function reverseSameSlotBody(opts: {
+  score: number | null;
+  windowStartMinutes: number;
+}): string {
+  if (opts.score == null) {
+    return `Pas de données pour les départs ${formatSlotSpoken(opts.windowStartMinutes)} dans l’autre sens — les créneaux utiles ne sont souvent pas les mêmes.`;
+  }
+  return `Même créneau dans l’autre sens : score ${Math.round(opts.score)}.`;
+}
+
+export function reverseBestBody(opts: {
+  windowStartMinutes: number;
+  score: number;
+}): string {
+  return `Meilleure heure dans l’autre sens : ${formatWindowLabel(opts.windowStartMinutes)} (score ${Math.round(opts.score)}).`;
+}

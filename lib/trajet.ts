@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { getSql } from "@/lib/db";
+import { pickBestHour } from "@/lib/day-profile";
 import {
   pickAlternative,
   pickSuggestions,
@@ -11,6 +12,10 @@ import {
   hasInsufficientHistory,
   type ConfidenceLabel,
 } from "@/lib/uncertainty";
+import {
+  scoreStdDev,
+  type MonthlyPoint,
+} from "@/lib/monthly-trend";
 
 import { DEFAULT_LINE_ID } from "@/lib/network";
 
@@ -31,9 +36,18 @@ export interface AggCell {
   weightsVersion: string;
 }
 
+export interface ReverseKpis {
+  /** Same créneau in the opposite direction — often null (fenêtres disjointes). */
+  cell: AggCell | null;
+  bestHour: AggCell | null;
+  odExists: boolean;
+}
+
 export interface TrajetResult {
   cell: AggCell | null;
   alternative: AggCell | null;
+  /** All rollup cells for this OD + day_type (day profile). */
+  profile: AggCell[];
   /** Windows (minutes) with data for this OD + day_type. */
   availableWindows: number[];
   /** At least one rollup cell for this oriented OD on the line (any day/window). */
@@ -45,6 +59,14 @@ export interface TrajetResult {
   confidence: ConfidenceLabel | null;
   insufficientHistory: boolean;
   band: ReturnType<typeof scoreBand> | null;
+  /** Best créneau of the day (n ≥ 30). */
+  bestHour: AggCell | null;
+  /** Monthly points for the selected window — holes not filled. */
+  monthly: MonthlyPoint[];
+  /** Inter-month score σ; null if &lt; 6 months. */
+  volatilitySd: number | null;
+  /** Opposite direction KPIs (same day_type). */
+  reverse: ReverseKpis;
 }
 
 function rowToCell(row: Record<string, unknown>): AggCell {
@@ -61,6 +83,16 @@ function rowToCell(row: Record<string, unknown>): AggCell {
     penalty: Number(row.penalty),
     score: Number(row.score),
     weightsVersion: String(row.weights_version),
+  };
+}
+
+function rowToMonthly(row: Record<string, unknown>): MonthlyPoint {
+  return {
+    monthKey: String(row.month_key).trim(),
+    score: Number(row.score),
+    n: Number(row.n),
+    tpr: Number(row.tpr),
+    penalty: Number(row.penalty),
   };
 }
 
@@ -102,6 +134,27 @@ async function fetchOdExists(
   return rows.length > 0;
 }
 
+async function fetchMonthlyWindow(
+  lineId: string,
+  fromCodeCi: string,
+  toCodeCi: string,
+  dayType: DayType,
+  windowStartMinutes: number,
+): Promise<MonthlyPoint[]> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT month_key, n, tpr, penalty, score
+    FROM agg_pair_window
+    WHERE line_id = ${lineId}
+      AND from_code_ci = ${fromCodeCi}
+      AND to_code_ci = ${toCodeCi}
+      AND day_type = ${dayType}
+      AND window_start_minutes = ${windowStartMinutes}
+    ORDER BY month_key
+  `;
+  return rows.map((r) => rowToMonthly(r as Record<string, unknown>));
+}
+
 const cachedPairWindows = unstable_cache(
   fetchPairWindows,
   ["agg-pair-windows-v2"],
@@ -112,6 +165,12 @@ const cachedOdExists = unstable_cache(fetchOdExists, ["agg-od-exists-v1"], {
   revalidate: 3600,
   tags: ["agg"],
 });
+
+const cachedMonthlyWindow = unstable_cache(
+  fetchMonthlyWindow,
+  ["agg-monthly-window-v1"],
+  { revalidate: 3600, tags: ["agg"] },
+);
 
 function cellFromPick(
   windows: AggCell[],
@@ -131,12 +190,20 @@ export async function getTrajetResult(
   windowStartMinutes: number,
   lineId: string = DEFAULT_LINE_ID,
 ): Promise<TrajetResult> {
-  const windows = await cachedPairWindows(
-    lineId,
-    fromCodeCi,
-    toCodeCi,
-    dayType,
-  );
+  const [windows, monthly, reverseWindows, reverseOdExists] =
+    await Promise.all([
+      cachedPairWindows(lineId, fromCodeCi, toCodeCi, dayType),
+      cachedMonthlyWindow(
+        lineId,
+        fromCodeCi,
+        toCodeCi,
+        dayType,
+        windowStartMinutes,
+      ),
+      cachedPairWindows(lineId, toCodeCi, fromCodeCi, dayType),
+      cachedOdExists(lineId, toCodeCi, fromCodeCi),
+    ]);
+
   const cell =
     windows.find((w) => w.windowStartMinutes === windowStartMinutes) ?? null;
 
@@ -199,9 +266,14 @@ export async function getTrajetResult(
     }
   }
 
+  const reverseCell =
+    reverseWindows.find((w) => w.windowStartMinutes === windowStartMinutes) ??
+    null;
+
   return {
     cell,
     alternative,
+    profile: windows,
     availableWindows: windows.map((w) => w.windowStartMinutes),
     odExists,
     suggestions,
@@ -209,5 +281,13 @@ export async function getTrajetResult(
     confidence: cell ? confidenceLabel(cell.n) : null,
     insufficientHistory: cell ? hasInsufficientHistory(cell.n) : false,
     band: cell ? scoreBand(cell.score) : null,
+    bestHour: pickBestHour(windows),
+    monthly,
+    volatilitySd: scoreStdDev(monthly),
+    reverse: {
+      cell: reverseCell,
+      bestHour: pickBestHour(reverseWindows),
+      odExists: reverseOdExists || reverseWindows.length > 0,
+    },
   };
 }

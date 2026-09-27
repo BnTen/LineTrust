@@ -123,7 +123,7 @@ describe("StationSearch", () => {
     );
 
     await user.click(
-      screen.getByRole("button", { name: /voir la fiabilité/i }),
+      screen.getByRole("button", { name: /voir le score/i }),
     );
 
     expect(screen.getByRole("alert")).toHaveTextContent(
@@ -144,7 +144,7 @@ describe("StationSearch", () => {
     );
 
     await user.click(
-      screen.getByRole("button", { name: /voir la fiabilité/i }),
+      screen.getByRole("button", { name: /voir le score/i }),
     );
 
     expect(push).toHaveBeenCalledWith(
@@ -152,7 +152,7 @@ describe("StationSearch", () => {
     );
   });
 
-  it("shows line pills and optional branches for D", () => {
+  it("shows line pills and branch as a select for D", () => {
     render(
       <StationSearch
         catalog={MELUN_TEST_CATALOG}
@@ -166,10 +166,10 @@ describe("StationSearch", () => {
       "true",
     );
     expect(screen.getByRole("button", { name: "RER E" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Toutes" })).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Branche Melun" }),
-    ).toBeInTheDocument();
+    const branch = screen.getByLabelText(/branche optionnelle/i);
+    expect(branch).toBeInTheDocument();
+    expect(branch).toHaveValue("rer-d-melun");
+    expect(screen.queryByRole("button", { name: "Toutes" })).not.toBeInTheDocument();
   });
 
   it("greys arrival options with no OD from the selected départ", () => {

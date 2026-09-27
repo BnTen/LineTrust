@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState, useTransition } from "react";
 import { CorridorPicker } from "@/components/corridor-picker";
+import { DayProfileChart } from "@/components/day-profile-chart";
 import { ScoreReveal } from "@/components/score-reveal";
 import { TrajetControls } from "@/components/trajet-controls";
 import { TrajetScorePanel } from "@/components/trajet-score-panel";
@@ -205,7 +206,7 @@ export function TrajetView({
         {liveAnnouncement}
       </div>
 
-      <div className="sticky top-0 z-30 -mx-6 border-b border-border/70 bg-canvas/90 px-6 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/80 lg:static lg:z-auto lg:mx-0 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none">
+      <div className="sticky top-0 z-30 -mx-6 border-b border-border/70 bg-canvas/90 px-6 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/80">
         <div className="flex items-start justify-between gap-3 sm:gap-6">
           <div className="min-w-0 flex-1">
             <p className="text-sm text-ink-muted">{lineLabel}</p>
@@ -236,8 +237,11 @@ export function TrajetView({
           dayType={dayType}
           windowStartMinutes={windowStartMinutes}
           availableWindows={result.availableWindows}
+          from={from}
+          to={to}
           onDayTypeChange={(d) => softUpdate({ dayType: d })}
           onWindowChange={(w) => softUpdate({ windowStartMinutes: w })}
+          onReverse={() => softUpdate({ from: to, to: from })}
         />
       </div>
 
@@ -246,6 +250,17 @@ export function TrajetView({
           {error}
         </p>
       ) : null}
+
+      <div
+        className={`mt-8 border-t border-border pt-8 ${pendingClass}`}
+        aria-busy={isPending}
+      >
+        <DayProfileChart
+          cells={result.profile}
+          selectedWindow={windowStartMinutes}
+          onSelectWindow={(w) => softUpdate({ windowStartMinutes: w })}
+        />
+      </div>
 
       <div
         className="mt-8 grid gap-8 border-t border-border pt-8 lg:mt-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-12"
@@ -265,7 +280,12 @@ export function TrajetView({
             insufficientHistory={result.insufficientHistory}
             dayType={dayType}
             windowStartMinutes={windowStartMinutes}
-            onReverse={() => softUpdate({ from: to, to: from })}
+            lineShort={lineShort}
+            corridorId={corridorId}
+            bestHour={result.bestHour}
+            monthly={result.monthly}
+            volatilitySd={result.volatilitySd}
+            reverse={result.reverse}
             onSelectWindow={(w) => softUpdate({ windowStartMinutes: w })}
             onSelectDayAndWindow={(d, w) =>
               softUpdate({ dayType: d, windowStartMinutes: w })

@@ -289,14 +289,13 @@ export function defaultPairForSelection(
 export function lineHeroCopy(line: RerLine, corridor: CorridorMeta | null): string {
   const lineBit =
     line.coverage === "partial"
-      ? `le RER ${line.pillLabel}`
-      : `le RER ${line.short}`;
+      ? `RER ${line.pillLabel}`
+      : `RER ${line.short}`;
   if (corridor) {
-    return `Choisis ton départ et ton arrivée sur ${lineBit} (${corridor.displayName}). On te montre comment ce trajet s’est passé dans le passé — en semaine ou le week-end, sur un créneau d’une demi-heure.`;
+    const branch = corridor.displayName.replace(/^RER [A-E]\s*[—–-]\s*/i, "");
+    return `Départ et arrivée sur le ${lineBit} · ${branch}. Fiabilité historique, créneau de 30 min.`;
   }
   const partial =
-    line.coverage === "partial"
-      ? " Couverture partielle ART (ouest / nord seulement)."
-      : "";
-  return `Choisis ton départ et ton arrivée sur ${lineBit}.${partial} On te montre comment ce trajet s’est passé dans le passé — en semaine ou le week-end, sur un créneau d’une demi-heure.`;
+    line.coverage === "partial" ? " Couverture partielle." : "";
+  return `Départ et arrivée sur le ${lineBit}.${partial} Fiabilité historique, créneau de 30 min.`;
 }

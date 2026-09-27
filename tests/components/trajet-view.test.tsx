@@ -26,6 +26,22 @@ const initialResult: TrajetResult = {
     weightsVersion: "w0",
   },
   alternative: null,
+  profile: [
+    {
+      lineId: "IDFM:C01728",
+      fromCodeCi: from.codeCi,
+      toCodeCi: to.codeCi,
+      dayType: "weekday",
+      windowStartMinutes: 480,
+      n: 44,
+      nUsedEst: 0,
+      tpr: 84,
+      tsr: 0,
+      penalty: 5,
+      score: 76,
+      weightsVersion: "w0",
+    },
+  ],
   availableWindows: [480],
   odExists: true,
   suggestions: [],
@@ -33,6 +49,10 @@ const initialResult: TrajetResult = {
   confidence: "faible",
   insufficientHistory: false,
   band: "mid",
+  bestHour: null,
+  monthly: [],
+  volatilitySd: null,
+  reverse: { cell: null, bestHour: null, odExists: false },
 };
 
 const denseCoverage = {
@@ -99,6 +119,11 @@ describe("TrajetView soft updates", () => {
       screen.getByRole("heading", {
         level: 1,
         name: /paris gare de lyon.*melun/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: /dans l’autre sens : melun vers paris gare de lyon/i,
       }),
     ).toBeInTheDocument();
 

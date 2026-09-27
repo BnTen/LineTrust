@@ -59,7 +59,6 @@ describe("TrajetScorePanel", () => {
         insufficientHistory={false}
         dayType="weekday"
         windowStartMinutes={480}
-        onReverse={() => undefined}
         onSelectWindow={() => undefined}
       />,
     );
@@ -87,7 +86,6 @@ describe("TrajetScorePanel", () => {
         insufficientHistory={false}
         dayType="weekday"
         windowStartMinutes={480}
-        onReverse={() => undefined}
       />,
     );
     expect(
@@ -95,7 +93,7 @@ describe("TrajetScorePanel", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders plain-language score, alternative, reverse, and share", () => {
+  it("renders plain-language score, alternative, and share", () => {
     render(
       <TrajetScorePanel
         from={from}
@@ -117,7 +115,6 @@ describe("TrajetScorePanel", () => {
         insufficientHistory={false}
         dayType="weekday"
         windowStartMinutes={480}
-        onReverse={() => undefined}
         onSelectWindow={() => undefined}
       />,
     );
@@ -126,13 +123,8 @@ describe("TrajetScorePanel", () => {
       screen.getByRole("heading", { name: "Ce créneau" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: /dans l’autre sens/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", {
-        name: /dans l’autre sens : melun vers paris gare de lyon/i,
-      }),
-    ).toBeInTheDocument();
+      screen.queryByRole("heading", { name: /dans l’autre sens/i }),
+    ).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: /d’où vient ce chiffre/i }),
     ).toBeInTheDocument();

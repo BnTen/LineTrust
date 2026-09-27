@@ -18,7 +18,6 @@ import {
   DEFAULT_LINE_ID,
 } from "@/lib/network";
 import { buildTrajetSlug } from "@/lib/slugs";
-import type { Station } from "@/lib/stations";
 
 function StationSelect({
   id,
@@ -33,9 +32,8 @@ function StationSelect({
   label: string;
   value: string;
   onChange: (slug: string) => void;
-  stations: readonly Station[];
+  stations: readonly { slug: string; codeCi: string; nameDisplay: string }[];
   exclude?: string;
-  /** codeCi without OD for the current oriented choice. */
   disabledCodes?: ReadonlySet<string>;
 }) {
   const options = useMemo(
@@ -50,7 +48,7 @@ function StationSelect({
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="h-11 rounded-full border border-border bg-card px-4 text-ink outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        className="h-12 rounded-full border border-border bg-card/95 px-4 text-base text-ink shadow-sm outline-none transition-[box-shadow,border-color] focus-visible:border-ink/30 focus-visible:ring-3 focus-visible:ring-ring/50"
       >
         <option value="">Choisir une gare</option>
         {options.map((s) => {
@@ -68,7 +66,7 @@ function StationSelect({
   );
 }
 
-function Pill({
+function LinePill({
   selected,
   onClick,
   children,
@@ -86,16 +84,20 @@ function Pill({
       aria-label={ariaLabel}
       onClick={onClick}
       className={[
-        "h-9 shrink-0 rounded-full border px-3.5 text-sm font-medium transition-colors",
+        "h-9 min-w-9 shrink-0 rounded-full border px-3.5 text-sm font-medium transition-colors",
         "outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
         selected
           ? "border-ink bg-ink text-canvas"
-          : "border-border bg-card text-ink hover:bg-secondary/60",
+          : "border-border/80 bg-card/80 text-ink hover:bg-secondary/70",
       ].join(" ")}
     >
       {children}
     </button>
   );
+}
+
+function branchOptionLabel(displayName: string): string {
+  return displayName.replace(/^RER [A-E]\s*[—–-]\s*/i, "");
 }
 
 export function StationSearch({
@@ -113,10 +115,7 @@ export function StationSearch({
   defaultCorridorId?: string | null;
   defaultFrom?: string;
   defaultTo?: string;
-  onSelectionChange?: (
-    lineId: string,
-    corridorId: string | null,
-  ) => void;
+  onSelectionChange?: (lineId: string, corridorId: string | null) => void;
 }) {
   const router = useRouter();
   const lines = useMemo(
@@ -167,10 +166,7 @@ export function StationSearch({
     return disabled;
   }, [coverage, lineId, stations, toStation]);
 
-  function applySelection(
-    nextLineId: string,
-    nextCorridorId: string | null,
-  ) {
+  function applySelection(nextLineId: string, nextCorridorId: string | null) {
     setLineId(nextLineId);
     setCorridorId(nextCorridorId);
     onSelectionChange?.(nextLineId, nextCorridorId);
@@ -200,6 +196,10 @@ export function StationSearch({
         ? preferred
         : null;
     applySelection(next.lineId, initial);
+  }
+
+  function onBranchChange(value: string) {
+    applySelection(lineId, value === "" ? null : value);
   }
 
   function onFromChange(slug: string) {
@@ -255,15 +255,13 @@ export function StationSearch({
       line: line.short,
     });
     if (corridorId) qs.set("c", corridorId);
-    router.push(
-      `/trajet/${buildTrajetSlug(fromS, toS)}?${qs.toString()}`,
-    );
+    router.push(`/trajet/${buildTrajetSlug(fromS, toS)}?${qs.toString()}`);
   }
 
   return (
     <form
       onSubmit={onSubmit}
-      className="flex w-full flex-col gap-4"
+      className="flex w-full flex-col gap-5"
       noValidate
       aria-label="Rechercher un trajet"
     >
@@ -275,73 +273,74 @@ export function StationSearch({
           aria-label="Lignes RER"
         >
           {lines.map((l) => (
-            <Pill
+            <LinePill
               key={l.lineId}
               selected={l.lineId === lineId}
               onClick={() => onLineClick(l)}
               ariaLabel={`RER ${l.pillLabel}`}
             >
               {l.pillLabel}
-            </Pill>
+            </LinePill>
           ))}
         </div>
       </div>
 
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-3">
+        <StationSelect
+          id="from"
+          label="Départ"
+          value={from}
+          onChange={onFromChange}
+          stations={stations}
+          exclude={to}
+          disabledCodes={disabledDepartureCodes}
+        />
+        <StationSelect
+          id="to"
+          label="Arrivée"
+          value={to}
+          onChange={onToChange}
+          stations={stations}
+          exclude={from}
+          disabledCodes={disabledArrivalCodes}
+        />
+      </div>
+
       {corridors.length > 1 ? (
-        <div className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-ink">
+        <label className="flex flex-col gap-1.5 text-sm">
+          <span className="font-medium text-ink">
             Branche{" "}
             <span className="font-normal text-ink-muted">(optionnel)</span>
           </span>
-          <div
-            className="flex flex-wrap gap-2"
-            role="group"
-            aria-label="Branches"
+          <select
+            id="branch"
+            value={corridorId ?? ""}
+            onChange={(e) => onBranchChange(e.target.value)}
+            className="h-11 max-w-md rounded-full border border-border bg-card/90 px-4 text-ink outline-none transition-[box-shadow,border-color] focus-visible:border-ink/30 focus-visible:ring-3 focus-visible:ring-ring/50"
+            aria-label="Branche optionnelle"
           >
-            <Pill
-              selected={corridorId === null}
-              onClick={() => applySelection(lineId, null)}
-            >
-              Toutes
-            </Pill>
+            <option value="">Toutes les branches</option>
             {corridors.map((c) => (
-              <Pill
-                key={c.corridorId}
-                selected={corridorId === c.corridorId}
-                onClick={() => applySelection(lineId, c.corridorId)}
-              >
-                {c.displayName.replace(/^RER [A-E]\s*[—–-]\s*/i, "")}
-              </Pill>
+              <option key={c.corridorId} value={c.corridorId}>
+                {branchOptionLabel(c.displayName)}
+              </option>
             ))}
-          </div>
-        </div>
+          </select>
+        </label>
       ) : null}
 
-      <StationSelect
-        id="from"
-        label="Départ"
-        value={from}
-        onChange={onFromChange}
-        stations={stations}
-        exclude={to}
-        disabledCodes={disabledDepartureCodes}
-      />
-      <StationSelect
-        id="to"
-        label="Arrivée"
-        value={to}
-        onChange={onToChange}
-        stations={stations}
-        exclude={from}
-        disabledCodes={disabledArrivalCodes}
-      />
       {error ? (
         <p className="text-sm text-score-bad" role="alert">
           {error}
         </p>
       ) : null}
-      <Button type="submit" size="lg" className="h-11 px-6 text-base">
-        Voir la fiabilité
+
+      <Button
+        type="submit"
+        size="lg"
+        className="h-12 w-full px-8 text-base sm:w-auto sm:self-start"
+      >
+        Voir le score
       </Button>
     </form>
   );

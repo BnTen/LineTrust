@@ -1,7 +1,9 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ReverseDirectionCta } from "@/components/reverse-direction-cta";
+import { ExtraKpis } from "@/components/extra-kpis";
+import { MetricBars } from "@/components/metric-bars";
+import { MonthlyTrendChart } from "@/components/monthly-trend-chart";
 import { TrajetShare } from "@/components/trajet-share";
 import {
   confidenceSectionBody,
@@ -9,14 +11,15 @@ import {
   emptySlotBody,
   estimatedTimesNote,
   formatSlotSpoken,
-  lateLine,
-  onTimeLine,
   suggestionChipLabel,
+  trajetCtaProfil,
   tripCountLabel,
 } from "@/lib/copy";
-import type { AggCell } from "@/lib/trajet";
+import type { MonthlyPoint } from "@/lib/monthly-trend";
+import type { AggCell, ReverseKpis } from "@/lib/trajet";
 import type { ConfidenceLabel } from "@/lib/uncertainty";
 import type { Station } from "@/lib/stations";
+import { buildTrajetSlug } from "@/lib/slugs";
 
 function SuggestionButtons({
   suggestions,
@@ -80,6 +83,36 @@ function SuggestionButtons({
   );
 }
 
+function ProfilLink({
+  from,
+  to,
+  dayType,
+  windowStartMinutes,
+  lineShort,
+  corridorId,
+}: {
+  from: Station;
+  to: Station;
+  dayType: string;
+  windowStartMinutes: number;
+  lineShort: string;
+  corridorId: string | null;
+}) {
+  const qs = new URLSearchParams({
+    d: dayType,
+    w: String(windowStartMinutes),
+    line: lineShort,
+  });
+  if (corridorId) qs.set("c", corridorId);
+  return (
+    <Button asChild variant="secondary" size="lg" className="h-11 px-5">
+      <Link href={`/profil/${buildTrajetSlug(from, to)}?${qs.toString()}`}>
+        {trajetCtaProfil}
+      </Link>
+    </Button>
+  );
+}
+
 export function TrajetScorePanel({
   from,
   to,
@@ -93,7 +126,12 @@ export function TrajetScorePanel({
   insufficientHistory,
   dayType,
   windowStartMinutes,
-  onReverse,
+  lineShort = "D",
+  corridorId = null,
+  bestHour = null,
+  monthly = [],
+  volatilitySd = null,
+  reverse = { cell: null, bestHour: null, odExists: false },
   onSelectWindow,
   onSelectDayAndWindow,
 }: {
@@ -109,7 +147,12 @@ export function TrajetScorePanel({
   insufficientHistory: boolean;
   dayType: string;
   windowStartMinutes: number;
-  onReverse: () => void;
+  lineShort?: string;
+  corridorId?: string | null;
+  bestHour?: AggCell | null;
+  monthly?: readonly MonthlyPoint[];
+  volatilitySd?: number | null;
+  reverse?: ReverseKpis;
   onSelectWindow?: (windowStartMinutes: number) => void;
   onSelectDayAndWindow?: (
     dayType: AggCell["dayType"],
@@ -176,10 +219,32 @@ export function TrajetScorePanel({
               />
             </div>
           ) : null}
-          <div className="mt-6">
-            <ReverseDirectionCta from={from} to={to} onReverse={onReverse} />
-          </div>
+          {odExists ? (
+            <div className="mt-6">
+              <ProfilLink
+                from={from}
+                to={to}
+                dayType={dayType}
+                windowStartMinutes={windowStartMinutes}
+                lineShort={lineShort}
+                corridorId={corridorId}
+              />
+            </div>
+          ) : null}
         </section>
+        {(bestHour || reverse.odExists) && odExists ? (
+          <section
+            className="lt-enter border-t border-border pt-8"
+            style={{ "--lt-delay": 120 } as CSSProperties}
+          >
+            <ExtraKpis
+              bestHour={bestHour}
+              selectedWindow={windowStartMinutes}
+              reverse={reverse}
+              onSelectWindow={onSelectWindow}
+            />
+          </section>
+        ) : null}
         <section
           className="lt-enter border-t border-border pt-8"
           style={{ "--lt-delay": 160 } as CSSProperties}
@@ -226,21 +291,45 @@ export function TrajetScorePanel({
           </p>
         ) : null}
 
-        <ul className="mt-4 space-y-1.5 text-ink-muted">
-          <li>{onTimeLine(cell.tpr)}</li>
-          <li>{lateLine(cell.penalty)}</li>
-        </ul>
+        <MetricBars tpr={cell.tpr} penalty={cell.penalty} />
         {estNote ? (
           <p className="mt-2 text-sm text-ink-muted">{estNote}</p>
         ) : null}
+
+        <div className="mt-6">
+          <ProfilLink
+            from={from}
+            to={to}
+            dayType={dayType}
+            windowStartMinutes={windowStartMinutes}
+            lineShort={lineShort}
+            corridorId={corridorId}
+          />
+        </div>
       </section>
 
-      <section
-        className="lt-enter border-t border-border pt-8"
-        style={{ "--lt-delay": 100 } as CSSProperties}
-      >
-        <ReverseDirectionCta from={from} to={to} onReverse={onReverse} />
-      </section>
+      {monthly.length > 0 ? (
+        <section
+          className="lt-enter border-t border-border pt-8"
+          style={{ "--lt-delay": 100 } as CSSProperties}
+        >
+          <MonthlyTrendChart points={monthly} volatilitySd={volatilitySd} />
+        </section>
+      ) : null}
+
+      {bestHour || reverse.odExists ? (
+        <section
+          className="lt-enter border-t border-border pt-8"
+          style={{ "--lt-delay": 120 } as CSSProperties}
+        >
+          <ExtraKpis
+            bestHour={bestHour}
+            selectedWindow={windowStartMinutes}
+            reverse={reverse}
+            onSelectWindow={onSelectWindow}
+          />
+        </section>
+      ) : null}
 
       {alternative ? (
         <section

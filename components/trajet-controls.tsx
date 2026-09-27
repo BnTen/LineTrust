@@ -1,13 +1,17 @@
 "use client";
 
+import { ArrowLeftRight } from "lucide-react";
 import {
   dayTypeControlLabel,
   formatWindowOptionLabel,
+  reverseDirectionDetail,
+  reverseDirectionTitle,
   windowPeriod,
   windowPeriodLabel,
   type WindowPeriod,
 } from "@/lib/copy";
 import type { DayType } from "@/lib/scoring";
+import type { Station } from "@/lib/stations";
 
 const WINDOWS = Array.from({ length: 48 }, (_, i) => i * 30);
 
@@ -39,6 +43,9 @@ export function TrajetControls({
   onDayTypeChange,
   onWindowChange,
   availableWindows,
+  from,
+  to,
+  onReverse,
 }: {
   dayType: DayType;
   windowStartMinutes: number;
@@ -46,13 +53,19 @@ export function TrajetControls({
   onWindowChange: (windowStartMinutes: number) => void;
   /** Windows with rollup data for the current OD + day_type. */
   availableWindows?: readonly number[];
+  from?: Station;
+  to?: Station;
+  onReverse?: () => void;
 }) {
   const available = availableWindows
     ? new Set(availableWindows)
     : null;
+  const showReverse = Boolean(from && to && onReverse);
+  const reverseDetail =
+    from && to ? reverseDirectionDetail(to.nameDisplay, from.nameDisplay) : "";
 
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-6">
+    <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:gap-x-6 sm:gap-y-4">
       <fieldset className="flex flex-col gap-2">
         <legend className="text-sm font-medium text-ink">Quand tu voyages</legend>
         <div className="flex gap-2">
@@ -107,6 +120,26 @@ export function TrajetControls({
           ))}
         </select>
       </label>
+
+      {showReverse ? (
+        <div className="flex flex-col gap-2">
+          <span className="text-sm font-medium text-ink">
+            {reverseDirectionTitle}
+          </span>
+          <button
+            type="button"
+            onClick={onReverse}
+            aria-label={`${reverseDirectionTitle} : ${reverseDetail}`}
+            title={reverseDetail}
+            className="inline-flex h-10 items-center gap-2 rounded-full bg-secondary px-4 text-sm text-ink transition-colors outline-none hover:bg-secondary/80 focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            <ArrowLeftRight className="size-4 shrink-0" aria-hidden />
+            <span className="max-w-[14rem] truncate sm:max-w-[18rem]">
+              {reverseDetail}
+            </span>
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
