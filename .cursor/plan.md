@@ -63,16 +63,28 @@ Agents execute between human gates. Check boxes only when the gate evidence exis
 
 ## Phase 4 — UI TravelAI-light
 
-- [ ] Hero + search composition
-- [ ] Trajet cinematic score + uncertainty + alternative + share + disclaimer
-- [ ] Motion + reduced-motion
-- [ ] Anti-slop second pass + component tests
-- [ ] Optional Stitch mock upstream
+- [x] Hero + search composition — brand hero-level + headline + phrase + CTA + full-bleed rail (`components/home-hero.tsx`, `public/images/hero-rail.jpg`)
+- [x] Trajet cinematic score + uncertainty + alternative + share + disclaimer (`trajet-score-panel`, `score-reveal`, `trajet-share`)
+- [x] Motion + reduced-motion — stagger `.lt-enter`, score `.lt-score-reveal`, control `.lt-control-feedback`; global `prefers-reduced-motion`
+- [x] Anti-slop second pass + component tests — cold canvas wash; tests `tests/components/*`; `pnpm test` + `typecheck` + `lint` green 2026-09-27
+- [ ] Optional Stitch mock upstream — skipped (non-blocking)
+
+**Gate 4:** human OK 2026-09-27 → Phase 5.
 
 ## Phase 5 — Deploy & maintain
 
-- [ ] CI
-- [ ] Cron 2×/week
-- [ ] Licences / mentions
-- [ ] Keep `DATA_PUBLIC` / noindex until validation
-- [ ] Backlog: masked suppressions, holidays, geo expansion
+- [x] CI — `.github/workflows/ci.yml` (secret scan + lint + typecheck + test + build)
+- [x] Cron 2×/week — `.github/workflows/etl-cron.yml` (Tue/Fri 04:00 UTC; needs `DATABASE_URL` secret)
+- [x] Licences / mentions — `/mentions-legales` attribution table + whitelist checklist
+- [x] Keep `DATA_PUBLIC` / noindex until validation — `lib/seo.ts` + `app/robots.ts`; `.env.example` still `false`
+- [x] Backlog documented: masked suppressions, holidays, geo expansion (V1.1 / V2 — see intent)
+
+**Gate 5:** awaiting human OK (enable GitHub secrets for live ETL cron; still noindex).
+
+### Backlog (post-MVP — do not block Gate 5)
+
+- Masked suppressions (V2)
+- Holidays day-type (V1.1)
+- Geo expansion beyond RER D Melun
+- Phase 3b browse ligne/région (optional, human-triggered)
+- PostHog funnel (optional)

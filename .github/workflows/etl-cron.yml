@@ -1,0 +1,85 @@
+name: ETL ART Melun (2×/week)
+
+# Cadence: Tue + Fri 04:00 UTC (docs/04, docs/05).
+# Repo secrets required for a real run: DATABASE_URL
+# Optional on cache miss: ART_IDFM_2023_URL, ART_IDFM_2024_URL
+
+on:
+  schedule:
+    - cron: "0 4 * * 2,5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Ignore watermark hash (force partition replace)"
+        type: boolean
+        default: false
+      years:
+        description: "Space-separated year partitions"
+        type: string
+        default: "2023 2024"
+
+concurrency:
+  group: etl-art-melun
+  cancel-in-progress: false
+
+jobs:
+  etl:
+    name: hash → partition (noop if unchanged)
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Check DATABASE_URL secret
+        id: cfg
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "DATABASE_URL secret missing — ETL skipped (configure in repo Settings → Secrets)."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        if: steps.cfg.outputs.configured == 'true'
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        if: steps.cfg.outputs.configured == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        if: steps.cfg.outputs.configured == 'true'
+        run: pip install "psycopg2-binary>=2.9"
+
+      - name: Restore ART zip cache
+        if: steps.cfg.outputs.configured == 'true'
+        uses: actions/cache@v4
+        with:
+          path: data/raw/art
+          key: art-idfm-2023-2024-v1
+          restore-keys: |
+            art-idfm-
+
+      - name: Fetch ART IDFM zips if missing
+        if: steps.cfg.outputs.configured == 'true'
+        env:
+          ART_IDFM_2023_URL: ${{ secrets.ART_IDFM_2023_URL }}
+          ART_IDFM_2024_URL: ${{ secrets.ART_IDFM_2024_URL }}
+        run: bash scripts/etl/fetch-art-idfm.sh
+
+      - name: Run ETL
+        if: steps.cfg.outputs.configured == 'true'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          set -euo pipefail
+          YEARS=(${{ github.event.inputs.years || '2023 2024' }})
+          FORCE_FLAG=""
+          if [ "${{ github.event.inputs.force || 'false' }}" = "true" ]; then
+            FORCE_FLAG="--force"
+          fi
+          python scripts/etl/art-melun-stream.py --years "${YEARS[@]}" $FORCE_FLAG

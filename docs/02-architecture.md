@@ -48,8 +48,8 @@ Alert if Neon project size approaches ~400 Mo (Free ~0.5 Go).
 
 ## Feature flags
 
-- `DATA_PUBLIC=false` until gate E signed.
-- Pages emit `noindex` while data unvalidated.
+- `DATA_PUBLIC=false` until human data validation (see `lib/seo.ts`, `app/robots.ts`).
+- Pages emit `noindex` while data unvalidated — flip only via host env after gate.
 
 ## Subagent rule (context hygiene)
 

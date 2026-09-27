@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { TrajetControls } from "@/components/trajet-controls";
 import { TrajetScorePanel } from "@/components/trajet-score-panel";
 import type { DayType } from "@/lib/scoring";
+import { robotsPolicy } from "@/lib/seo";
 import { parseTrajetSlug } from "@/lib/slugs";
 import { getTrajetResult } from "@/lib/trajet";
 
@@ -30,7 +32,7 @@ export async function generateMetadata({
   const sp = await searchParams;
   const parsed = parseTrajetSlug(slug);
   if (!parsed) {
-    return { title: "Trajet introuvable", robots: { index: false, follow: false } };
+    return { title: "Trajet introuvable", robots: robotsPolicy() };
   }
   const { from, to } = parsed;
   const title = `${from.nameDisplay} vers ${to.nameDisplay}`;
@@ -39,7 +41,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    robots: { index: false, follow: false },
+    robots: robotsPolicy(),
     alternates: { canonical: canonicalPath },
     openGraph: {
       title,
@@ -69,14 +71,25 @@ export default async function TrajetPage({ params, searchParams }: PageProps) {
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-20 pt-6">
-      <p className="text-sm text-ink-muted">RER D · Branche Melun</p>
-      <h1 className="mt-2 max-w-2xl font-heading text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+      <p
+        className="lt-enter text-sm text-ink-muted"
+        style={{ "--lt-delay": 20 } as CSSProperties}
+      >
+        RER D · Branche Melun
+      </p>
+      <h1
+        className="lt-enter mt-2 max-w-2xl font-heading text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
+        style={{ "--lt-delay": 80 } as CSSProperties}
+      >
         {from.nameDisplay}
         <span className="text-ink-muted"> → </span>
         {to.nameDisplay}
       </h1>
 
-      <div className="mt-8">
+      <div
+        className="lt-enter mt-8"
+        style={{ "--lt-delay": 140 } as CSSProperties}
+      >
         <Suspense fallback={null}>
           <TrajetControls
             dayType={dayType}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Source_Sans_3, JetBrains_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { robotsPolicy } from "@/lib/seo";
 import "./globals.css";
 
 const fontDisplay = Outfit({
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   },
   description:
     "Fiabilité historique des trajets TER, Transilien et RER en Île-de-France.",
-  robots: { index: false, follow: false },
+  robots: robotsPolicy(),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

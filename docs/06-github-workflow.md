@@ -63,7 +63,8 @@ Prefer `gh` when creating remotes/PRs:
 ```bash
 gh repo view BnTen/LineTrust
 gh pr create --title "…" --body "…"
-gh run list                      # CI later (Phase 5)
+gh run list                      # CI + ETL cron (Phase 5)
+gh workflow run "ETL ART Melun (2×/week)"   # manual ETL
 ```
 
 ## Do not

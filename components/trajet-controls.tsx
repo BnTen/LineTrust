@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { formatWindowLabel } from "@/lib/slugs";
 import type { DayType } from "@/lib/scoring";
@@ -16,6 +17,16 @@ export function TrajetControls({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [flashKey, setFlashKey] = useState(0);
+  const isFirst = useRef(true);
+
+  useEffect(() => {
+    if (isFirst.current) {
+      isFirst.current = false;
+      return;
+    }
+    setFlashKey((k) => k + 1);
+  }, [dayType, windowStartMinutes]);
 
   function update(next: { d?: DayType; w?: number }) {
     const params = new URLSearchParams(searchParams.toString());
@@ -25,7 +36,12 @@ export function TrajetControls({
   }
 
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-6">
+    <div
+      key={flashKey}
+      className={`flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-6 ${
+        flashKey > 0 ? "lt-control-feedback rounded-2xl" : ""
+      }`}
+    >
       <fieldset className="flex flex-col gap-2">
         <legend className="text-sm font-medium text-ink">Type de jour</legend>
         <div className="flex gap-2">

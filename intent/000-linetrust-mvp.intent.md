@@ -1,6 +1,6 @@
 # Intent — LineTrust MVP (MonTER)
 
-Status: **locked** · Phase 2+3a complete (awaiting human gate 3a) · next = Phase 4 UI polish  
+Status: **locked** · Phases H→4 complete · Phase 5 ops in progress  
 Last updated: 2026-09-27
 
 ## One-liner

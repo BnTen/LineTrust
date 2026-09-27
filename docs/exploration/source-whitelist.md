@@ -29,11 +29,12 @@
 
 ## Licence / attribution checklist (pre-indexation)
 
-- [ ] SNCF Voyageurs — ODbL attribution for S1/S2 (+ share-alike on derived DB of same nature)
-- [ ] SNCF Gares & Connexions — ODbL for S3
-- [ ] Île-de-France Mobilités — ODbL for S4; **Licence Mobilité** obligations for S5 GTFS (attribution + mobility licence terms on PRIM)
-- [ ] Wording: indépendant, open data historique — **pas** service SNCF/RATP/IDFM
-- [ ] Page `/mentions-legales` (Phase 3+) lists this table
+- [x] SNCF Voyageurs — ODbL attribution for S1/S2 (+ share-alike on derived DB of same nature) — listed on `/mentions-legales`
+- [x] SNCF Gares & Connexions — ODbL for S3 — listed on `/mentions-legales`
+- [x] Île-de-France Mobilités — ODbL for S4; **Licence Mobilité** obligations for S5 GTFS (attribution + mobility licence terms on PRIM) — listed on `/mentions-legales`
+- [x] Wording: indépendant, open data historique — **pas** service SNCF/RATP/IDFM
+- [x] Page `/mentions-legales` lists this table (Phase 5)
+- [ ] Human data validation before flipping `DATA_PUBLIC=true` / indexation
 
 ## Neon budget policy (reminder)
 

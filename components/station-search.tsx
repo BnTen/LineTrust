@@ -81,8 +81,9 @@ export function StationSearch({
   return (
     <form
       onSubmit={onSubmit}
-      className="flex w-full max-w-lg flex-col gap-4"
+      className="flex w-full flex-col gap-4"
       noValidate
+      aria-label="Rechercher un trajet"
     >
       <StationSelect
         id="from"

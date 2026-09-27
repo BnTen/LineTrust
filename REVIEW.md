@@ -4,15 +4,15 @@ Use before merging a feature or signing a phase gate.
 
 ## Always
 
-- [ ] Matches `intent/` locks (no scope creep: auth, live, France-wide, early index…)
-- [ ] Grain honesty: UI claims ⊆ capability matrix statuses
-- [ ] A→B and B→A treated as distinct
-- [ ] Disclaimer present where user-facing score/share appears
-- [ ] FR copy; no operator impersonation
-- [ ] `noindex` still on until data gate signed
-- [ ] Tests added/updated; `feature-test-gate` satisfied
-- [ ] No secrets (`.env*`) in diff
-- [ ] No multi-MB raw dumps committed or pasted into agent context
+- [x] Matches `intent/` locks (no scope creep: auth, live, France-wide, early index…)
+- [x] Grain honesty: UI claims ⊆ capability matrix statuses
+- [x] A→B and B→A treated as distinct
+- [x] Disclaimer present where user-facing score/share appears
+- [x] FR copy; no operator impersonation
+- [x] `noindex` still on until data gate signed — `DATA_PUBLIC=false` / `robotsPolicy()` (Phase 5)
+- [x] Tests added/updated; `feature-test-gate` satisfied
+- [x] No secrets (`.env*`) in diff
+- [x] No multi-MB raw dumps committed or pasted into agent context
 
 ## Security
 
@@ -37,11 +37,11 @@ Use before merging a feature or signing a phase gate.
 
 ## UI (when touched)
 
-- [ ] `docs/DESIGN.md` + `linetrust-ui` followed
-- [ ] Anti-slop checklist passed (second pass)
-- [ ] WCAG 2.2 AA for score colors on light canvas
-- [ ] `prefers-reduced-motion` respected
-- [ ] Hero budget respected (no stats strip / card grid in first viewport)
+- [x] `docs/DESIGN.md` + `linetrust-ui` followed — Phase 4 TravelAI-light 2026-09-27
+- [x] Anti-slop checklist passed (second pass) — cold paper, Outfit/Source Sans, one signature gradient word, no hero stats/cards
+- [x] WCAG 2.2 AA for score colors on light canvas — tokens unchanged; score bands on canvas
+- [x] `prefers-reduced-motion` respected — globals + motion utilities
+- [x] Hero budget respected (no stats strip / card grid in first viewport)
 
 ## Context hygiene (agentic)
 

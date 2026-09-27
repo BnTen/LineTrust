@@ -50,9 +50,35 @@ Before flipping indexation:
 
 ## CI (Phase 5)
 
-- `pnpm lint` + `tsc` + `pnpm test`
-- Block secrets via hook + CI scan if available
-- ETL dry-run on fixtures
+Workflow: `.github/workflows/ci.yml` on `push` / `PR` → `main`.
+
+- Secret scan (no `.env*` except `.env.example`; no live `DATABASE_URL=postgres…` in tree)
+- `pnpm lint` + `pnpm typecheck` + `pnpm test` + `pnpm build`
+- `DATA_PUBLIC=false` on build
+
+Inspect runs: `gh run list` / `gh run view`.
+
+## ETL cron (Phase 5)
+
+Workflow: `.github/workflows/etl-cron.yml`
+
+| | |
+|--|--|
+| Schedule | Tue + Fri 04:00 UTC (`0 4 * * 2,5`) |
+| Manual | `workflow_dispatch` (`force`, `years`) |
+| Script | `scripts/etl/art-melun-stream.py` (+ `fetch-art-idfm.sh`) |
+
+**Secrets (repo Settings → Secrets and variables → Actions):**
+
+| Secret | Required | Role |
+|--------|----------|------|
+| `DATABASE_URL` | yes for real runs | Neon connection (never commit) |
+| `ART_IDFM_2023_URL` | on cache miss | HTTPS URL to `idfm_annuel_2023.zip` |
+| `ART_IDFM_2024_URL` | on cache miss | HTTPS URL to `idfm_annuel_2024.zip` |
+
+Zips are gitignored; Actions caches `data/raw/art` between runs. First enablement: seed cache via a machine that has the zips, or set the URL secrets.
+
+Without `DATABASE_URL`, the workflow exits cleanly (skip) — CI quality job stays green.
 
 ## Rollback ETL
 
@@ -60,4 +86,4 @@ Keep previous partition or Neon snapshot before month replace.
 
 ## Human gates
 
-Never auto-enable public indexation or claim train-level grain without signed Phase E matrix + corridor name in `intent/`.
+Never auto-enable public indexation or claim train-level grain without signed Phase E matrix + corridor name in `intent/`. Flip only by setting `DATA_PUBLIC=true` in host env **after** human sign-off.
