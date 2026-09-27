@@ -1,70 +1,66 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import { ScoreReveal } from "@/components/score-reveal";
+import { Button } from "@/components/ui/button";
+import { ReverseDirectionCta } from "@/components/reverse-direction-cta";
 import { TrajetShare } from "@/components/trajet-share";
-import { DISCLAIMER_FR } from "@/lib/disclaimer";
-import { formatWindowLabel, buildTrajetSlug } from "@/lib/slugs";
+import {
+  confidenceSectionBody,
+  contextSummaryLine,
+  dayTypeLabel,
+  estimatedTimesNote,
+  formatSlotSpoken,
+  lateLine,
+  onTimeLine,
+  tripCountLabel,
+} from "@/lib/copy";
 import type { AggCell } from "@/lib/trajet";
-import type { ScoreBand } from "@/lib/scoring";
 import type { ConfidenceLabel } from "@/lib/uncertainty";
 import type { Station } from "@/lib/stations";
-
-const bandLabel: Record<ScoreBand, string> = {
-  good: "Plutôt fiable",
-  mid: "Mitigé",
-  bad: "Peu fiable",
-};
-
-const confidenceCopy: Record<ConfidenceLabel, string> = {
-  faible: "Historique faible",
-  moyen: "Historique moyen",
-  fort: "Historique solide",
-};
 
 export function TrajetScorePanel({
   from,
   to,
   cell,
   alternative,
-  band,
   confidence,
   insufficientHistory,
   dayType,
   windowStartMinutes,
+  onReverse,
+  onSelectWindow,
 }: {
   from: Station;
   to: Station;
   cell: AggCell | null;
   alternative: AggCell | null;
-  band: ScoreBand | null;
   confidence: ConfidenceLabel | null;
   insufficientHistory: boolean;
   dayType: string;
   windowStartMinutes: number;
+  onReverse: () => void;
+  onSelectWindow?: (windowStartMinutes: number) => void;
 }) {
-  const reverseHref = `/trajet/${buildTrajetSlug(to, from)}?d=${dayType}&w=${windowStartMinutes}`;
-  const shareTitle = `${from.nameDisplay} → ${to.nameDisplay} · LineTrust`;
-  const dayLabel = dayType === "weekend" ? "Week-end" : "Jour ouvré";
+  const shareTitle = `${from.nameDisplay} vers ${to.nameDisplay} · LineTrust`;
+  const estNote = cell ? estimatedTimesNote(cell.nUsedEst) : null;
 
   if (!cell) {
     return (
-      <div className="mt-10 max-w-xl space-y-10">
-        <section className="lt-enter" style={{ "--lt-delay": 80 } as CSSProperties}>
-          <h2 className="font-heading text-lg font-semibold text-ink">Score</h2>
+      <div className="max-w-2xl space-y-8 lg:max-w-none">
+        <section
+          className="lt-enter"
+          style={{ "--lt-delay": 80 } as CSSProperties}
+        >
+          <h2 className="font-heading text-lg font-semibold text-ink">
+            Ce créneau
+          </h2>
           <p className="mt-3 text-lg text-ink-muted">
-            Pas assez d’historique pour cette fenêtre (
-            {formatWindowLabel(windowStartMinutes)},{" "}
-            {dayType === "weekend" ? "week-end" : "ouvré"}). Essaie une autre
-            plage ou le sens inverse.
+            Pas assez de trajets passés pour les départs{" "}
+            {formatSlotSpoken(windowStartMinutes)} {dayTypeLabel(dayType)}.
+            Essaie un autre créneau, ou le trajet dans l’autre sens.
           </p>
-          <p className="mt-4">
-            <Link
-              href={reverseHref}
-              className="text-ink underline-offset-4 hover:underline"
-            >
-              Voir {to.nameDisplay} → {from.nameDisplay}
-            </Link>
-          </p>
+          <div className="mt-6">
+            <ReverseDirectionCta from={from} to={to} onReverse={onReverse} />
+          </div>
         </section>
         <section
           className="lt-enter border-t border-border pt-8"
@@ -82,7 +78,7 @@ export function TrajetScorePanel({
   }
 
   return (
-    <div className="mt-10 max-w-xl space-y-10">
+    <div className="max-w-2xl space-y-8 lg:max-w-none">
       <section
         className="lt-enter"
         style={{ "--lt-delay": 60 } as CSSProperties}
@@ -92,11 +88,14 @@ export function TrajetScorePanel({
           id="trajet-score-heading"
           className="font-heading text-lg font-semibold text-ink"
         >
-          Score
+          Ce créneau
         </h2>
         <p className="mt-2 text-sm text-ink-muted">
-          {formatWindowLabel(windowStartMinutes)} · {dayLabel} · n={cell.n}
-          {confidence ? ` · ${confidenceCopy[confidence]}` : null}
+          {contextSummaryLine({
+            windowStartMinutes,
+            dayType,
+            n: cell.n,
+          })}
         </p>
 
         {insufficientHistory ? (
@@ -104,76 +103,91 @@ export function TrajetScorePanel({
             className="mt-4 rounded-2xl bg-secondary px-4 py-3 text-sm text-ink"
             role="status"
           >
-            Historique insuffisant (moins de 30 circulations) — le score reste
-            indicatif.
+            Moins de 30 trajets passés sur ce créneau : le score est indicatif,
+            à prendre avec prudence.
           </p>
         ) : null}
 
-        <div className="mt-6">
-          <ScoreReveal
-            key={`${dayType}-${windowStartMinutes}-${Math.round(cell.score)}`}
-            score={cell.score}
-            band={band}
-            label={band ? bandLabel[band] : null}
-          />
-        </div>
-
-        <p className="mt-3 text-ink-muted">
-          TPR {cell.tpr.toFixed(0)}% · retards &gt;15 min {cell.penalty.toFixed(0)}%
-        </p>
-        {cell.nUsedEst > 0 ? (
-          <p className="mt-2 text-sm text-ink-muted">
-            Dont {cell.nUsedEst} passage(s) avec horaire estimé (obs manquant).
-          </p>
+        <ul className="mt-4 space-y-1.5 text-ink-muted">
+          <li>{onTimeLine(cell.tpr)}</li>
+          <li>{lateLine(cell.penalty)}</li>
+        </ul>
+        {estNote ? (
+          <p className="mt-2 text-sm text-ink-muted">{estNote}</p>
         ) : null}
       </section>
 
-      {confidence || insufficientHistory ? (
-        <section
-          className="lt-enter border-t border-border pt-8"
-          style={{ "--lt-delay": 140 } as CSSProperties}
-          aria-labelledby="trajet-uncertainty-heading"
-        >
-          <h2
-            id="trajet-uncertainty-heading"
-            className="font-heading text-lg font-semibold text-ink"
-          >
-            Incertitude
-          </h2>
-          <p className="mt-3 text-ink-muted">
-            {confidence ? `${confidenceCopy[confidence]} — ` : null}
-            basé sur {cell.n}{" "}
-            {cell.n > 1 ? "circulations" : "circulation"} dans cette fenêtre
-            (grain pair × sens × type de jour × 30 min).
-          </p>
-        </section>
-      ) : null}
+      <section
+        className="lt-enter border-t border-border pt-8"
+        style={{ "--lt-delay": 100 } as CSSProperties}
+      >
+        <ReverseDirectionCta from={from} to={to} onReverse={onReverse} />
+      </section>
 
       {alternative ? (
         <section
           className="lt-enter border-t border-border pt-8"
-          style={{ "--lt-delay": 200 } as CSSProperties}
+          style={{ "--lt-delay": 140 } as CSSProperties}
           aria-labelledby="trajet-alt-heading"
         >
           <h2
             id="trajet-alt-heading"
             className="font-heading text-lg font-semibold text-ink"
           >
-            Alternative ±30 min
+            Un créneau voisin plus fiable
           </h2>
           <p className="mt-3 text-ink-muted">
-            {formatWindowLabel(alternative.windowStartMinutes)} — score{" "}
+            Départs {formatSlotSpoken(alternative.windowStartMinutes)} — score{" "}
             <span className="font-medium text-ink">
               {Math.round(alternative.score)}
-            </span>{" "}
-            (n={alternative.n})
+            </span>
+            , d’après {tripCountLabel(alternative.n)}.
           </p>
-          <Link
-            href={`?d=${dayType}&w=${alternative.windowStartMinutes}`}
-            className="mt-3 inline-block text-sm text-ink underline-offset-4 hover:underline"
+          {onSelectWindow ? (
+            <Button
+              type="button"
+              variant="secondary"
+              size="lg"
+              className="mt-4 h-11 px-5"
+              onClick={() => onSelectWindow(alternative.windowStartMinutes)}
+            >
+              Voir ce créneau
+            </Button>
+          ) : (
+            <Button
+              asChild
+              variant="secondary"
+              size="lg"
+              className="mt-4 h-11 px-5"
+            >
+              <Link href={`?d=${dayType}&w=${alternative.windowStartMinutes}`}>
+                Voir ce créneau
+              </Link>
+            </Button>
+          )}
+        </section>
+      ) : null}
+
+      {confidence || insufficientHistory ? (
+        <section
+          className="lt-enter border-t border-border pt-8"
+          style={{ "--lt-delay": 200 } as CSSProperties}
+          aria-labelledby="trajet-uncertainty-heading"
+        >
+          <h2
+            id="trajet-uncertainty-heading"
+            className="font-heading text-lg font-semibold text-ink"
           >
-            Afficher cette fenêtre
-          </Link>
+            D’où vient ce chiffre ?
+          </h2>
+          <p className="mt-3 text-ink-muted">
+            {confidenceSectionBody({
+              n: cell.n,
+              confidence,
+              windowStartMinutes,
+              dayType,
+            })}
+          </p>
         </section>
       ) : null}
 
@@ -191,19 +205,7 @@ export function TrajetScorePanel({
         <div className="mt-4">
           <TrajetShare title={shareTitle} />
         </div>
-        <p className="mt-6 text-sm leading-relaxed text-ink-muted">
-          {DISCLAIMER_FR}
-        </p>
       </section>
-
-      <p className="lt-enter text-sm" style={{ "--lt-delay": 300 } as CSSProperties}>
-        <Link
-          href={reverseHref}
-          className="text-ink-muted underline-offset-4 hover:text-ink hover:underline"
-        >
-          Sens inverse : {to.nameDisplay} → {from.nameDisplay}
-        </Link>
-      </p>
     </div>
   );
 }

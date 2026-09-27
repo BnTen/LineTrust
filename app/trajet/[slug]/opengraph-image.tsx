@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
+import { contextSummaryLine } from "@/lib/copy";
 import { DISCLAIMER_SHORT_FR } from "@/lib/disclaimer";
-import { formatWindowLabel, parseTrajetSlug } from "@/lib/slugs";
+import { parseTrajetSlug } from "@/lib/slugs";
 import { getTrajetResult } from "@/lib/trajet";
 
 export const size = { width: 1200, height: 630 };
@@ -19,7 +20,7 @@ export default async function OgImage({ params }: Props) {
   const parsed = parseTrajetSlug(slug);
 
   let scoreLabel = "—";
-  let subtitle = "Historique insuffisant";
+  let subtitle = "Pas assez de trajets passés pour ce créneau";
   let fromName = "Départ";
   let toName = "Arrivée";
 
@@ -35,10 +36,14 @@ export default async function OgImage({ params }: Props) {
       );
       if (result.cell) {
         scoreLabel = String(Math.round(result.cell.score));
-        subtitle = `${formatWindowLabel(DEFAULT_WINDOW)} · Ouvré · n=${result.cell.n}`;
+        subtitle = contextSummaryLine({
+          windowStartMinutes: DEFAULT_WINDOW,
+          dayType: DEFAULT_DAY,
+          n: result.cell.n,
+        });
       }
     } catch {
-      subtitle = "Score indisponible";
+      subtitle = "Fiabilité indisponible pour le moment";
     }
   }
 
@@ -60,7 +65,7 @@ export default async function OgImage({ params }: Props) {
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <div style={{ fontSize: 28, fontWeight: 600 }}>LineTrust</div>
           <div style={{ fontSize: 40, fontWeight: 600, maxWidth: 900 }}>
-            {fromName} → {toName}
+            {fromName} vers {toName}
           </div>
           <div style={{ fontSize: 24, color: "#5C6370" }}>{subtitle}</div>
         </div>

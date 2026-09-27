@@ -14,6 +14,8 @@
   --color-score-good: var(--score-good);
   --color-score-mid: var(--score-mid);
   --color-score-bad: var(--score-bad);
+  --color-line-rer-d: var(--line-rer-d);
+  --color-line-rer-d-muted: var(--line-rer-d-muted);
   --font-sans: var(--font-body);
   --font-heading: var(--font-display);
   --font-mono: var(--font-mono);
@@ -64,8 +66,11 @@
   --score-good: oklch(0.55 0.14 145);
   --score-mid: oklch(0.68 0.15 55);
   --score-bad: oklch(0.55 0.19 25);
-  --gradient-signature-from: oklch(0.74 0.17 48);
-  --gradient-signature-to: oklch(0.56 0.15 145);
+  /* RER D Melun schematic — official forest green family */
+  --line-rer-d: oklch(0.52 0.12 155);
+  --line-rer-d-muted: oklch(0.78 0.03 155);
+  --gradient-signature-from: oklch(0.72 0.19 45);
+  --gradient-signature-to: oklch(0.55 0.16 145);
 
   --background: var(--canvas);
   --foreground: var(--ink);
@@ -153,10 +158,6 @@
   .lt-score-reveal {
     animation: lt-score-reveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-
-  .lt-control-feedback {
-    animation: lt-control-feedback 0.5s ease-out both;
-  }
 }
 
 @keyframes lt-enter {
@@ -178,18 +179,6 @@
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes lt-control-feedback {
-  0% {
-    box-shadow: 0 0 0 0 color-mix(in oklch, var(--ring) 0%, transparent);
-  }
-  35% {
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 35%, transparent);
-  }
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in oklch, var(--ring) 0%, transparent);
   }
 }
 

@@ -31,17 +31,17 @@ function cell(
 }
 
 describe("ScoreReveal", () => {
-  it("exposes score and band label for a11y", () => {
+  it("exposes fiabilité and band label for a11y", () => {
     render(<ScoreReveal score={82.4} band="good" label="Plutôt fiable" />);
     expect(
-      screen.getByLabelText(/score 82, plutôt fiable/i),
+      screen.getByLabelText(/fiabilité 82, plutôt fiable/i),
     ).toBeInTheDocument();
     expect(screen.getByText("Plutôt fiable")).toBeInTheDocument();
   });
 });
 
 describe("TrajetScorePanel", () => {
-  it("renders score, alternative, share, and disclaimer sections", () => {
+  it("renders plain-language score, alternative, reverse, and share", () => {
     render(
       <TrajetScorePanel
         from={from}
@@ -59,21 +59,40 @@ describe("TrajetScorePanel", () => {
           tpr: 85,
           penalty: 3,
         })}
-        band="mid"
         confidence="moyen"
         insufficientHistory={false}
         dayType="weekday"
         windowStartMinutes={480}
+        onReverse={() => undefined}
+        onSelectWindow={() => undefined}
       />,
     );
 
-    expect(screen.getByRole("heading", { name: "Score" })).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Incertitude" }),
+      screen.getByRole("heading", { name: "Ce créneau" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: /alternative/i }),
+      screen.getByRole("heading", { name: /dans l’autre sens/i }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: /dans l’autre sens : melun vers paris gare de lyon/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /d’où vient ce chiffre/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /créneau voisin/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /voir ce créneau/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/arrivés à l’heure/i),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/TPR/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/n=/i)).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "Partager" }),
     ).toBeInTheDocument();
@@ -81,7 +100,7 @@ describe("TrajetScorePanel", () => {
       screen.getByRole("button", { name: /partager ce trajet/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/outil indépendant fondé sur l’open data historique/i),
-    ).toBeInTheDocument();
+      screen.queryByText(/outil indépendant fondé sur l’open data historique/i),
+    ).not.toBeInTheDocument();
   });
 });

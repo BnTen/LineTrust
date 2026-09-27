@@ -3,4 +3,4 @@ export const DISCLAIMER_FR =
   "LineTrust est un outil indépendant fondé sur l’open data historique. Ce n’est pas un service opérateur, ni de l’information temps réel.";
 
 export const DISCLAIMER_SHORT_FR =
-  "Indépendant · open data historique · pas un opérateur · pas du temps réel";
+  "Indépendant · données passées · pas un opérateur · pas du temps réel";

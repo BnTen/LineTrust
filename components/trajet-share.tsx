@@ -50,9 +50,7 @@ export function TrajetShare({ title }: { title: string }) {
         <p className="text-sm text-ink-muted" role="status">
           {feedback}
         </p>
-      ) : (
-        <p className="text-sm text-ink-muted">{DISCLAIMER_SHORT_FR}</p>
-      )}
+      ) : null}
     </div>
   );
 }
