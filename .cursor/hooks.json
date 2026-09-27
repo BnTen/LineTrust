@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "node .cursor/hooks/block-env-commit.mjs",
+        "matcher": "git\\s+(add|commit|stage)",
+        "failClosed": true
+      }
+    ]
+  }
+}

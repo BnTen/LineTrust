@@ -1,0 +1,16 @@
+{
+  "description": "Placeholder golden aggregate cell for Phase 1 Vitest scoring fixtures.",
+  "weights_version": "w0",
+  "cell": {
+    "from": "SYNTH_A",
+    "to": "SYNTH_B",
+    "day_type": "weekday",
+    "window_start": "08:00",
+    "tpr": 90,
+    "tsr": 5,
+    "penalty": 10,
+    "n": 120,
+    "expected_score": 76.75
+  },
+  "notes": "expected_score = clamp(90*0.5 + (100-5)*0.35 - 10*0.15, 0, 100) = 45 + 33.25 - 1.5 = 76.75"
+}
