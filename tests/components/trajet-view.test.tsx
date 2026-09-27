@@ -12,6 +12,7 @@ const yerres = CORRIDOR_STATIONS.find((s) => s.slug === "yerres")!;
 
 const initialResult: TrajetResult = {
   cell: {
+    lineId: "IDFM:C01728",
     fromCodeCi: from.codeCi,
     toCodeCi: to.codeCi,
     dayType: "weekday",
@@ -68,6 +69,11 @@ describe("TrajetView soft updates", () => {
         initialDayType="weekday"
         initialWindowStartMinutes={480}
         initialResult={initialResult}
+        lineShort="D"
+        lineId="IDFM:C01728"
+        corridorId="rer-d-melun"
+        corridorStations={[...CORRIDOR_STATIONS]}
+        lineLabel="RER D · Branche Melun"
       />,
     );
 
@@ -87,11 +93,12 @@ describe("TrajetView soft updates", () => {
       expect(fetchMock).toHaveBeenCalled();
     });
     expect(String(fetchMock.mock.calls[0]![0])).toMatch(
-      /\/api\/trajet\?.*from=yerres.*to=melun/,
+      /\/api\/trajet\?.*from=yerres.*to=melun.*line=D/,
     );
     expect(replaceState).toHaveBeenCalled();
     const url = String(replaceState.mock.calls.at(-1)?.[2] ?? "");
     expect(url).toContain("/trajet/yerres--melun");
+    expect(url).toContain("line=D");
 
     await waitFor(() => {
       expect(

@@ -26,7 +26,8 @@ Package manager: **pnpm** only.
 | Spec | `docs/spec.md` |
 | Design | `docs/DESIGN.md` |
 | Data matrix | `docs/exploration/data-capability-matrix.md` |
-| Phase checklist | `.cursor/plan.md` |
+| Scale RER | `docs/exploration/scale-rer-coverage.md` · `scale-rer-corridors.md` · `scale-od-key.md` |
+| Phase checklist | `.cursor/plan.md` (incl. **Phase S** scale) |
 | Review lens | `REVIEW.md` |
 | GitHub / gh | `docs/06-github-workflow.md` |
 | Evals | `evals/` |
@@ -55,14 +56,14 @@ gh pr create               # when opening a PR
 
 Never commit `.env.local` / secrets. Use `.githooks` + Cursor hook.
 
-## Definition of Done (slice)
+## Definition of Done (scale RER)
 
 See intent. Short form:
 
-1. Search 2 pilot-corridor stations → oriented trajet page  
+1. Home line pills (A–E) + optional branch → 2 stations → `/trajet/…?line=&c=`  
 2. Score + color + uncertainty + ±30 min alternative (weekday/WE) + disclaimer  
-3. Share OG image  
-4. Tests green; ETL second run noop; `noindex`
+3. Melun golden path OK; share OG; `noindex`  
+4. Tests green; ETL 2e run noop / partition; Neon ≪ 400 Mo
 
 ## Sub-agents (mandatory for heavy data)
 
@@ -101,9 +102,20 @@ Also: Cursor Task `explore` for codebase research.
 
 ## Phase boundaries
 
-- **Phase H (this harness):** docs/skills/agents/hooks/evals only — **no** product routes, Neon live, ETL download, shadcn init.
-- **Phase 1:** Neon via MCP, Vitest, shadcn init, CSS tokens.
-- Later phases: see `.cursor/plan.md`.
+- **Phases H→5:** complete (MVP Melun + TravelAI UI + CI). Still `noindex` until human data gate.
+- **Phase S (scale RER):** S0–S2 done — multi-line schema, ETL A–E 2024, home pills + trajet `?line=`. See `.cursor/plan.md`.
+- **Next:** Transilien (budget-gated) · human multi-OD validation · Phase 3b browse optional.
+
+## ETL scale (recette)
+
+```bash
+# Un stream par ligne — PAS 5 lignes × 2 ans d’un coup
+export PYTHONUNBUFFERED=1
+python scripts/etl/art-network-stream.py --years 2024 --force --tct TBC   # etc.
+# 2e run sans --force = noop (même partition_key year-rer-TCT)
+```
+
+Config: `scripts/etl/corridors.yaml` + `corridors.discovered.json`. Melun-only legacy: `art-melun-stream.py`.
 
 ## Security
 

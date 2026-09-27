@@ -16,18 +16,25 @@ download → hash file → if unchanged: noop
 
 Row-level diff = v1 **only after** Phase E proves stable business keys.
 
-## Phase 2 implementation
+## Phase 2 + Scale RER implementation
 
 | Piece | Path |
 |-------|------|
-| Schema | `db/schema.sql` (Neon project `muddy-paper-90279472`) |
-| Stream ETL | `scripts/etl/art-melun-stream.py` (ART zip → `agg_pair_window` + rollup) |
+| Schema | `db/schema.sql` + `db/migrations/001_multilines.sql` (Neon `muddy-paper-90279472`) |
+| Network ETL (primary) | `scripts/etl/art-network-stream.py` — multi-corridor · `--tct` · prune n≥30 + nuit |
+| Corridor config | `scripts/etl/corridors.yaml` + `corridors.discovered.json` |
+| Discover | `scripts/etl/discover-corridors.py` |
+| Legacy Melun-only | `scripts/etl/art-melun-stream.py` |
 | Pure aggregate (tests) | `lib/etl/aggregate.ts` |
 | Watermark decision | `lib/etl/watermark.ts` |
-| Corridor codes | `lib/etl/corridor.ts` |
 
-**Corridor filter:** `tct=TBD` + OD endpoints Paris-Gare-de-Lyon (`686030` / alias `686006`) ↔ Melun (`682005`).  
-Directed pairs among jalons on those trips; window = 30 min floor of theoretical depart at `from`.
+**Agg key:** `(line_id, from, to, day_type, window[, month])` — score **par ligne**.  
+**Partitions:** `{year}-rer-{TCT…}` (ex. `2024-rer-TBC`) — un `--tct` à la fois pour noop.  
+**Retention:** 12 calendar months. **Raw ART** hors Neon / hors git.
+
+**Loaded 2024 (mesuré):** RER A–E corridor-scoped · ~575 k monthly · ~62 k rollup · DB **~160 Mo**.  
+Melun golden path: `tct=TBD` · Lyon `686030` ↔ Melun `682005`.  
+Partial honesty: A ouest / B nord only (terminus virtuel Nanterre `758029` = OD sans jalon).
 
 ### Estimated times (`dh_est_jalon`)
 
@@ -62,7 +69,7 @@ Per KPI: `calculable` | `proxy` | `impossible` | `V2`.
 
 ## Storage budget
 
-- Target Neon ≪ 400 Mo with 24 months of **aggregates** for pilot corridor.
+- Target Neon ≪ 400 Mo with **12 months** of **aggregates** (corridor-scoped; was 24 — revised for free tier).
 - If raw facts needed for recompute: keep outside Neon; rebuild agg from scratch scripts.
 
 ## Cadence

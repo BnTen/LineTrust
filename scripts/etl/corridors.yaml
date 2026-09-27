@@ -1,0 +1,76 @@
+# ART multi-corridor ETL config — RER scale (human gate S0)
+# Prune: n_min=30, drop windows 01:00–04:30 (minutes 60..269)
+
+source_id: art-idfm
+weights_version: w0
+n_min: 30
+# Retention — human lock 2026-09-27 (Neon free): keep last 12 calendar months only
+retention_months: 12
+# Exclusive overnight window starts to drop (30-min buckets)
+drop_window_minutes_from: 60   # 01:00
+drop_window_minutes_to: 270    # 04:30 exclusive
+
+lines:
+  TBA: { line_id: IDFM:C01742, short: A, coverage: partial }
+  TBB: { line_id: IDFM:C01743, short: B, coverage: partial }
+  TBC: { line_id: IDFM:C01727, short: C, coverage: full }
+  TBD: { line_id: IDFM:C01728, short: D, coverage: full }
+  TBE: { line_id: IDFM:C01729, short: E, coverage: full }
+
+# Seed corridors — hub/end from ART/IDFM maps; stops filled by discover or fixed seq
+# Melun keeps explicit stop_seq (MVP golden path)
+corridors:
+  - id: rer-d-melun
+    line_tct: TBD
+    display_name: "RER D — Branche Melun"
+    hub: "686030"
+    end: "682005"
+    aliases: { "686006": "686030" }
+    # fixed seq optional — if omitted, discover from ART
+    stop_seq:
+      "686030": 1
+      "686006": 1
+      "681155": 2
+      "681247": 3
+      "608802": 4
+      "681825": 5
+      "681809": 6
+      "682104": 7
+      "682112": 8
+      "682120": 9
+      "682138": 10
+      "682146": 11
+      "682153": 12
+      "682187": 13
+      "682161": 14
+      "682179": 15
+      "682005": 16
+
+  - id: rer-d-corbeil
+    line_tct: TBD
+    display_name: "RER D — Branche Corbeil"
+    hub: "686030"
+    end: "681007"  # Corbeil-Essonnes
+    aliases: { "686006": "686030" }
+
+  - id: rer-d-malesherbes
+    line_tct: TBD
+    display_name: "RER D — Branche Malesherbes"
+    hub: "545244"  # Juvisy
+    end: "684415"  # Malesherbes
+
+  - id: rer-d-nord
+    line_tct: TBD
+    display_name: "RER D — Branche Nord"
+    hub: "686030"
+    end: "276246"  # Goussainville
+    aliases: { "686006": "686030" }
+
+  - id: rer-d-orry
+    line_tct: TBD
+    display_name: "RER D — Branche Orry"
+    hub: "271007"  # Paris-Nord
+    end: "276279"  # Orry-la-Ville-Coye
+
+  # E / C / A / B — hub/end resolved by discover-corridors.py into
+  # scripts/etl/corridors.discovered.json (merged at runtime)

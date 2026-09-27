@@ -1,4 +1,4 @@
-/** Corridor segment helpers — Melun branch order from CORRIDOR_STATIONS. */
+/** Corridor segment helpers — ordered station list (per corridor). */
 
 import { CORRIDOR_STATIONS, type Station } from "@/lib/stations";
 
@@ -29,8 +29,12 @@ export function isStationOnSegment(
   return station.sequenceOrder >= lo && station.sequenceOrder <= hi;
 }
 
-export function stationsOnSegment(from: Station, to: Station): Station[] {
-  return CORRIDOR_STATIONS.filter((s) => isStationOnSegment(s, from, to));
+export function stationsOnSegment(
+  from: Station,
+  to: Station,
+  stations: readonly Station[] = CORRIDOR_STATIONS,
+): Station[] {
+  return stations.filter((s) => isStationOnSegment(s, from, to));
 }
 
 /**

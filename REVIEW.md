@@ -51,7 +51,14 @@ Use before merging a feature or signing a phase gate.
 
 ## Phase gate sign-off
 
-Phase: ______  
-Reviewer: ______  
-Date: ______  
-Notes: ______
+### Scale RER S0–S2 (2026-09-27)
+
+- [x] S0 gate signed (`scale-rer-coverage.md`)
+- [x] ETL 2024 A–E loaded · Melun + E still scoreable · 2e run noop · Neon ~160 Mo
+- [x] UI multi-lignes (pills + branche optionnelle + `?line=`) · tests green · still `noindex`
+- [ ] Human multi-OD spot-check before `DATA_PUBLIC=true`
+
+Phase: **S2**  
+Reviewer: agent + pending human spot-check  
+Date: 2026-09-27  
+Notes: Transilien deferred (budget); A est / B sud still impossible.

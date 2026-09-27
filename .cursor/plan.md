@@ -32,7 +32,7 @@ Agents execute between human gates. Check boxes only when the gate evidence exis
 
 - [x] Download + profile (subagents) — S1–S5 puis **S6 ART** IDFM 2023–2024 (`art-circulations-discovery.md`, `profile-art-rer-d.md`)
 - [x] Fill `data-capability-matrix.md` — **revised**: pair×window **calculable** via ART; S1 = cross-check
-- [x] Name pilot corridor in `intent/` — **RER D — Branche Melun (Paris-Gare-de-Lyon ↔ Melun)** (pending human confirm)
+- [x] Name pilot corridor in `intent/` — **RER D — Branche Melun (Paris-Gare-de-Lyon ↔ Melun)**
 - [x] Neon budget + source whitelist + licences (`source-whitelist.md`; raw ART hors Neon; agg corridor ≪ 400 Mo)
 - [x] **Human gate:** matrix + corridor + honest grain — signed 2026-09-27 (RER D Melun + ART S6; OK Phase 2)
 
@@ -52,13 +52,13 @@ Agents execute between human gates. Check boxes only when the gate evidence exis
 
 - [x] Search + `/trajet/[from]-[to]` oriented
 - [x] `noindex` + canonical self
-- [x] Golden path DoD
+- [x] Golden path DoD (Melun)
 
 **Gate 3a evidence:** home search → `/trajet/paris-gare-de-lyon--melun` ; score + uncertainty + alt ±30 + disclaimer + OG ; tests/lint/tsc green.
 
 ### 3b Browse (only if matrix OK)
 
-- [ ] Line / region browse
+- [ ] Line / region browse (dedicated browse pages)
 - [ ] Train number only if calculable
 
 ## Phase 4 — UI TravelAI-light
@@ -81,10 +81,31 @@ Agents execute between human gates. Check boxes only when the gate evidence exis
 
 **Gate 5:** awaiting human OK (enable GitHub secrets for live ETL cron; still noindex).
 
+## Phase S — Scale RER network (2026-09-27)
+
+Gate S0 signed: score **par ligne** · corridors/branches · ordre E→D→C→A/B · pruning n≥30 + nuit · rétention **12 mois**.
+
+### S1 Schéma + ETL data
+
+- [x] Migration `db/migrations/001_multilines.sql` · `line_id` in agg PK
+- [x] `scripts/etl/art-network-stream.py` + `corridors.yaml` + `discover-corridors.py`
+- [x] Load 2024 **RER A–E** corridor-scoped (noop 2e run / partition)
+- [x] Neon mesuré **~160 Mo** (≪ 400 Mo) — Melun golden path OK
+- [x] Docs: `scale-rer-coverage.md` · `scale-rer-corridors.md` · `scale-od-key.md`
+
+### S2 UI multi-lignes (architecture pages inchangée)
+
+- [x] Home: gélules ligne A–E + branche optionnelle → selects dynamiques
+- [x] Trajet: `?line=` + `?c=` · score par `line_id` · corridor picker multi-branche
+- [x] Catalog Neon `lib/network.ts` · partial copy A ouest / B nord
+- [x] Tests + typecheck green · `DATA_PUBLIC=false` / `noindex` inchangés
+
+**Next:** Transilien ETL (STOP si Neon → 300–350 Mo) · validation humaine multi-OD · éventuel Phase 3b browse.
+
 ### Backlog (post-MVP — do not block Gate 5)
 
 - Masked suppressions (V2)
 - Holidays day-type (V1.1)
-- Geo expansion beyond RER D Melun
+- Transilien after RER (budget-gated)
 - Phase 3b browse ligne/région (optional, human-triggered)
 - PostHog funnel (optional)

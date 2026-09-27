@@ -14,12 +14,16 @@ import {
   type CorridorEnd,
   type CorridorSelection,
 } from "@/lib/corridor-segment";
-import { CORRIDOR_STATIONS, stationBySlug, type Station } from "@/lib/stations";
+import { CORRIDOR_STATIONS, type Station } from "@/lib/stations";
 import type { ScoreBand } from "@/lib/scoring";
 
 export interface CorridorPickerProps {
   fromSlug?: string | null;
   toSlug?: string | null;
+  /** Ordered stops for the active corridor (defaults to Melun). */
+  stations?: readonly Station[];
+  /** Subtitle under the picker title, e.g. "RER D · Branche Melun". */
+  lineLabel?: string;
   /** Soft tint on the active segment (trajet page). */
   band?: ScoreBand | null;
   /** Controlled editing end (trajet soft-update shell). */
@@ -47,6 +51,8 @@ function initialEditing(
 export function CorridorPicker({
   fromSlug = null,
   toSlug = null,
+  stations = CORRIDOR_STATIONS,
+  lineLabel = "RER D · Branche Melun",
   band = null,
   editing: editingProp,
   onEditingChange,
@@ -65,8 +71,9 @@ export function CorridorPicker({
     onEditingChange?.(next);
   }
 
-  const from = fromSlug ? stationBySlug(fromSlug) : undefined;
-  const to = toSlug ? stationBySlug(toSlug) : undefined;
+  const bySlug = new Map(stations.map((s) => [s.slug, s]));
+  const from = fromSlug ? bySlug.get(fromSlug) : undefined;
+  const to = toSlug ? bySlug.get(toSlug) : undefined;
   const hasPair = Boolean(from && to);
   const armed = hasPair ? (editing ?? "to") : null;
 
@@ -103,7 +110,7 @@ export function CorridorPicker({
         >
           {corridorPickerTitle}
         </h2>
-        <p className="text-sm text-ink-muted">RER D · Branche Melun</p>
+        <p className="text-sm text-ink-muted">{lineLabel}</p>
       </div>
       <p className="mt-1 max-w-xl text-sm text-ink-muted">
         {corridorPickerHint(hasPair)}
@@ -111,7 +118,7 @@ export function CorridorPicker({
 
       <ol
         className="relative mt-5 max-w-md list-none sm:max-w-lg"
-        aria-label="Gares de la branche Melun"
+        aria-label={`Gares — ${lineLabel}`}
       >
         <div
           aria-hidden
@@ -121,11 +128,12 @@ export function CorridorPicker({
           <ActiveRailVertical
             from={from}
             to={to}
+            stations={stations}
             className={activeRailClass}
           />
         ) : null}
 
-        {CORRIDOR_STATIONS.map((station) => {
+        {stations.map((station) => {
           const role =
             station.slug === fromSlug
               ? "from"
@@ -219,13 +227,15 @@ export function CorridorPicker({
 function ActiveRailVertical({
   from,
   to,
+  stations,
   className,
 }: {
   from: Station;
   to: Station;
+  stations: readonly Station[];
   className: string;
 }) {
-  const n = CORRIDOR_STATIONS.length;
+  const n = stations.length || 1;
   const i0 = Math.min(from.sequenceOrder, to.sequenceOrder) - 1;
   const i1 = Math.max(from.sequenceOrder, to.sequenceOrder) - 1;
   const topPct = ((i0 + 0.5) / n) * 100;

@@ -5,13 +5,23 @@ export function buildTrajetSlug(from: Station, to: Station): string {
   return `${from.slug}--${to.slug}`;
 }
 
+function lookupStation(
+  slug: string,
+  stations?: readonly Station[],
+): Station | undefined {
+  if (stations) return stations.find((s) => s.slug === slug);
+  return stationBySlug(slug);
+}
+
+/** Resolve oriented trajet slug. Pass `stations` for multi-line catalogs. */
 export function parseTrajetSlug(
   slug: string,
+  stations?: readonly Station[],
 ): { from: Station; to: Station } | null {
   const parts = slug.split("--");
   if (parts.length !== 2) return null;
-  const from = stationBySlug(parts[0]);
-  const to = stationBySlug(parts[1]);
+  const from = lookupStation(parts[0]!, stations);
+  const to = lookupStation(parts[1]!, stations);
   if (!from || !to) return null;
   if (from.codeCi === to.codeCi) return null;
   return { from, to };

@@ -1,0 +1,639 @@
+{
+  "generated": "2026-09-27",
+  "inventory": {
+    "zip_2023_mb": 502.5,
+    "zip_2024_mb": 530.2,
+    "csv_uncompressed_2023_mb_est": 9325,
+    "csv_uncompressed_2024_mb_est": 10200,
+    "rows_2023": 31534444,
+    "rows_2024": 34568951,
+    "jalon_rows_rer_2024": 19669314,
+    "jalon_rows_transilien_2024": 14899637,
+    "jalon_rows_other_2024": 0
+  },
+  "constants": {
+    "windows_per_cell_space": 96,
+    "months": 24,
+    "bytes_per_row_est": 150,
+    "density_assumptions": {
+      "low": 0.05,
+      "mid": 0.1,
+      "high": 0.15,
+      "n30_frac": 0.5,
+      "overnight_keep": 0.8541666666666666
+    }
+  },
+  "melun_density_proxy": {
+    "S": 17,
+    "mvp_hub_end_pairs": 2,
+    "mvp_rollup_cells_max": 192,
+    "full_line_rollup_upper": 26112,
+    "hub_pair_share_of_all_directed_pairs": 0.0074,
+    "note": "MVP ETL aggregates hub↔terminus only; use 5–15% of theoretical for full-line all-pairs"
+  },
+  "by_tct_2024": {
+    "TBC": {
+      "line_family": "RER-C",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne C du RER",
+      "jalon_rows": 7576794,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 86,
+      "distinct_circulations": 200548,
+      "distinct_endpoint_od": 824,
+      "theoretical_directed_station_pairs": 7310,
+      "jalon_rows_2023": 6822993
+    },
+    "TBD": {
+      "line_family": "RER-D",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne D du RER",
+      "jalon_rows": 5310303,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 82,
+      "distinct_circulations": 159652,
+      "distinct_endpoint_od": 466,
+      "theoretical_directed_station_pairs": 6642,
+      "jalon_rows_2023": 4897212
+    },
+    "TBR": {
+      "line_family": "Transilien-L",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne L",
+      "jalon_rows": 3793297,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 38,
+      "distinct_circulations": 174376,
+      "distinct_endpoint_od": 207,
+      "theoretical_directed_station_pairs": 1406,
+      "jalon_rows_2023": 3528351
+    },
+    "TBN": {
+      "line_family": "Transilien-H",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne H",
+      "jalon_rows": 3323078,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 51,
+      "distinct_circulations": 137814,
+      "distinct_endpoint_od": 167,
+      "theoretical_directed_station_pairs": 2550,
+      "jalon_rows_2023": 3095284
+    },
+    "TBB": {
+      "line_family": "RER-B",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne B du RER",
+      "jalon_rows": 3195010,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 35,
+      "distinct_circulations": 167369,
+      "distinct_endpoint_od": 146,
+      "theoretical_directed_station_pairs": 1190,
+      "jalon_rows_2023": 2974534
+    },
+    "TBS": {
+      "line_family": "Transilien-J",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne J",
+      "jalon_rows": 3064173,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 62,
+      "distinct_circulations": 157003,
+      "distinct_endpoint_od": 227,
+      "theoretical_directed_station_pairs": 3782,
+      "jalon_rows_2023": 2883016
+    },
+    "TBE": {
+      "line_family": "RER-E",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne E du RER",
+      "jalon_rows": 2363012,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 25,
+      "distinct_circulations": 136721,
+      "distinct_endpoint_od": 208,
+      "theoretical_directed_station_pairs": 600,
+      "jalon_rows_2023": 2154989
+    },
+    "TBM": {
+      "line_family": "Transilien-N",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne N",
+      "jalon_rows": 1851475,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 36,
+      "distinct_circulations": 69807,
+      "distinct_endpoint_od": 102,
+      "theoretical_directed_station_pairs": 1260,
+      "jalon_rows_2023": 1726553
+    },
+    "TBA": {
+      "line_family": "RER-A",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne A du RER",
+      "jalon_rows": 1224195,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 11,
+      "distinct_circulations": 92469,
+      "distinct_endpoint_od": 54,
+      "theoretical_directed_station_pairs": 110,
+      "jalon_rows_2023": 1169228
+    },
+    "TBT": {
+      "line_family": "Transilien-P",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne P",
+      "jalon_rows": 1086310,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 56,
+      "distinct_circulations": 98934,
+      "distinct_endpoint_od": 127,
+      "theoretical_directed_station_pairs": 3080,
+      "jalon_rows_2023": 1051782
+    },
+    "TBL": {
+      "line_family": "Transilien-R",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne R",
+      "jalon_rows": 737203,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 56,
+      "distinct_circulations": 40294,
+      "distinct_endpoint_od": 50,
+      "theoretical_directed_station_pairs": 3080,
+      "jalon_rows_2023": 648956
+    },
+    "TBQ": {
+      "line_family": "Transilien-U",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne U",
+      "jalon_rows": 473431,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 26,
+      "distinct_circulations": 23405,
+      "distinct_endpoint_od": 58,
+      "theoretical_directed_station_pairs": 650,
+      "jalon_rows_2023": 410922
+    },
+    "TWP": {
+      "line_family": "Transilien-T12",
+      "lib_tct_mode": "Tram-train transport Ile-de-France Mobilités à charge, ligne T12",
+      "jalon_rows": 390983,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 7,
+      "distinct_circulations": 44147,
+      "distinct_endpoint_od": 20,
+      "theoretical_directed_station_pairs": 42,
+      "jalon_rows_2023": 18976
+    },
+    "TBV": {
+      "line_family": "Transilien-K",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne K",
+      "jalon_rows": 165635,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 19,
+      "distinct_circulations": 10170,
+      "distinct_endpoint_od": 22,
+      "theoretical_directed_station_pairs": 342,
+      "jalon_rows_2023": 151648
+    },
+    "TBW": {
+      "line_family": "Transilien-V",
+      "lib_tct_mode": "Train transport Ile-de-France Mobilités à charge, ligne V",
+      "jalon_rows": 14052,
+      "lib_tct_variants": 1,
+      "distinct_jalon_stations": 7,
+      "distinct_circulations": 1171,
+      "distinct_endpoint_od": 2,
+      "theoretical_directed_station_pairs": 42
+    }
+  },
+  "by_line_family_2024": {
+    "RER-A": {
+      "tcts": [
+        "TBA"
+      ],
+      "jalon_rows_2024": 1224195,
+      "stations_max": 11,
+      "endpoint_od_sum": 54,
+      "circ_sum": 92469,
+      "S_2024": 11,
+      "theoretical_pairs": 110,
+      "monthly_cells_upper": 253440,
+      "rollup_cells_upper": 10560,
+      "strategy_A_monthly_mo_upper": 38.02,
+      "strategy_A_rollup_mo_upper": 1.58,
+      "strategy_A_monthly_mo_10pct": 3.8,
+      "strategy_B_same_rows_per_line": true
+    },
+    "RER-B": {
+      "tcts": [
+        "TBB"
+      ],
+      "jalon_rows_2024": 3195010,
+      "stations_max": 35,
+      "endpoint_od_sum": 146,
+      "circ_sum": 167369,
+      "S_2024": 35,
+      "theoretical_pairs": 1190,
+      "monthly_cells_upper": 2741760,
+      "rollup_cells_upper": 114240,
+      "strategy_A_monthly_mo_upper": 411.26,
+      "strategy_A_rollup_mo_upper": 17.14,
+      "strategy_A_monthly_mo_10pct": 41.13,
+      "strategy_B_same_rows_per_line": true
+    },
+    "RER-C": {
+      "tcts": [
+        "TBC"
+      ],
+      "jalon_rows_2024": 7576794,
+      "stations_max": 86,
+      "endpoint_od_sum": 824,
+      "circ_sum": 200548,
+      "S_2024": 86,
+      "theoretical_pairs": 7310,
+      "monthly_cells_upper": 16842240,
+      "rollup_cells_upper": 701760,
+      "strategy_A_monthly_mo_upper": 2526.34,
+      "strategy_A_rollup_mo_upper": 105.26,
+      "strategy_A_monthly_mo_10pct": 252.63,
+      "strategy_B_same_rows_per_line": true
+    },
+    "RER-D": {
+      "tcts": [
+        "TBD"
+      ],
+      "jalon_rows_2024": 5310303,
+      "stations_max": 82,
+      "endpoint_od_sum": 466,
+      "circ_sum": 159652,
+      "S_2024": 82,
+      "theoretical_pairs": 6642,
+      "monthly_cells_upper": 15303168,
+      "rollup_cells_upper": 637632,
+      "strategy_A_monthly_mo_upper": 2295.48,
+      "strategy_A_rollup_mo_upper": 95.64,
+      "strategy_A_monthly_mo_10pct": 229.55,
+      "strategy_B_same_rows_per_line": true
+    },
+    "RER-E": {
+      "tcts": [
+        "TBE"
+      ],
+      "jalon_rows_2024": 2363012,
+      "stations_max": 25,
+      "endpoint_od_sum": 208,
+      "circ_sum": 136721,
+      "S_2024": 25,
+      "theoretical_pairs": 600,
+      "monthly_cells_upper": 1382400,
+      "rollup_cells_upper": 57600,
+      "strategy_A_monthly_mo_upper": 207.36,
+      "strategy_A_rollup_mo_upper": 8.64,
+      "strategy_A_monthly_mo_10pct": 20.74,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-H": {
+      "tcts": [
+        "TBN"
+      ],
+      "jalon_rows_2024": 3323078,
+      "stations_max": 51,
+      "endpoint_od_sum": 167,
+      "circ_sum": 137814,
+      "S_2024": 51,
+      "theoretical_pairs": 2550,
+      "monthly_cells_upper": 5875200,
+      "rollup_cells_upper": 244800,
+      "strategy_A_monthly_mo_upper": 881.28,
+      "strategy_A_rollup_mo_upper": 36.72,
+      "strategy_A_monthly_mo_10pct": 88.13,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-J": {
+      "tcts": [
+        "TBS"
+      ],
+      "jalon_rows_2024": 3064173,
+      "stations_max": 62,
+      "endpoint_od_sum": 227,
+      "circ_sum": 157003,
+      "S_2024": 62,
+      "theoretical_pairs": 3782,
+      "monthly_cells_upper": 8713728,
+      "rollup_cells_upper": 363072,
+      "strategy_A_monthly_mo_upper": 1307.06,
+      "strategy_A_rollup_mo_upper": 54.46,
+      "strategy_A_monthly_mo_10pct": 130.71,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-K": {
+      "tcts": [
+        "TBV"
+      ],
+      "jalon_rows_2024": 165635,
+      "stations_max": 19,
+      "endpoint_od_sum": 22,
+      "circ_sum": 10170,
+      "S_2024": 19,
+      "theoretical_pairs": 342,
+      "monthly_cells_upper": 787968,
+      "rollup_cells_upper": 32832,
+      "strategy_A_monthly_mo_upper": 118.2,
+      "strategy_A_rollup_mo_upper": 4.92,
+      "strategy_A_monthly_mo_10pct": 11.82,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-L": {
+      "tcts": [
+        "TBR"
+      ],
+      "jalon_rows_2024": 3793297,
+      "stations_max": 38,
+      "endpoint_od_sum": 207,
+      "circ_sum": 174376,
+      "S_2024": 38,
+      "theoretical_pairs": 1406,
+      "monthly_cells_upper": 3239424,
+      "rollup_cells_upper": 134976,
+      "strategy_A_monthly_mo_upper": 485.91,
+      "strategy_A_rollup_mo_upper": 20.25,
+      "strategy_A_monthly_mo_10pct": 48.59,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-N": {
+      "tcts": [
+        "TBM"
+      ],
+      "jalon_rows_2024": 1851475,
+      "stations_max": 36,
+      "endpoint_od_sum": 102,
+      "circ_sum": 69807,
+      "S_2024": 36,
+      "theoretical_pairs": 1260,
+      "monthly_cells_upper": 2903040,
+      "rollup_cells_upper": 120960,
+      "strategy_A_monthly_mo_upper": 435.46,
+      "strategy_A_rollup_mo_upper": 18.14,
+      "strategy_A_monthly_mo_10pct": 43.55,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-P": {
+      "tcts": [
+        "TBT"
+      ],
+      "jalon_rows_2024": 1086310,
+      "stations_max": 56,
+      "endpoint_od_sum": 127,
+      "circ_sum": 98934,
+      "S_2024": 56,
+      "theoretical_pairs": 3080,
+      "monthly_cells_upper": 7096320,
+      "rollup_cells_upper": 295680,
+      "strategy_A_monthly_mo_upper": 1064.45,
+      "strategy_A_rollup_mo_upper": 44.35,
+      "strategy_A_monthly_mo_10pct": 106.44,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-R": {
+      "tcts": [
+        "TBL"
+      ],
+      "jalon_rows_2024": 737203,
+      "stations_max": 56,
+      "endpoint_od_sum": 50,
+      "circ_sum": 40294,
+      "S_2024": 56,
+      "theoretical_pairs": 3080,
+      "monthly_cells_upper": 7096320,
+      "rollup_cells_upper": 295680,
+      "strategy_A_monthly_mo_upper": 1064.45,
+      "strategy_A_rollup_mo_upper": 44.35,
+      "strategy_A_monthly_mo_10pct": 106.44,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-T12": {
+      "tcts": [
+        "TWP"
+      ],
+      "jalon_rows_2024": 390983,
+      "stations_max": 7,
+      "endpoint_od_sum": 20,
+      "circ_sum": 44147,
+      "S_2024": 7,
+      "theoretical_pairs": 42,
+      "monthly_cells_upper": 96768,
+      "rollup_cells_upper": 4032,
+      "strategy_A_monthly_mo_upper": 14.52,
+      "strategy_A_rollup_mo_upper": 0.6,
+      "strategy_A_monthly_mo_10pct": 1.45,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-U": {
+      "tcts": [
+        "TBQ"
+      ],
+      "jalon_rows_2024": 473431,
+      "stations_max": 26,
+      "endpoint_od_sum": 58,
+      "circ_sum": 23405,
+      "S_2024": 26,
+      "theoretical_pairs": 650,
+      "monthly_cells_upper": 1497600,
+      "rollup_cells_upper": 62400,
+      "strategy_A_monthly_mo_upper": 224.64,
+      "strategy_A_rollup_mo_upper": 9.36,
+      "strategy_A_monthly_mo_10pct": 22.46,
+      "strategy_B_same_rows_per_line": true
+    },
+    "Transilien-V": {
+      "tcts": [
+        "TBW"
+      ],
+      "jalon_rows_2024": 14052,
+      "stations_max": 7,
+      "endpoint_od_sum": 2,
+      "circ_sum": 1171,
+      "S_2024": 7,
+      "theoretical_pairs": 42,
+      "monthly_cells_upper": 96768,
+      "rollup_cells_upper": 4032,
+      "strategy_A_monthly_mo_upper": 14.52,
+      "strategy_A_rollup_mo_upper": 0.6,
+      "strategy_A_monthly_mo_10pct": 1.45,
+      "strategy_B_same_rows_per_line": true
+    }
+  },
+  "collision_2024": {
+    "endpoint_od_pairs_total": 2597,
+    "multi_tct_pairs": 81,
+    "examples_multi_tct": [
+      {
+        "code_ci_origine": "271031",
+        "code_ci_destination": "271007",
+        "tcts": [
+          "TBB",
+          "TBN",
+          "TBV"
+        ],
+        "n_tcts": 3
+      },
+      {
+        "code_ci_origine": "271007",
+        "code_ci_destination": "271031",
+        "tcts": [
+          "TBB",
+          "TBD",
+          "TBV"
+        ],
+        "n_tcts": 3
+      },
+      {
+        "code_ci_origine": "382655",
+        "code_ci_destination": "386466",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "386466",
+        "code_ci_destination": "382655",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "386417",
+        "code_ci_destination": "386425",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "382655",
+        "code_ci_destination": "381459",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "386425",
+        "code_ci_destination": "386417",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "382655",
+        "code_ci_destination": "382655",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "386417",
+        "code_ci_destination": "382655",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "382655",
+        "code_ci_destination": "381657",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "382655",
+        "code_ci_destination": "382499",
+        "tcts": [
+          "TBA",
+          "TBR"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "758607",
+        "code_ci_destination": "271023",
+        "tcts": [
+          "TBB",
+          "TBD"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "758607",
+        "code_ci_destination": "271528",
+        "tcts": [
+          "TBB",
+          "TBD"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "271528",
+        "code_ci_destination": "271031",
+        "tcts": [
+          "TBB",
+          "TBV"
+        ],
+        "n_tcts": 2
+      },
+      {
+        "code_ci_origine": "271023",
+        "code_ci_destination": "271023",
+        "tcts": [
+          "TBB",
+          "TBD"
+        ],
+        "n_tcts": 2
+      }
+    ]
+  },
+  "scenarios": {
+    "1_all_covered_rer": {
+      "stations_summed": 239,
+      "theoretical_directed_pairs_summed": 15852,
+      "endpoint_od_summed": 1698,
+      "jalon_rows_2024": 19669314,
+      "monthly_cells_upper": 36523008,
+      "rollup_cells_upper": 1521792,
+      "monthly_mo_upper": 5478.45,
+      "rollup_mo_upper": 228.27,
+      "monthly_mo_density_10pct": 547.85,
+      "rollup_mo_density_10pct": 22.83,
+      "pruned_n30_monthly_mo": 273.92,
+      "pruned_no_overnight_monthly_mo": 467.95,
+      "pruned_both_monthly_mo": 233.98
+    },
+    "2_rer_plus_transilien": {
+      "stations_summed": 597,
+      "theoretical_directed_pairs_summed": 32086,
+      "endpoint_od_summed": 2680,
+      "jalon_rows_2024": 34568951,
+      "monthly_cells_upper": 73926144,
+      "rollup_cells_upper": 3080256,
+      "monthly_mo_upper": 11088.92,
+      "rollup_mo_upper": 462.04,
+      "monthly_mo_density_10pct": 1108.89,
+      "rollup_mo_density_10pct": 46.2,
+      "pruned_n30_monthly_mo": 554.45,
+      "pruned_no_overnight_monthly_mo": 947.18,
+      "pruned_both_monthly_mo": 473.59
+    }
+  },
+  "coverage_notes": {
+    "rer_a": "partial — ouest branches only (TBA)",
+    "rer_b": "partial — nord from Gare du Nord only (TBB)",
+    "rer_cde": "complete in IDFM partition",
+    "rer_a_est_sud_absent": true,
+    "rer_b_sud_absent": true
+  }
+}

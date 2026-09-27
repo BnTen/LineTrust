@@ -7,7 +7,12 @@ import {
   type ConfidenceLabel,
 } from "@/lib/uncertainty";
 
+import { DEFAULT_LINE_ID } from "@/lib/network";
+
+export { DEFAULT_LINE_ID };
+
 export interface AggCell {
+  lineId: string;
   fromCodeCi: string;
   toCodeCi: string;
   dayType: DayType;
@@ -31,6 +36,7 @@ export interface TrajetResult {
 
 function rowToCell(row: Record<string, unknown>): AggCell {
   return {
+    lineId: String(row.line_id ?? DEFAULT_LINE_ID).trim(),
     fromCodeCi: String(row.from_code_ci).trim(),
     toCodeCi: String(row.to_code_ci).trim(),
     dayType: row.day_type as DayType,
@@ -46,6 +52,7 @@ function rowToCell(row: Record<string, unknown>): AggCell {
 }
 
 async function fetchPairWindows(
+  lineId: string,
   fromCodeCi: string,
   toCodeCi: string,
   dayType: DayType,
@@ -53,10 +60,11 @@ async function fetchPairWindows(
   const sql = getSql();
   const rows = await sql`
     SELECT
-      from_code_ci, to_code_ci, day_type, window_start_minutes,
+      line_id, from_code_ci, to_code_ci, day_type, window_start_minutes,
       n, n_used_est, tpr, tsr, penalty, score, weights_version
     FROM agg_pair_window_rollup
-    WHERE from_code_ci = ${fromCodeCi}
+    WHERE line_id = ${lineId}
+      AND from_code_ci = ${fromCodeCi}
       AND to_code_ci = ${toCodeCi}
       AND day_type = ${dayType}
     ORDER BY window_start_minutes
@@ -66,7 +74,7 @@ async function fetchPairWindows(
 
 const cachedPairWindows = unstable_cache(
   fetchPairWindows,
-  ["agg-pair-windows"],
+  ["agg-pair-windows-v2"],
   { revalidate: 3600, tags: ["agg"] },
 );
 
@@ -75,8 +83,9 @@ export async function getTrajetResult(
   toCodeCi: string,
   dayType: DayType,
   windowStartMinutes: number,
+  lineId: string = DEFAULT_LINE_ID,
 ): Promise<TrajetResult> {
-  const windows = await cachedPairWindows(fromCodeCi, toCodeCi, dayType);
+  const windows = await cachedPairWindows(lineId, fromCodeCi, toCodeCi, dayType);
   const cell =
     windows.find((w) => w.windowStartMinutes === windowStartMinutes) ?? null;
 

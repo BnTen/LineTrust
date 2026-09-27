@@ -17,6 +17,7 @@ function cell(
   partial: Partial<AggCell> &
     Pick<AggCell, "windowStartMinutes" | "score" | "n">,
 ): AggCell {
+  const { lineId: lineIdOverride, ...rest } = partial;
   return {
     fromCodeCi: from.codeCi,
     toCodeCi: to.codeCi,
@@ -26,7 +27,8 @@ function cell(
     tsr: 0,
     penalty: 5,
     weightsVersion: "w0",
-    ...partial,
+    ...rest,
+    lineId: lineIdOverride ?? "IDFM:C01728",
   };
 }
 

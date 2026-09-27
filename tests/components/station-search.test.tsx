@@ -4,6 +4,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CorridorPicker } from "@/components/corridor-picker";
 import { StationSearch } from "@/components/station-search";
+import { MELUN_TEST_CATALOG } from "@/tests/fixtures/melun-catalog";
 
 const push = vi.fn();
 
@@ -113,6 +114,7 @@ describe("StationSearch", () => {
     const user = userEvent.setup();
     render(
       <StationSearch
+        catalog={MELUN_TEST_CATALOG}
         defaultFrom="paris-gare-de-lyon"
         defaultTo="paris-gare-de-lyon"
       />,
@@ -128,10 +130,14 @@ describe("StationSearch", () => {
     expect(push).not.toHaveBeenCalled();
   });
 
-  it("navigates to oriented trajet with weekday 08:00 window", async () => {
+  it("navigates to oriented trajet with weekday 08:00 window and line", async () => {
     const user = userEvent.setup();
     render(
-      <StationSearch defaultFrom="paris-gare-de-lyon" defaultTo="melun" />,
+      <StationSearch
+        catalog={MELUN_TEST_CATALOG}
+        defaultFrom="paris-gare-de-lyon"
+        defaultTo="melun"
+      />,
     );
 
     await user.click(
@@ -139,7 +145,26 @@ describe("StationSearch", () => {
     );
 
     expect(push).toHaveBeenCalledWith(
-      "/trajet/paris-gare-de-lyon--melun?d=weekday&w=480",
+      "/trajet/paris-gare-de-lyon--melun?d=weekday&w=480&line=D&c=rer-d-melun",
     );
+  });
+
+  it("shows line pills and optional branches for D", () => {
+    render(
+      <StationSearch
+        catalog={MELUN_TEST_CATALOG}
+        defaultFrom="paris-gare-de-lyon"
+        defaultTo="melun"
+      />,
+    );
+    expect(screen.getByRole("button", { name: "RER D" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByRole("button", { name: "RER E" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Toutes" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Branche Melun" }),
+    ).toBeInTheDocument();
   });
 });

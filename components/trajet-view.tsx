@@ -9,7 +9,7 @@ import { bandLabel } from "@/lib/copy";
 import type { CorridorEnd, CorridorSelection } from "@/lib/corridor-segment";
 import type { DayType } from "@/lib/scoring";
 import { buildTrajetSlug } from "@/lib/slugs";
-import { stationBySlug, type Station } from "@/lib/stations";
+import type { Station } from "@/lib/stations";
 import type { TrajetResult } from "@/lib/trajet";
 
 interface TrajetApiPayload {
@@ -25,8 +25,16 @@ function syncTrajetUrl(
   to: Station,
   dayType: DayType,
   windowStartMinutes: number,
+  lineShort: string,
+  corridorId: string | null,
 ) {
-  const path = `/trajet/${buildTrajetSlug(from, to)}?d=${dayType}&w=${windowStartMinutes}`;
+  const qs = new URLSearchParams({
+    d: dayType,
+    w: String(windowStartMinutes),
+    line: lineShort,
+  });
+  if (corridorId) qs.set("c", corridorId);
+  const path = `/trajet/${buildTrajetSlug(from, to)}?${qs.toString()}`;
   window.history.replaceState(window.history.state, "", path);
   document.title = `${from.nameDisplay} vers ${to.nameDisplay} · LineTrust`;
 }
@@ -41,12 +49,21 @@ export function TrajetView({
   initialDayType,
   initialWindowStartMinutes,
   initialResult,
+  lineShort,
+  corridorId,
+  corridorStations,
+  lineLabel,
 }: {
   initialFrom: Station;
   initialTo: Station;
   initialDayType: DayType;
   initialWindowStartMinutes: number;
   initialResult: TrajetResult;
+  lineShort: string;
+  lineId: string;
+  corridorId: string | null;
+  corridorStations: Station[];
+  lineLabel: string;
 }) {
   const [from, setFrom] = useState(initialFrom);
   const [to, setTo] = useState(initialTo);
@@ -59,6 +76,7 @@ export function TrajetView({
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const fetchGen = useRef(0);
+  const bySlug = new Map(corridorStations.map((s) => [s.slug, s]));
 
   async function loadTrajet(
     nextFrom: Station,
@@ -73,7 +91,9 @@ export function TrajetView({
       to: nextTo.slug,
       d: nextDay,
       w: String(nextWindow),
+      line: lineShort,
     });
+    if (corridorId) qs.set("c", corridorId);
     const res = await fetch(`/api/trajet?${qs.toString()}`);
     if (!res.ok) {
       const body = (await res.json().catch(() => null)) as {
@@ -94,6 +114,8 @@ export function TrajetView({
       data.to,
       data.dayType,
       data.windowStartMinutes,
+      lineShort,
+      corridorId,
     );
   }
 
@@ -112,7 +134,14 @@ export function TrajetView({
     setTo(nextTo);
     setDayType(nextDay);
     setWindowStartMinutes(nextWindow);
-    syncTrajetUrl(nextFrom, nextTo, nextDay, nextWindow);
+    syncTrajetUrl(
+      nextFrom,
+      nextTo,
+      nextDay,
+      nextWindow,
+      lineShort,
+      corridorId,
+    );
 
     startTransition(() => {
       void loadTrajet(nextFrom, nextTo, nextDay, nextWindow).catch(
@@ -130,8 +159,8 @@ export function TrajetView({
   function onCorridorChange(next: CorridorSelection) {
     if (!next.fromSlug || !next.toSlug || next.fromSlug === next.toSlug) return;
     if (next.fromSlug === from.slug && next.toSlug === to.slug) return;
-    const nextFrom = stationBySlug(next.fromSlug);
-    const nextTo = stationBySlug(next.toSlug);
+    const nextFrom = bySlug.get(next.fromSlug);
+    const nextTo = bySlug.get(next.toSlug);
     if (!nextFrom || !nextTo) return;
     softUpdate({ from: nextFrom, to: nextTo });
   }
@@ -150,21 +179,20 @@ export function TrajetView({
 
   return (
     <>
-      <div
-        className="sr-only"
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
         {liveAnnouncement}
       </div>
 
       <div className="sticky top-0 z-30 -mx-6 border-b border-border/70 bg-canvas/90 px-6 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/80 lg:static lg:z-auto lg:mx-0 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none">
         <div className="flex items-start justify-between gap-3 sm:gap-6">
-          <h1 className="min-w-0 flex-1 font-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl lg:text-4xl">
-            {from.nameDisplay}
-            <span className="text-ink-muted"> vers </span>
-            {to.nameDisplay}
-          </h1>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm text-ink-muted">{lineLabel}</p>
+            <h1 className="font-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl lg:text-4xl">
+              {from.nameDisplay}
+              <span className="text-ink-muted"> vers </span>
+              {to.nameDisplay}
+            </h1>
+          </div>
           {score !== null ? (
             <div className={pendingClass}>
               <ScoreReveal
@@ -218,6 +246,8 @@ export function TrajetView({
           <CorridorPicker
             fromSlug={from.slug}
             toSlug={to.slug}
+            stations={corridorStations}
+            lineLabel={lineLabel}
             band={result.band}
             editing={editing}
             onEditingChange={setEditing}

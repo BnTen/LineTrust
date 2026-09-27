@@ -1,12 +1,16 @@
--- LineTrust Phase 2 — Neon schema (refs + agg + watermarks + weights)
+-- LineTrust — Neon schema (multi-lignes / multi-corridors)
 -- Project: muddy-paper-90279472 · raw ART stays out of Neon
+-- Agg PK includes line_id (human gate S0: 1 score per line)
 
 CREATE TABLE IF NOT EXISTS ref_lines (
   line_id TEXT PRIMARY KEY,
   short_name TEXT NOT NULL,
   display_name TEXT NOT NULL,
-  art_tct TEXT NOT NULL,
-  corridor_id TEXT NOT NULL,
+  art_tct CHAR(3) NOT NULL,
+  network TEXT NOT NULL DEFAULT 'rer'
+    CHECK (network IN ('rer', 'transilien')),
+  coverage TEXT NOT NULL DEFAULT 'full'
+    CHECK (coverage IN ('full', 'partial')),
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
@@ -16,13 +20,34 @@ CREATE TABLE IF NOT EXISTS ref_stops (
   uic8 CHAR(8),
   name TEXT NOT NULL,
   name_display TEXT NOT NULL,
-  corridor_id TEXT NOT NULL,
-  sequence_order INT NOT NULL,
-  is_hub BOOLEAN NOT NULL DEFAULT false,
   aliases_code_ci TEXT[] NOT NULL DEFAULT '{}',
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   UNIQUE (code_ci)
 );
+
+CREATE TABLE IF NOT EXISTS ref_corridors (
+  corridor_id TEXT PRIMARY KEY,
+  line_id TEXT NOT NULL REFERENCES ref_lines (line_id),
+  display_name TEXT NOT NULL,
+  hub_code_ci CHAR(6),
+  end_code_ci CHAR(6),
+  coverage TEXT NOT NULL DEFAULT 'full'
+    CHECK (coverage IN ('full', 'partial')),
+  status TEXT NOT NULL DEFAULT 'proposed'
+    CHECK (status IN ('proposed', 'seeded', 'loaded')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS ref_corridor_stops (
+  corridor_id TEXT NOT NULL REFERENCES ref_corridors (corridor_id),
+  stop_id TEXT NOT NULL REFERENCES ref_stops (stop_id),
+  sequence_order INT NOT NULL,
+  is_hub BOOLEAN NOT NULL DEFAULT false,
+  PRIMARY KEY (corridor_id, stop_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_ref_corridor_stops_stop
+ON ref_corridor_stops (stop_id);
 
 CREATE TABLE IF NOT EXISTS score_weights (
   version TEXT PRIMARY KEY,
@@ -53,8 +78,9 @@ CREATE TABLE IF NOT EXISTS etl_quarantine (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
--- Monthly partition cells (hash → replace by month_key × source)
+-- Monthly cells — line_id required (A→B on line X ≠ same OD on line Y)
 CREATE TABLE IF NOT EXISTS agg_pair_window (
+  line_id TEXT NOT NULL REFERENCES ref_lines (line_id),
   from_code_ci CHAR(6) NOT NULL,
   to_code_ci CHAR(6) NOT NULL,
   day_type TEXT NOT NULL CHECK (day_type IN ('weekday', 'weekend')),
@@ -74,6 +100,7 @@ CREATE TABLE IF NOT EXISTS agg_pair_window (
   weights_version TEXT NOT NULL REFERENCES score_weights (version),
   computed_at TIMESTAMPTZ NOT NULL,
   PRIMARY KEY (
+    line_id,
     from_code_ci,
     to_code_ci,
     day_type,
@@ -82,8 +109,8 @@ CREATE TABLE IF NOT EXISTS agg_pair_window (
   )
 );
 
--- 24-month rollup for hot path (pair × sens × day_type × window)
 CREATE TABLE IF NOT EXISTS agg_pair_window_rollup (
+  line_id TEXT NOT NULL REFERENCES ref_lines (line_id),
   from_code_ci CHAR(6) NOT NULL,
   to_code_ci CHAR(6) NOT NULL,
   day_type TEXT NOT NULL CHECK (day_type IN ('weekday', 'weekend')),
@@ -101,14 +128,14 @@ CREATE TABLE IF NOT EXISTS agg_pair_window_rollup (
   score NUMERIC(8, 4) NOT NULL,
   weights_version TEXT NOT NULL REFERENCES score_weights (version),
   computed_at TIMESTAMPTZ NOT NULL,
-  PRIMARY KEY (from_code_ci, to_code_ci, day_type, window_start_minutes)
+  PRIMARY KEY (line_id, from_code_ci, to_code_ci, day_type, window_start_minutes)
 );
 
 CREATE INDEX IF NOT EXISTS idx_agg_pair_window_lookup
-ON agg_pair_window (from_code_ci, to_code_ci, day_type);
+ON agg_pair_window (line_id, from_code_ci, to_code_ci, day_type);
 
 CREATE INDEX IF NOT EXISTS idx_agg_rollup_lookup
-ON agg_pair_window_rollup (from_code_ci, to_code_ci, day_type);
+ON agg_pair_window_rollup (line_id, from_code_ci, to_code_ci, day_type);
 
 INSERT INTO score_weights (version, tpr, reliability, penalty, notes)
 VALUES ('w0', 0.50, 0.35, 0.15, 'MVP locked weights — intent + docs/03')

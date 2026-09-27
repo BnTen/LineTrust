@@ -33,6 +33,8 @@ except ImportError:
 REPO = Path(__file__).resolve().parents[2]
 SOURCE_ID = "art-idfm"
 ART_TCT = "TBD"
+LINE_ID = "IDFM:C01728"
+CORRIDOR_ID = "rer-d-melun"
 WEIGHTS_VERSION = "w0"
 ON_TIME = 5
 PENALTY_GT = 15
@@ -359,7 +361,10 @@ def replace_months(
     cur = conn.cursor()
     # Delete existing monthly cells for months in this year partition
     for m in sorted(months):
-        cur.execute("DELETE FROM agg_pair_window WHERE month_key = %s", (m,))
+        cur.execute(
+            "DELETE FROM agg_pair_window WHERE line_id = %s AND month_key = %s",
+            (LINE_ID, m),
+        )
 
     rows = []
     for (frm, to, dt, w, month), acc in cells.items():
@@ -368,6 +373,7 @@ def replace_months(
         tpr, tsr, penalty, score = score_cell(acc)
         rows.append(
             (
+                LINE_ID,
                 frm,
                 to,
                 dt,
@@ -391,11 +397,11 @@ def replace_months(
         cur,
         """
         INSERT INTO agg_pair_window (
-          from_code_ci, to_code_ci, day_type, window_start_minutes, month_key,
+          line_id, from_code_ci, to_code_ci, day_type, window_start_minutes, month_key,
           n, n_on_time, n_delay_gt15, n_used_est, n_cancelled,
           tpr, tsr, penalty, score, weights_version, computed_at
         ) VALUES (
-          %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
+          %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
         )
         """,
         rows,
@@ -438,16 +444,20 @@ def replace_months(
 def rebuild_rollup(conn) -> int:
     now = datetime.now(timezone.utc)
     cur = conn.cursor()
-    cur.execute("DELETE FROM agg_pair_window_rollup")
+    # Scope to this line so other lines' rollups survive multi-line loads
+    cur.execute(
+        "DELETE FROM agg_pair_window_rollup WHERE line_id = %s",
+        (LINE_ID,),
+    )
     cur.execute(
         """
         INSERT INTO agg_pair_window_rollup (
-          from_code_ci, to_code_ci, day_type, window_start_minutes,
+          line_id, from_code_ci, to_code_ci, day_type, window_start_minutes,
           n, n_on_time, n_delay_gt15, n_used_est, n_cancelled,
           tpr, tsr, penalty, score, weights_version, computed_at
         )
         SELECT
-          from_code_ci, to_code_ci, day_type, window_start_minutes,
+          line_id, from_code_ci, to_code_ci, day_type, window_start_minutes,
           SUM(n)::int,
           SUM(n_on_time)::int,
           SUM(n_delay_gt15)::int,
@@ -463,19 +473,24 @@ def rebuild_rollup(conn) -> int:
           %s,
           %s
         FROM agg_pair_window
-        GROUP BY from_code_ci, to_code_ci, day_type, window_start_minutes
+        WHERE line_id = %s
+        GROUP BY line_id, from_code_ci, to_code_ci, day_type, window_start_minutes
         """,
-        (WEIGHTS_VERSION, now),
+        (WEIGHTS_VERSION, now, LINE_ID),
     )
-    # Recompute score with w0 in SQL
     cur.execute(
         """
         UPDATE agg_pair_window_rollup SET score = GREATEST(0, LEAST(100,
           tpr * 0.5 + (100 - tsr) * 0.35 - penalty * 0.15
         ))
-        """
+        WHERE line_id = %s
+        """,
+        (LINE_ID,),
     )
-    cur.execute("SELECT COUNT(*) FROM agg_pair_window_rollup")
+    cur.execute(
+        "SELECT COUNT(*) FROM agg_pair_window_rollup WHERE line_id = %s",
+        (LINE_ID,),
+    )
     n = cur.fetchone()[0]
     conn.commit()
     cur.close()

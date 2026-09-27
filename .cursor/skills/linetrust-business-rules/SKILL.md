@@ -17,7 +17,8 @@ Read `intent/000-linetrust-mvp.intent.md` and `docs/03-domain-scoring.md` first 
 3. **Direction:** A→B and B→A are different scores and URLs.
 4. **Day types MVP:** `weekday` | `weekend` only (holidays = V1.1).
 5. **Window:** user-chosen 30 minutes; alternative = best score in ±30 min same day type.
-6. **History / refresh:** 24 months; ETL 2×/week.
+6. **History / refresh:** **12 months** (Neon free; was 24); ETL 2×/week.
+6b. **Scale RER:** score keyed by `line_id`; home line pills + optional branch; A ouest / B nord partial only; Melun golden path.
 7. **Auth:** none.
 8. **Locale:** FR only.
 9. **SEO:** `noindex` until human data validation.

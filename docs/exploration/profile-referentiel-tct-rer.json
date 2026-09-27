@@ -1,0 +1,1236 @@
+{
+  "meta": {
+    "source": "data\\raw\\art\\referentiel_tct-ui.csv",
+    "total_rows": 1103,
+    "idf_filtered_rows": 203,
+    "rer_transilien_rows": 159,
+    "distinct_tct_codes": 19
+  },
+  "columns": {
+    "tct": {
+      "null_pct": 0.0,
+      "distinct": 137
+    },
+    "ui": {
+      "null_pct": 0.0,
+      "distinct": 20
+    },
+    "lib_tct": {
+      "null_pct": 0.0,
+      "distinct": 252
+    },
+    "lib_ui": {
+      "null_pct": 0.0,
+      "distinct": 30
+    },
+    "annee": {
+      "null_pct": 0.0,
+      "distinct": 9
+    },
+    "activite": {
+      "null_pct": 0.0,
+      "distinct": 5
+    },
+    "categorie": {
+      "null_pct": 0.0,
+      "distinct": 2
+    },
+    "autorite_organisatrice": {
+      "null_pct": 23.4,
+      "distinct": 13
+    },
+    "nom_commercial_service_regional": {
+      "null_pct": 23.4,
+      "distinct": 14
+    }
+  },
+  "rer_tct_map": {
+    "TBA": {
+      "tct": "TBA",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne A du RER",
+        "Train transport Ile-de-France Mobilités à charge, ligne A du RER"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "A",
+      "network": "RER",
+      "idfm_line_id": "IDFM:C01742",
+      "coverage_expectation": "partial (ouest only; est/sud RATP absent)",
+      "row_count": 9
+    },
+    "TBB": {
+      "tct": "TBB",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne B du RER",
+        "Train transport Ile-de-France Mobilités à charge, ligne B du RER"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "B",
+      "network": "RER",
+      "idfm_line_id": "IDFM:C01743",
+      "coverage_expectation": "partial (nord from Gare du Nord; sud absent)",
+      "row_count": 9
+    },
+    "TBC": {
+      "tct": "TBC",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne C du RER",
+        "Train transport Ile-de-France Mobilités à charge, ligne C du RER"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "C",
+      "network": "RER",
+      "idfm_line_id": "IDFM:C01727",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBD": {
+      "tct": "TBD",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne D du RER",
+        "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "D",
+      "network": "RER",
+      "idfm_line_id": "IDFM:C01728",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBE": {
+      "tct": "TBE",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne E du RER",
+        "Train transport Ile-de-France Mobilités à charge, ligne E du RER"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "E",
+      "network": "RER",
+      "idfm_line_id": "IDFM:C01729",
+      "coverage_expectation": "full",
+      "row_count": 9
+    }
+  },
+  "transilien_tct_map": {
+    "TBL": {
+      "tct": "TBL",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne Paris-Gare de Lyon",
+        "Train transport Ile-de-France Mobilités à charge, ligne R"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "R",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01731",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBM": {
+      "tct": "TBM",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne Paris-Montparnasse",
+        "Train transport Ile-de-France Mobilités à charge, ligne N"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "N",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01736",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBN": {
+      "tct": "TBN",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne Ouest-Paris-Nord",
+        "Train transport Ile-de-France Mobilités à charge, ligne H"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "H",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01737",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBQ": {
+      "tct": "TBQ",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge,ligne Saint-Quentin à La Défense",
+        "Train transport Ile-de-France Mobilités à charge, ligne U"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "U",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01741",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBR": {
+      "tct": "TBR",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne PSL (groupes 2, 3)",
+        "Train transport Ile-de-France Mobilités à charge, ligne L"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "L",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01740",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBS": {
+      "tct": "TBS",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne PSL (groupes 4, 5, 6)",
+        "Train transport Ile-de-France Mobilités à charge, ligne J"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "J",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01739",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBT": {
+      "tct": "TBT",
+      "ui": [
+        "1287",
+        "9178"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne Paris-Est",
+        "Train transport Ile-de-France Mobilités à charge, ligne P"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "P",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01730",
+      "coverage_expectation": "full",
+      "row_count": 11
+    },
+    "TBV": {
+      "tct": "TBV",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train Transilien à charge, ligne Paris-Nord - Crépy-en-Valois",
+        "Train transport Ile-de-France Mobilités à charge, ligne K"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "K",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C01738",
+      "coverage_expectation": "full",
+      "row_count": 9
+    },
+    "TBW": {
+      "tct": "TBW",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train transport Ile-de-France Mobilités à charge, ligne V"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "V",
+      "network": "Transilien",
+      "idfm_line_id": "IDFM:C02711",
+      "coverage_expectation": "full",
+      "row_count": 2
+    }
+  },
+  "tram_train_tct_map": {
+    "TWN": {
+      "tct": "TWN",
+      "ui": [
+        "1287",
+        "9178"
+      ],
+      "lib_tct": [
+        "Tram-Train transport Ile-de-France Mobilités à charge, ligne T11",
+        "Tram-train Transilien à charge, Tram Express Nord"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "T11",
+      "network": "Tram-train",
+      "idfm_line_id": null,
+      "coverage_expectation": null,
+      "row_count": 11
+    },
+    "TWP": {
+      "tct": "TWP",
+      "ui": [
+        "9165",
+        "9183"
+      ],
+      "lib_tct": [
+        "Tram-train transport Ile-de-France Mobilités à charge, ligne T12"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "T12",
+      "network": "Tram-train",
+      "idfm_line_id": null,
+      "coverage_expectation": null,
+      "row_count": 6
+    },
+    "TWT": {
+      "tct": "TWT",
+      "ui": [
+        "1287",
+        "9178"
+      ],
+      "lib_tct": [
+        "Tram-train Transilien à charge, ligne Paris-Est",
+        "Tram-train transport Ile-de-France Mobilités à charge, ligne T4"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "T4",
+      "network": "Tram-train",
+      "idfm_line_id": null,
+      "coverage_expectation": null,
+      "row_count": 11
+    },
+    "TWV": {
+      "tct": "TWV",
+      "ui": [
+        "1287",
+        "9183"
+      ],
+      "lib_tct": [
+        "Tram-train transport Ile-de-France Mobilités à charge, ligne T13"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": "T13",
+      "network": "Tram-train",
+      "idfm_line_id": null,
+      "coverage_expectation": null,
+      "row_count": 7
+    }
+  },
+  "navette_tct_map": {
+    "TCC": {
+      "tct": "TCC",
+      "ui": [
+        "1287"
+      ],
+      "lib_tct": [
+        "Train transport Ile-de-France Mobilités à charge, navette ferroviaire"
+      ],
+      "nom_commercial_service_regional": [
+        "Train Transilien"
+      ],
+      "annee": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "categorie": [
+        "Service conventionné"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ],
+      "short": null,
+      "network": "Navette",
+      "idfm_line_id": null,
+      "coverage_expectation": null,
+      "row_count": 3
+    }
+  },
+  "unclassified_tct_map": {},
+  "ambiguous": [
+    {
+      "tct": "TCC",
+      "reason": "no short name inferred",
+      "lib_tct": [
+        "Train transport Ile-de-France Mobilités à charge, navette ferroviaire"
+      ],
+      "activite": [
+        "Transilien et RER"
+      ]
+    }
+  ],
+  "year_drift": [
+    {
+      "tct": "TBA",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne A du RER"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne A du RER"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne A du RER"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne A du RER"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne A du RER"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne A du RER"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne A du RER"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne A du RER"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne A du RER"
+        ]
+      }
+    },
+    {
+      "tct": "TBB",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne B du RER"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne B du RER"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne B du RER"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne B du RER"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne B du RER"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne B du RER"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne B du RER"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne B du RER"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne B du RER"
+        ]
+      }
+    },
+    {
+      "tct": "TBC",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne C du RER"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne C du RER"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne C du RER"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne C du RER"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne C du RER"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne C du RER"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne C du RER"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne C du RER"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne C du RER"
+        ]
+      }
+    },
+    {
+      "tct": "TBD",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne D du RER"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne D du RER"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne D du RER"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne D du RER"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+        ]
+      }
+    },
+    {
+      "tct": "TBE",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne E du RER"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne E du RER"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne E du RER"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne E du RER"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne E du RER"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne E du RER"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne E du RER"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne E du RER"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne E du RER"
+        ]
+      }
+    },
+    {
+      "tct": "TBL",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne Paris-Gare de Lyon"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne Paris-Gare de Lyon"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne Paris-Gare de Lyon"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne Paris-Gare de Lyon"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne R"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne R"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne R"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne R"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne R"
+        ]
+      }
+    },
+    {
+      "tct": "TBM",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne Paris-Montparnasse"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne Paris-Montparnasse"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne Paris-Montparnasse"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne Paris-Montparnasse"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne N"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne N"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne N"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne N"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne N"
+        ]
+      }
+    },
+    {
+      "tct": "TBN",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne Ouest-Paris-Nord"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne Ouest-Paris-Nord"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne Ouest-Paris-Nord"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne Ouest-Paris-Nord"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne H"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne H"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne H"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne H"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne H"
+        ]
+      }
+    },
+    {
+      "tct": "TBQ",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge,ligne Saint-Quentin à La Défense"
+        ],
+        "2018": [
+          "Train Transilien à charge,ligne Saint-Quentin à La Défense"
+        ],
+        "2019": [
+          "Train Transilien à charge,ligne Saint-Quentin à La Défense"
+        ],
+        "2020": [
+          "Train Transilien à charge,ligne Saint-Quentin à La Défense"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne U"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne U"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne U"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne U"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne U"
+        ]
+      }
+    },
+    {
+      "tct": "TBR",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne PSL (groupes 2, 3)"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne PSL (groupes 2, 3)"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne PSL (groupes 2, 3)"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne PSL (groupes 2, 3)"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne L"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne L"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne L"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne L"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne L"
+        ]
+      }
+    },
+    {
+      "tct": "TBS",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne PSL (groupes 4, 5, 6)"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne PSL (groupes 4, 5, 6)"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne PSL (groupes 4, 5, 6)"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne PSL (groupes 4, 5, 6)"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne J"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne J"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne J"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne J"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne J"
+        ]
+      }
+    },
+    {
+      "tct": "TBT",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne Paris-Est"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne Paris-Est"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne Paris-Est"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne Paris-Est"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne P"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne P"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne P"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne P"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne P"
+        ]
+      }
+    },
+    {
+      "tct": "TBV",
+      "by_year": {
+        "2017": [
+          "Train Transilien à charge, ligne Paris-Nord - Crépy-en-Valois"
+        ],
+        "2018": [
+          "Train Transilien à charge, ligne Paris-Nord - Crépy-en-Valois"
+        ],
+        "2019": [
+          "Train Transilien à charge, ligne Paris-Nord - Crépy-en-Valois"
+        ],
+        "2020": [
+          "Train Transilien à charge, ligne Paris-Nord - Crépy-en-Valois"
+        ],
+        "2021": [
+          "Train transport Ile-de-France Mobilités à charge, ligne K"
+        ],
+        "2022": [
+          "Train transport Ile-de-France Mobilités à charge, ligne K"
+        ],
+        "2023": [
+          "Train transport Ile-de-France Mobilités à charge, ligne K"
+        ],
+        "2024": [
+          "Train transport Ile-de-France Mobilités à charge, ligne K"
+        ],
+        "2025": [
+          "Train transport Ile-de-France Mobilités à charge, ligne K"
+        ]
+      }
+    },
+    {
+      "tct": "TWN",
+      "by_year": {
+        "2017": [
+          "Tram-train Transilien à charge, Tram Express Nord"
+        ],
+        "2018": [
+          "Tram-train Transilien à charge, Tram Express Nord"
+        ],
+        "2019": [
+          "Tram-train Transilien à charge, Tram Express Nord"
+        ],
+        "2020": [
+          "Tram-train Transilien à charge, Tram Express Nord"
+        ],
+        "2021": [
+          "Tram-Train transport Ile-de-France Mobilités à charge, ligne T11"
+        ],
+        "2022": [
+          "Tram-Train transport Ile-de-France Mobilités à charge, ligne T11"
+        ],
+        "2023": [
+          "Tram-Train transport Ile-de-France Mobilités à charge, ligne T11"
+        ],
+        "2024": [
+          "Tram-Train transport Ile-de-France Mobilités à charge, ligne T11"
+        ],
+        "2025": [
+          "Tram-Train transport Ile-de-France Mobilités à charge, ligne T11"
+        ]
+      }
+    },
+    {
+      "tct": "TWT",
+      "by_year": {
+        "2017": [
+          "Tram-train Transilien à charge, ligne Paris-Est"
+        ],
+        "2018": [
+          "Tram-train Transilien à charge, ligne Paris-Est"
+        ],
+        "2019": [
+          "Tram-train Transilien à charge, ligne Paris-Est"
+        ],
+        "2020": [
+          "Tram-train Transilien à charge, ligne Paris-Est"
+        ],
+        "2021": [
+          "Tram-train transport Ile-de-France Mobilités à charge, ligne T4"
+        ],
+        "2022": [
+          "Tram-train transport Ile-de-France Mobilités à charge, ligne T4"
+        ],
+        "2023": [
+          "Tram-train transport Ile-de-France Mobilités à charge, ligne T4"
+        ],
+        "2024": [
+          "Tram-train transport Ile-de-France Mobilités à charge, ligne T4"
+        ],
+        "2025": [
+          "Tram-train transport Ile-de-France Mobilités à charge, ligne T4"
+        ]
+      }
+    }
+  ],
+  "noise_tcts": [
+    "LBF",
+    "LBH",
+    "LCF",
+    "LCH",
+    "NBM",
+    "NBS",
+    "NCM",
+    "NCS"
+  ],
+  "idfm_reference": {
+    "A": "IDFM:C01742",
+    "B": "IDFM:C01743",
+    "C": "IDFM:C01727",
+    "D": "IDFM:C01728",
+    "E": "IDFM:C01729",
+    "H": "IDFM:C01737",
+    "J": "IDFM:C01739",
+    "K": "IDFM:C01738",
+    "L": "IDFM:C01740",
+    "N": "IDFM:C01736",
+    "P": "IDFM:C01730",
+    "R": "IDFM:C01731",
+    "U": "IDFM:C01741",
+    "V": "IDFM:C02711"
+  },
+  "coverage_reference": {
+    "A": "partial (ouest only; est/sud RATP absent)",
+    "B": "partial (nord from Gare du Nord; sud absent)",
+    "C": "full",
+    "D": "full",
+    "E": "full",
+    "H": "full",
+    "J": "full",
+    "K": "full",
+    "L": "full",
+    "N": "full",
+    "P": "full",
+    "R": "full",
+    "U": "full",
+    "V": "full"
+  }
+}

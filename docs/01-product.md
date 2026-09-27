@@ -21,8 +21,9 @@ LineTrust turns open historical regularity into a single score (with uncertainty
 
 | Phase | Capability |
 |-------|------------|
-| 3a (slice) | Search only on pilot corridor |
-| 3b | Browse by line / region **if** data matrix supports it |
+| 3a (slice) | Search Melun corridor |
+| **S2 scale** | Home **RER line pills** (A–E) + optional branch → selects → trajet `?line=` |
+| 3b | Dedicated browse by line / region **if** matrix supports it |
 | Later | Train number only if matrix = calculable |
 
 ## Content & tone
@@ -30,11 +31,12 @@ LineTrust turns open historical regularity into a single score (with uncertainty
 - FR only; plain verbs; citizen utility, not operator marketing.
 - Never claim live status or official certification.
 - Always disclose independence + open-data basis.
+- Partial ART: copy **A ouest** / **B nord** only — never list A est / B sud.
 
 ## Feature backlog priority
 
-1. Vertical slice (search → score → alternative → share → disclaimer).
-2. Enrich metrics only after `docs/exploration/data-capability-matrix.md`.
+1. Vertical slice Melun (done) → scale RER UI (done).
+2. Transilien ETL if Neon headroom OK (≪ 300–350 Mo).
 3. Browse / train grain / holidays / masked suppressions as gated follow-ups.
 
 ## Success metrics (qualitative MVP)

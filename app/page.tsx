@@ -1,5 +1,7 @@
 import { HomeHero } from "@/components/home-hero";
+import { getNetworkCatalog } from "@/lib/network";
 
-export default function Home() {
-  return <HomeHero />;
+export default async function Home() {
+  const catalog = await getNetworkCatalog();
+  return <HomeHero catalog={catalog} />;
 }
