@@ -33,7 +33,11 @@ export const metadata: Metadata = {
   robots: robotsPolicy(),
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="fr"
