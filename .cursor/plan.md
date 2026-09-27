@@ -30,11 +30,11 @@ Agents execute between human gates. Check boxes only when the gate evidence exis
 
 ## Phase E — Exploration
 
-- [ ] Download + profile (subagents) + clean + useful ingest notes
-- [ ] Fill `data-capability-matrix.md`
-- [ ] Name pilot corridor in `intent/`
-- [ ] Neon budget + source whitelist + licences
-- [ ] **Human gate:** matrix + corridor + honest grain
+- [x] Download + profile (subagents) — S1–S5 puis **S6 ART** IDFM 2023–2024 (`art-circulations-discovery.md`, `profile-art-rer-d.md`)
+- [x] Fill `data-capability-matrix.md` — **revised**: pair×window **calculable** via ART; S1 = cross-check
+- [x] Name pilot corridor in `intent/` — **RER D — Branche Melun (Paris-Gare-de-Lyon ↔ Melun)** (pending human confirm)
+- [x] Neon budget + source whitelist + licences (`source-whitelist.md`; raw ART hors Neon; agg corridor ≪ 400 Mo)
+- [x] **Human gate:** matrix + corridor + honest grain — signed 2026-09-27 (RER D Melun + ART S6; OK Phase 2)
 
 ## Phase 2 — ETL + KPI
 

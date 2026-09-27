@@ -1,0 +1,1410 @@
+{
+  "arrets_lignes": {
+    "row_count": 72727,
+    "columns": [
+      "id",
+      "route_long_name",
+      "stop_id",
+      "stop_name",
+      "stop_lon",
+      "stop_lat",
+      "operatorname",
+      "shortname",
+      "bookingrules",
+      "mode",
+      "pointgeo",
+      "nom_commune",
+      "code_insee"
+    ],
+    "null_pct": {
+      "id": 0.0,
+      "route_long_name": 0.0,
+      "stop_id": 0.0,
+      "stop_name": 0.0,
+      "stop_lon": 0.0,
+      "stop_lat": 0.0,
+      "operatorname": 0.0,
+      "shortname": 0.0,
+      "bookingrules": 95.88,
+      "mode": 0.0,
+      "pointgeo": 0.0,
+      "nom_commune": 0.0,
+      "code_insee": 0.0
+    },
+    "distinct": {
+      "line_id": 1981,
+      "stop_id": 34860
+    },
+    "mode_counts": {
+      "Metro": 803,
+      "Tramway": 564,
+      "RapidTransit": 253,
+      "Bus": 70661,
+      "regionalRail": 153,
+      "LocalTrain": 263,
+      "RailShuttle": 16,
+      "CableWay": 10,
+      "Funicular": 4
+    },
+    "operator_top20": {
+      "RATP": 5439,
+      "Transdev Sud Yvelines": 4118,
+      "Keolis Seine et Oise Est": 2731,
+      "Keolis Grand Paris Vallée de la Marne": 2721,
+      "Transdev Brie et 2 Morin": 2334,
+      "RATP Cap Défense Seine Ouest": 2233,
+      "RD Mantois": 2222,
+      "Keolis Roissy Pays de France Ouest": 2153,
+      "Francilité Saint-Quentin-en-Yvelines": 2064,
+      "Keolis Grand Paris Seine Orly": 1988,
+      "RATP Cap Boucles de Marne": 1902,
+      "Transdev Cœur Essonne": 1750,
+      "Keolis Val d'Essonne Deux Vallées": 1683,
+      "Keolis Roissy Pays de France Est": 1632,
+      "Keolis Argenteuil Boucles de Seine": 1624,
+      "Transdev Pays de Fontainebleau": 1616,
+      "RD Saclay": 1603,
+      "Keolis Portes et Val de Brie": 1559,
+      "RATP Cap Plaine Saint-Denis": 1493,
+      "Keolis Val d'Yerres Val de Seine": 1473
+    },
+    "duplicate_line_stop_pairs": 0,
+    "examples": [
+      {
+        "id": "IDFM:C01371",
+        "route_long_name": "1",
+        "stop_id": "IDFM:463130",
+        "stop_name": "Bérault",
+        "stop_lon": "2.4290262652466583",
+        "stop_lat": "48.84554919216388",
+        "operatorname": "RATP",
+        "shortname": "1",
+        "bookingrules": "",
+        "mode": "Metro",
+        "pointgeo": "48.84554919216388, 2.4290262652466583",
+        "nom_commune": "Vincennes",
+        "code_insee": "94080"
+      },
+      {
+        "id": "IDFM:C01371",
+        "route_long_name": "1",
+        "stop_id": "IDFM:463294",
+        "stop_name": "Reuilly - Diderot",
+        "stop_lon": "2.3851026686267773",
+        "stop_lat": "48.84720216018846",
+        "operatorname": "RATP",
+        "shortname": "1",
+        "bookingrules": "",
+        "mode": "Metro",
+        "pointgeo": "48.84720216018846, 2.3851026686267773",
+        "nom_commune": "Paris",
+        "code_insee": "75056"
+      },
+      {
+        "id": "IDFM:C01371",
+        "route_long_name": "1",
+        "stop_id": "IDFM:463197",
+        "stop_name": "Gare de Lyon",
+        "stop_lon": "2.373658253991729",
+        "stop_lat": "48.845892686507405",
+        "operatorname": "RATP",
+        "shortname": "1",
+        "bookingrules": "",
+        "mode": "Metro",
+        "pointgeo": "48.845892686507405, 2.373658253991729",
+        "nom_commune": "Paris",
+        "code_insee": "75056"
+      },
+      {
+        "id": "IDFM:C01371",
+        "route_long_name": "1",
+        "stop_id": "IDFM:463150",
+        "stop_name": "Concorde",
+        "stop_lon": "2.324585310879803",
+        "stop_lat": "48.866166958916516",
+        "operatorname": "RATP",
+        "shortname": "1",
+        "bookingrules": "",
+        "mode": "Metro",
+        "pointgeo": "48.866166958916516, 2.324585310879803",
+        "nom_commune": "Paris",
+        "code_insee": "75056"
+      },
+      {
+        "id": "IDFM:C01371",
+        "route_long_name": "1",
+        "stop_id": "IDFM:22099",
+        "stop_name": "Pont de Neuilly",
+        "stop_lon": "2.2607160495433503",
+        "stop_lat": "48.88468472414712",
+        "operatorname": "RATP",
+        "shortname": "1",
+        "bookingrules": "",
+        "mode": "Metro",
+        "pointgeo": "48.88468472414712, 2.2607160495433503",
+        "nom_commune": "Neuilly-sur-Seine",
+        "code_insee": "92051"
+      }
+    ],
+    "rail": {
+      "modes_filter": [
+        "LocalTrain",
+        "RailShuttle",
+        "RapidTransit",
+        "regionalRail"
+      ],
+      "row_count": 685,
+      "distinct_line_ids": 26,
+      "distinct_stop_ids": 574,
+      "lines": [
+        {
+          "line_id": "IDFM:C01727",
+          "shortname": "C",
+          "route_long_name": "C",
+          "mode": "RapidTransit",
+          "operator": "SNCF",
+          "stop_rows": 75,
+          "distinct_stops": 75
+        },
+        {
+          "line_id": "IDFM:C01728",
+          "shortname": "D",
+          "route_long_name": "D",
+          "mode": "RapidTransit",
+          "operator": "SNCF",
+          "stop_rows": 59,
+          "distinct_stops": 59
+        },
+        {
+          "line_id": "IDFM:C01739",
+          "shortname": "J",
+          "route_long_name": "J",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 54,
+          "distinct_stops": 54
+        },
+        {
+          "line_id": "IDFM:C01737",
+          "shortname": "H",
+          "route_long_name": "H",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 50,
+          "distinct_stops": 50
+        },
+        {
+          "line_id": "IDFM:C01743",
+          "shortname": "B",
+          "route_long_name": "B",
+          "mode": "RapidTransit",
+          "operator": "SNCF",
+          "stop_rows": 47,
+          "distinct_stops": 47
+        },
+        {
+          "line_id": "IDFM:C01742",
+          "shortname": "A",
+          "route_long_name": "A",
+          "mode": "RapidTransit",
+          "operator": "SNCF",
+          "stop_rows": 46,
+          "distinct_stops": 46
+        },
+        {
+          "line_id": "IDFM:C01740",
+          "shortname": "L",
+          "route_long_name": "L",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 36,
+          "distinct_stops": 36
+        },
+        {
+          "line_id": "IDFM:C01736",
+          "shortname": "N",
+          "route_long_name": "N",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 35,
+          "distinct_stops": 35
+        },
+        {
+          "line_id": "IDFM:C01744",
+          "shortname": "TER",
+          "route_long_name": "TER Centre - Val de Loire",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 33,
+          "distinct_stops": 33
+        },
+        {
+          "line_id": "IDFM:C01730",
+          "shortname": "P",
+          "route_long_name": "P",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 32,
+          "distinct_stops": 32
+        },
+        {
+          "line_id": "IDFM:C01729",
+          "shortname": "E",
+          "route_long_name": "E",
+          "mode": "RapidTransit",
+          "operator": "SNCF",
+          "stop_rows": 26,
+          "distinct_stops": 26
+        },
+        {
+          "line_id": "IDFM:C01745",
+          "shortname": "TER",
+          "route_long_name": "TER Bourgogne - Franche-Comté",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 25,
+          "distinct_stops": 25
+        },
+        {
+          "line_id": "IDFM:C01731",
+          "shortname": "R",
+          "route_long_name": "R",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 24,
+          "distinct_stops": 24
+        },
+        {
+          "line_id": "IDFM:C01857",
+          "shortname": "TER",
+          "route_long_name": "TER Centre - Val-de-Loire",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 24,
+          "distinct_stops": 24
+        },
+        {
+          "line_id": "IDFM:C01741",
+          "shortname": "U",
+          "route_long_name": "U",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 15,
+          "distinct_stops": 15
+        },
+        {
+          "line_id": "IDFM:C01748",
+          "shortname": "TER",
+          "route_long_name": "TER Normandie",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 14,
+          "distinct_stops": 14
+        },
+        {
+          "line_id": "IDFM:C02375",
+          "shortname": "TER",
+          "route_long_name": "TER Normandie",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 13,
+          "distinct_stops": 13
+        },
+        {
+          "line_id": "IDFM:C01747",
+          "shortname": "TER",
+          "route_long_name": "TER Grand-Est",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 12,
+          "distinct_stops": 12
+        },
+        {
+          "line_id": "IDFM:C01746",
+          "shortname": "TER",
+          "route_long_name": "TER Hauts-de-France",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 11,
+          "distinct_stops": 11
+        },
+        {
+          "line_id": "IDFM:C01863",
+          "shortname": "TER",
+          "route_long_name": "TER Hauts-de-France",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 11,
+          "distinct_stops": 11
+        },
+        {
+          "line_id": "IDFM:C00563",
+          "shortname": "CDG VAL",
+          "route_long_name": "CDG VAL",
+          "mode": "RailShuttle",
+          "operator": "ADP",
+          "stop_rows": 10,
+          "distinct_stops": 10
+        },
+        {
+          "line_id": "IDFM:C01738",
+          "shortname": "K",
+          "route_long_name": "K",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 10,
+          "distinct_stops": 10
+        },
+        {
+          "line_id": "IDFM:C02711",
+          "shortname": "V",
+          "route_long_name": "V",
+          "mode": "LocalTrain",
+          "operator": "SNCF",
+          "stop_rows": 7,
+          "distinct_stops": 7
+        },
+        {
+          "line_id": "IDFM:C01388",
+          "shortname": "ORLYVAL",
+          "route_long_name": "ORLYVAL",
+          "mode": "RailShuttle",
+          "operator": "RATP",
+          "stop_rows": 6,
+          "distinct_stops": 6
+        },
+        {
+          "line_id": "IDFM:C02368",
+          "shortname": "TER",
+          "route_long_name": "TER Centre - Val de Loire",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 5,
+          "distinct_stops": 5
+        },
+        {
+          "line_id": "IDFM:C02370",
+          "shortname": "TER",
+          "route_long_name": "TER Normandie",
+          "mode": "regionalRail",
+          "operator": "SNCF",
+          "stop_rows": 5,
+          "distinct_stops": 5
+        }
+      ]
+    }
+  },
+  "gtfs": {
+    "agency": {
+      "columns": [
+        "agency_id",
+        "agency_name",
+        "agency_url",
+        "agency_timezone",
+        "agency_lang",
+        "agency_phone",
+        "agency_email",
+        "agency_fare_url",
+        "ticketing_deep_link_id"
+      ],
+      "row_count": 20,
+      "rows": [
+        {
+          "agency_id": "IDFM:1060",
+          "agency_name": "Paris Saclay",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1052",
+          "agency_name": "Mantois",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1059",
+          "agency_name": "Essonne Sud Ouest",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1070",
+          "agency_name": "Pays Briard",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1055",
+          "agency_name": "Meaux et Ourcq",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:64",
+          "agency_name": "Marne-la-Vallée",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:885",
+          "agency_name": "Paris-Saclay Mobilités",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1061",
+          "agency_name": "Vélizy Vallées",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1054",
+          "agency_name": "Argenteuil - Boucles de Seine",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1049",
+          "agency_name": "Vallée de Montmorency",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1051",
+          "agency_name": "Poissy - Les Mureaux",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1056",
+          "agency_name": "Brie et 2 Morin",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1050",
+          "agency_name": "Grand Melun",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1057",
+          "agency_name": "Val d'Yerres Val de Seine",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1058",
+          "agency_name": "Essonne Sud Est",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:78",
+          "agency_name": "Sénart",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1065",
+          "agency_name": "Marne et Seine",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1068",
+          "agency_name": "Saint-Quentin-en-Yvelines",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:1071",
+          "agency_name": "Roissy Ouest",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        },
+        {
+          "agency_id": "IDFM:71",
+          "agency_name": "RER",
+          "agency_url": "https://www.iledefrance-mobilites.fr",
+          "agency_timezone": "Europe/Paris",
+          "agency_lang": "",
+          "agency_phone": "",
+          "agency_email": "",
+          "agency_fare_url": "https://app.idf-mobilites.fr/gtfs",
+          "ticketing_deep_link_id": "ticketing_deep_link:1"
+        }
+      ]
+    },
+    "routes": {
+      "columns": [
+        "route_id",
+        "agency_id",
+        "route_short_name",
+        "route_long_name",
+        "route_desc",
+        "route_type",
+        "route_url",
+        "route_color",
+        "route_text_color",
+        "route_sort_order"
+      ],
+      "row_count": 2027,
+      "route_type_counts": {
+        "3": 1968,
+        "0": 17,
+        "1": 16,
+        "7": 1,
+        "6": 1,
+        "2": 24
+      },
+      "route_mode_counts": {
+        "": 2027
+      },
+      "route_operator_top15": {
+        "": 2027
+      },
+      "head": [
+        {
+          "route_id": "IDFM:C01624",
+          "agency_id": "IDFM:1080",
+          "route_short_name": "4244",
+          "route_long_name": "4244",
+          "route_desc": "",
+          "route_type": "3",
+          "route_url": "",
+          "route_color": "82DC73",
+          "route_text_color": "000000",
+          "route_sort_order": ""
+        },
+        {
+          "route_id": "IDFM:C02313",
+          "agency_id": "IDFM:1081",
+          "route_short_name": "5310",
+          "route_long_name": "5310",
+          "route_desc": "",
+          "route_type": "3",
+          "route_url": "",
+          "route_color": "82C8E6",
+          "route_text_color": "000000",
+          "route_sort_order": ""
+        },
+        {
+          "route_id": "IDFM:C00029",
+          "agency_id": "IDFM:1087",
+          "route_short_name": "761",
+          "route_long_name": "761",
+          "route_desc": "",
+          "route_type": "3",
+          "route_url": "",
+          "route_color": "FFBE00",
+          "route_text_color": "000000",
+          "route_sort_order": ""
+        },
+        {
+          "route_id": "IDFM:C00632",
+          "agency_id": "IDFM:64",
+          "route_short_name": "2234",
+          "route_long_name": "2234",
+          "route_desc": "",
+          "route_type": "3",
+          "route_url": "",
+          "route_color": "640082",
+          "route_text_color": "FFFFFF",
+          "route_sort_order": ""
+        },
+        {
+          "route_id": "IDFM:C00164",
+          "agency_id": "IDFM:1081",
+          "route_short_name": "5233",
+          "route_long_name": "5233",
+          "route_desc": "",
+          "route_type": "3",
+          "route_url": "",
+          "route_color": "DC9600",
+          "route_text_color": "000000",
+          "route_sort_order": ""
+        }
+      ],
+      "rail_routes_sample": [
+        {
+          "route_id": "IDFM:C01371",
+          "route_short_name": "1",
+          "route_long_name": "1",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01372",
+          "route_short_name": "2",
+          "route_long_name": "2",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01373",
+          "route_short_name": "3",
+          "route_long_name": "3",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01384",
+          "route_short_name": "14",
+          "route_long_name": "14",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01386",
+          "route_short_name": "3B",
+          "route_long_name": "3B",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01387",
+          "route_short_name": "7B",
+          "route_long_name": "7B",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01377",
+          "route_short_name": "7",
+          "route_long_name": "7",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01383",
+          "route_short_name": "13",
+          "route_long_name": "13",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01374",
+          "route_short_name": "4",
+          "route_long_name": "4",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01375",
+          "route_short_name": "5",
+          "route_long_name": "5",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01376",
+          "route_short_name": "6",
+          "route_long_name": "6",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01378",
+          "route_short_name": "8",
+          "route_long_name": "8",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01379",
+          "route_short_name": "9",
+          "route_long_name": "9",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01380",
+          "route_short_name": "10",
+          "route_long_name": "10",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01382",
+          "route_short_name": "12",
+          "route_long_name": "12",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01381",
+          "route_short_name": "11",
+          "route_long_name": "11",
+          "route_type": "1",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01745",
+          "route_short_name": "TER",
+          "route_long_name": "TER Bourgogne - Franche-Comté",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01744",
+          "route_short_name": "TER",
+          "route_long_name": "TER Centre - Val de Loire",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01746",
+          "route_short_name": "TER",
+          "route_long_name": "TER Hauts-de-France",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01731",
+          "route_short_name": "R",
+          "route_long_name": "R",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01742",
+          "route_short_name": "A",
+          "route_long_name": "A",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01741",
+          "route_short_name": "U",
+          "route_long_name": "U",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01743",
+          "route_short_name": "B",
+          "route_long_name": "B",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01730",
+          "route_short_name": "P",
+          "route_long_name": "P",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01736",
+          "route_short_name": "N",
+          "route_long_name": "N",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01748",
+          "route_short_name": "TER",
+          "route_long_name": "TER Normandie",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01863",
+          "route_short_name": "TER",
+          "route_long_name": "TER Hauts-de-France",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01737",
+          "route_short_name": "H",
+          "route_long_name": "H",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01738",
+          "route_short_name": "K",
+          "route_long_name": "K",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01739",
+          "route_short_name": "J",
+          "route_long_name": "J",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01727",
+          "route_short_name": "C",
+          "route_long_name": "C",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01740",
+          "route_short_name": "L",
+          "route_long_name": "L",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01728",
+          "route_short_name": "D",
+          "route_long_name": "D",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01729",
+          "route_short_name": "E",
+          "route_long_name": "E",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01747",
+          "route_short_name": "TER",
+          "route_long_name": "TER Grand-Est",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C01857",
+          "route_short_name": "TER",
+          "route_long_name": "TER Centre - Val-de-Loire",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C02368",
+          "route_short_name": "TER",
+          "route_long_name": "TER Centre - Val de Loire",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C02370",
+          "route_short_name": "TER",
+          "route_long_name": "TER Normandie",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C02375",
+          "route_short_name": "TER",
+          "route_long_name": "TER Normandie",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        },
+        {
+          "route_id": "IDFM:C02711",
+          "route_short_name": "V",
+          "route_long_name": "V",
+          "route_type": "2",
+          "route_mode": null,
+          "route_operator": null
+        }
+      ],
+      "rail_route_id_count": 40
+    },
+    "stops": {
+      "columns": [
+        "stop_id",
+        "stop_code",
+        "stop_name",
+        "stop_desc",
+        "stop_lon",
+        "stop_lat",
+        "zone_id",
+        "stop_url",
+        "location_type",
+        "parent_station",
+        "stop_timezone",
+        "level_id",
+        "wheelchair_boarding",
+        "platform_code",
+        "stop_access"
+      ],
+      "row_count": 53450,
+      "idfm_prefix_count": 53450,
+      "idfm_prefix_pct": 100.0,
+      "parent_station_nonnull": 38060,
+      "location_type_counts": {
+        "0": 35544,
+        "1": 15390,
+        "2": 2516
+      },
+      "head": [
+        {
+          "stop_id": "IDFM:monomodalStopPlace:473875",
+          "stop_code": "",
+          "stop_name": "Nation",
+          "stop_desc": "",
+          "stop_lon": "2.3959444654495297",
+          "stop_lat": "48.84823319072756",
+          "zone_id": "1",
+          "stop_url": "",
+          "location_type": "0",
+          "parent_station": "IDFM:71673",
+          "stop_timezone": "",
+          "level_id": "",
+          "wheelchair_boarding": "1",
+          "platform_code": "",
+          "stop_access": ""
+        },
+        {
+          "stop_id": "IDFM:monomodalStopPlace:53783",
+          "stop_code": "",
+          "stop_name": "Chatou - Croissy",
+          "stop_desc": "",
+          "stop_lon": "2.1559376624708975",
+          "stop_lat": "48.88519702561107",
+          "zone_id": "4",
+          "stop_url": "",
+          "location_type": "0",
+          "parent_station": "IDFM:64483",
+          "stop_timezone": "",
+          "level_id": "",
+          "wheelchair_boarding": "1",
+          "platform_code": "",
+          "stop_access": ""
+        },
+        {
+          "stop_id": "IDFM:monomodalStopPlace:53784",
+          "stop_code": "",
+          "stop_name": "Le Vésinet - Centre",
+          "stop_desc": "",
+          "stop_lon": "2.1343339900216813",
+          "stop_lat": "48.89013759185911",
+          "zone_id": "4",
+          "stop_url": "",
+          "location_type": "0",
+          "parent_station": "IDFM:64514",
+          "stop_timezone": "",
+          "level_id": "",
+          "wheelchair_boarding": "1",
+          "platform_code": "",
+          "stop_access": ""
+        },
+        {
+          "stop_id": "IDFM:monomodalStopPlace:473890",
+          "stop_code": "",
+          "stop_name": "Denfert-Rochereau",
+          "stop_desc": "",
+          "stop_lon": "2.333220634641387",
+          "stop_lat": "48.83318643678081",
+          "zone_id": "1",
+          "stop_url": "",
+          "location_type": "0",
+          "parent_station": "IDFM:71056",
+          "stop_timezone": "",
+          "level_id": "",
+          "wheelchair_boarding": "1",
+          "platform_code": "",
+          "stop_access": ""
+        },
+        {
+          "stop_id": "IDFM:monomodalStopPlace:473843",
+          "stop_code": "",
+          "stop_name": "Cité Universitaire",
+          "stop_desc": "",
+          "stop_lon": "2.3388576809777035",
+          "stop_lat": "48.82150600684166",
+          "zone_id": "1",
+          "stop_url": "",
+          "location_type": "0",
+          "parent_station": "IDFM:70623",
+          "stop_timezone": "",
+          "level_id": "",
+          "wheelchair_boarding": "1",
+          "platform_code": "",
+          "stop_access": ""
+        }
+      ]
+    },
+    "trips": {
+      "columns": [
+        "route_id",
+        "service_id",
+        "trip_id",
+        "trip_headsign",
+        "trip_short_name",
+        "direction_id",
+        "block_id",
+        "shape_id",
+        "wheelchair_accessible",
+        "bikes_allowed"
+      ],
+      "row_count": 496429,
+      "head": [
+        {
+          "route_id": "IDFM:C01792",
+          "service_id": "IDFM:1",
+          "trip_id": "IDFM:stif:local-175995-C01792-5699",
+          "trip_headsign": "Terminal 2 G",
+          "trip_short_name": "",
+          "direction_id": "1",
+          "block_id": "",
+          "shape_id": "IDFM:shp_3_8193",
+          "wheelchair_accessible": "2",
+          "bikes_allowed": "0"
+        },
+        {
+          "route_id": "IDFM:C00562",
+          "service_id": "IDFM:1",
+          "trip_id": "IDFM:stif:local-175995-C00562-5535",
+          "trip_headsign": "Terminal 2 F",
+          "trip_short_name": "",
+          "direction_id": "1",
+          "block_id": "",
+          "shape_id": "IDFM:shp_3_8191",
+          "wheelchair_accessible": "0",
+          "bikes_allowed": "0"
+        },
+        {
+          "route_id": "IDFM:C00562",
+          "service_id": "IDFM:1",
+          "trip_id": "IDFM:stif:local-175995-C00562-5468",
+          "trip_headsign": "Terminal 2 F",
+          "trip_short_name": "",
+          "direction_id": "1",
+          "block_id": "",
+          "shape_id": "IDFM:shp_3_8191",
+          "wheelchair_accessible": "0",
+          "bikes_allowed": "0"
+        },
+        {
+          "route_id": "IDFM:C01792",
+          "service_id": "IDFM:1",
+          "trip_id": "IDFM:stif:local-175995-C01792-5822",
+          "trip_headsign": "Terminal 2 F",
+          "trip_short_name": "",
+          "direction_id": "0",
+          "block_id": "",
+          "shape_id": "IDFM:shp_3_8195",
+          "wheelchair_accessible": "2",
+          "bikes_allowed": "0"
+        },
+        {
+          "route_id": "IDFM:C00563",
+          "service_id": "IDFM:1",
+          "trip_id": "IDFM:stif:local-175995-C00563-5888",
+          "trip_headsign": "Terminal 1",
+          "trip_short_name": "",
+          "direction_id": "0",
+          "block_id": "",
+          "shape_id": "IDFM:shp_0_247",
+          "wheelchair_accessible": "1",
+          "bikes_allowed": "0"
+        }
+      ],
+      "route_id_top20_first100k": {
+        "IDFM:C02666": 2052,
+        "IDFM:C01384": 1245,
+        "IDFM:C01385": 1110,
+        "IDFM:C01372": 919,
+        "IDFM:C01371": 813,
+        "IDFM:C01172": 678,
+        "IDFM:C01383": 647,
+        "IDFM:C01389": 637,
+        "IDFM:C02527": 635,
+        "IDFM:C01142": 629,
+        "IDFM:C01287": 585,
+        "IDFM:C00563": 572,
+        "IDFM:C01159": 551,
+        "IDFM:C01374": 542,
+        "IDFM:C01192": 534,
+        "IDFM:C01386": 530,
+        "IDFM:C01999": 520,
+        "IDFM:C01391": 506,
+        "IDFM:C01311": 497,
+        "IDFM:C01098": 494
+      }
+    },
+    "stop_times": {
+      "columns": [
+        "trip_id",
+        "arrival_time",
+        "departure_time",
+        "start_pickup_drop_off_window",
+        "end_pickup_drop_off_window",
+        "stop_id",
+        "stop_sequence",
+        "pickup_type",
+        "drop_off_type",
+        "local_zone_id",
+        "stop_headsign",
+        "timepoint",
+        "pickup_booking_rule_id",
+        "drop_off_booking_rule_id"
+      ],
+      "row_count": 11065718,
+      "head": [
+        {
+          "trip_id": "IDFM:stif:local-175995-C01792-5699",
+          "arrival_time": "15:44:00",
+          "departure_time": "15:44:00",
+          "start_pickup_drop_off_window": "",
+          "end_pickup_drop_off_window": "",
+          "stop_id": "IDFM:10228",
+          "stop_sequence": "0",
+          "pickup_type": "0",
+          "drop_off_type": "1",
+          "local_zone_id": "",
+          "stop_headsign": "",
+          "timepoint": "1",
+          "pickup_booking_rule_id": "",
+          "drop_off_booking_rule_id": ""
+        },
+        {
+          "trip_id": "IDFM:stif:local-175995-C01792-5699",
+          "arrival_time": "15:50:00",
+          "departure_time": "15:50:00",
+          "start_pickup_drop_off_window": "",
+          "end_pickup_drop_off_window": "",
+          "stop_id": "IDFM:40086",
+          "stop_sequence": "1",
+          "pickup_type": "1",
+          "drop_off_type": "0",
+          "local_zone_id": "",
+          "stop_headsign": "",
+          "timepoint": "1",
+          "pickup_booking_rule_id": "",
+          "drop_off_booking_rule_id": ""
+        },
+        {
+          "trip_id": "IDFM:stif:local-175995-C00562-5535",
+          "arrival_time": "17:54:00",
+          "departure_time": "17:54:00",
+          "start_pickup_drop_off_window": "",
+          "end_pickup_drop_off_window": "",
+          "stop_id": "IDFM:10228",
+          "stop_sequence": "0",
+          "pickup_type": "0",
+          "drop_off_type": "1",
+          "local_zone_id": "",
+          "stop_headsign": "",
+          "timepoint": "1",
+          "pickup_booking_rule_id": "",
+          "drop_off_booking_rule_id": ""
+        },
+        {
+          "trip_id": "IDFM:stif:local-175995-C00562-5535",
+          "arrival_time": "17:56:00",
+          "departure_time": "17:56:00",
+          "start_pickup_drop_off_window": "",
+          "end_pickup_drop_off_window": "",
+          "stop_id": "IDFM:10221",
+          "stop_sequence": "1",
+          "pickup_type": "0",
+          "drop_off_type": "0",
+          "local_zone_id": "",
+          "stop_headsign": "",
+          "timepoint": "1",
+          "pickup_booking_rule_id": "",
+          "drop_off_booking_rule_id": ""
+        },
+        {
+          "trip_id": "IDFM:stif:local-175995-C00562-5535",
+          "arrival_time": "17:58:00",
+          "departure_time": "17:58:00",
+          "start_pickup_drop_off_window": "",
+          "end_pickup_drop_off_window": "",
+          "stop_id": "IDFM:10222",
+          "stop_sequence": "2",
+          "pickup_type": "0",
+          "drop_off_type": "0",
+          "local_zone_id": "",
+          "stop_headsign": "",
+          "timepoint": "1",
+          "pickup_booking_rule_id": "",
+          "drop_off_booking_rule_id": ""
+        }
+      ]
+    }
+  },
+  "joins": {
+    "stop_id": {
+      "csv_all": 34860,
+      "csv_rail": 574,
+      "gtfs": 53450,
+      "exact_overlap_all": 34858,
+      "exact_overlap_rail": 572,
+      "overlap_pct_csv_all": 99.99,
+      "overlap_pct_csv_rail": 99.65,
+      "csv_only_sample": [
+        "IDFM:471604",
+        "IDFM:472323"
+      ],
+      "gtfs_only_sample": [
+        "IDFM:10181",
+        "IDFM:10397",
+        "IDFM:10398",
+        "IDFM:10399",
+        "IDFM:10401",
+        "IDFM:10402",
+        "IDFM:10460",
+        "IDFM:10461"
+      ]
+    },
+    "route_id": {
+      "csv_rail_line_ids": 26,
+      "gtfs_rail_route_ids": 40,
+      "exact_overlap": 24,
+      "overlap_pct": 92.31,
+      "csv_only_sample": [
+        "IDFM:C00563",
+        "IDFM:C01388"
+      ],
+      "gtfs_only_sample": [
+        "IDFM:C01371",
+        "IDFM:C01372",
+        "IDFM:C01373",
+        "IDFM:C01374",
+        "IDFM:C01375",
+        "IDFM:C01376",
+        "IDFM:C01377",
+        "IDFM:C01378"
+      ]
+    },
+    "reco": "Direct join on stop_id and route_id — both use IDFM:… namespace in CSV and GTFS."
+  }
+}

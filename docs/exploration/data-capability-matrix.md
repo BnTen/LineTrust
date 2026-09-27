@@ -1,14 +1,18 @@
-# Data capability matrix (template)
+# Data capability matrix
 
-**Phase:** E (fill before promising UI grain)  
-**Corridor candidacy:** _TBD_  
-**Sources inventoried:** _list URLs / datasets_  
-**Profiler artifacts:** `docs/exploration/…`  
-**Human gate:** ☐ signed — date / name: ________
+**Phase:** E (revised 2026-09-27 after ART discovery)  
+**Corridor:** **RER D — Branche Melun (Paris-Gare-de-Lyon ↔ Melun)**  
+**Route:** IDFM:C01728 · ART filter `tct = 'TBD'`  
+**Sources inventoried:** `docs/exploration/source-whitelist.md` (S1–S7; **primary facts = S6 ART**)  
+**Profiler artifacts:**
+- `docs/exploration/art-circulations-discovery.md`
+- `docs/exploration/profile-art-rer-d.md` (+ `.json`)
+- `docs/exploration/rer-d-station-map.md`
+- `docs/exploration/raw-inventory.md` (S1–S5)
+
+**Human gate:** ☑ signed — 2026-09-27 (humain) — RER D Melun + ART primary; OK to start Phase 2
 
 ## How to use
-
-For each KPI or UI promise, mark exactly one status:
 
 | Status | Meaning |
 |--------|---------|
@@ -23,51 +27,81 @@ Never upgrade `proxy`/`impossible` to product copy that implies `calculable`.
 
 | KPI / promise | Required grain | Sources | Status | Notes / disclosure copy |
 |---------------|----------------|---------|--------|-------------------------|
-| Score directed pair A→B | pair × sens × day_type × window 30m | | | |
-| Score B→A independent | same | | | |
-| Weekday vs weekend split | day_type | | | |
-| Alternative ±30 min | neighboring windows | | | |
-| Uncertainty from `n` | cell sample size | | | |
-| Line identity on page | line id join | | | |
-| Train number | train_id × run | | | |
-| Browse by line | line aggregates | | | |
-| Browse by region | region mapping | | | |
-| Trend chart 24 months | monthly cells | | | |
-| Share card metrics pack | subset of above | | | |
-| Holidays day-type | calendar | | V2 / V1.1 | Out of MVP |
-| Masked suppressions | dedicated field | | V2 | |
+| Score directed pair A→B | pair × sens × day_type × window 30m | **S6 ART** | **calculable** | Delay at dest: `COALESCE(obs,est)−the` on type_horaire=A. Flag `used_est` when obs null (~13–18 %). |
+| Score B→A independent | same | S6 | **calculable** | Separate OD filter (e.g. Melun→Lyon vs Lyon→Melun). |
+| Weekday vs weekend split | day_type | S6 `date_circ` | **calculable** | ~78 % WD / ~22 % WE on RER D. |
+| Alternative ±30 min | neighboring windows | S6 | **calculable** | Bucket origin `dh_the` into 30-min slots; compare cell scores. |
+| Uncertainty from `n` | cell sample size | S6 | **calculable** | `n` = circulations in cell (pair × sens × day_type × window × months). Propose freeze: `N_min` 30 / 100 / 300 → labels faible/moyen/fort in `docs/03` after gate. |
+| Line identity on page | line id | S6 `tct=TBD` + S4 | **calculable** | |
+| Train number | train_id × run | S6 `num_marche` | **calculable** | Show if cell has enough `n`; else hide. Phase 3b optional. |
+| Browse by line | line aggregates | S6 (+ S1 cross-check) | **calculable** | Phase 3b. S1 = monthly passenger KPI (different methodology). |
+| Browse by region | region mapping | — | **V2** / hors slice | |
+| Trend chart 24 months | monthly cells | S6 (2023–2024 on disk; +2022/2025 optional) | **calculable** | Download more IDFM years as needed. |
+| Share card metrics pack | subset | S6 | **calculable** | Pair score + window + day_type + uncertainty + disclaimer. |
+| Holidays day-type | calendar | — | **V2** / V1.1 | |
+| Masked suppressions | dedicated field | — | **V2** | Cancellations: derive from missing circulations vs GTFS — **proxy** until validated. |
+| S1 line-month alone as pair score | — | S1 | **proxy** (fallback only) | Do not use as primary now that ART exists. |
 
 ## Join / id mapping
 
 | Id space | Coverage | Join path | Risk |
 |----------|----------|-----------|------|
-| UIC | | | |
-| STIF / Île-de-France Mobilités | | | |
-| GTFS stop_id | | | |
+| ART `code_ci_*` (6 digits) | RER D jalons | = `RIGHT(gares.codes_uic, 6)` | Multi-UIC; label drift (`Paris-Gare-de-Lyon (Banlieue)`) |
+| IDFM `stop_id` | 59 stops RER D | arrets-lignes → name → gares → code_ci | Châtelet: ART `758607` (absent gares) |
+| GTFS `stop_id` | same IDFM namespace | Direct | Licence Mobilité (schedule only) |
+| `tct` / `num_marche` | RER D | `TBD` / commercial number | |
+
+Detail: `docs/exploration/rer-d-station-map.md`.
 
 ## Grain honesty decision (required)
 
-Chosen MVP display grain: ☐ window/pair · ☐ line · ☐ train  
+Chosen MVP display grain: **☑ window/pair** · ☐ line · ☐ train-only  
 
-Rationale (from matrix):
+Rationale:
 
-_
+ART Infocentre (S6) provides observed (or estimated) timestamps per station per circulation for RER D. Slice DoD can keep **pair × sens × day_type × fenêtre 30 min** as originally intended.
+
+**Pilot corridor:** RER D branche Melun — **Paris-Gare-de-Lyon (Banlieue) ↔ Melun** (~17 stops, ~7.4k circ/yr on OD endpoints). Full RER D Y-network deferred to Phase 3b.
+
+**ETL honesty rules:**
+1. Prefer `dh_obs_jalon`; if null use `dh_est_jalon` only with `used_est` flag / optional exclusion from TPR.
+2. Quarantine empty origins, delays &gt;120 min, schema drift.
+3. Never invent missing circulations; cancellations = explicit derivation or omit TSR until proven.
+4. Neon = refs + `agg_*` for corridor only — not raw 10 Go/an.
 
 ## Neon budget estimate
 
 | Table class | Est. rows | Est. Mo |
 |-------------|-----------|---------|
-| refs | | |
-| agg_* | | |
-| watermarks / weights | | |
-| **Total** | | |
+| refs (RER D ~59 stops + Melun-branch subset + lines) | &lt; 1k | ≪ 1 |
+| agg_* (pair × sens × day_type × window × month, corridor) | ~10⁵–10⁶ order | **&lt; 100** (tune after first ETL) |
+| watermarks / weights | &lt; 100 | ≪ 1 |
+| Raw ART CSV | **0 in Neon** | stay in `data/raw/art/` |
+| **Total** | | **target ≪ 400 Mo** |
 
-☐ Under ~400 Mo headroom for Free tier.
+☑ Under ~400 Mo headroom if raw stays out and agg scoped to pilot (+ controlled expansion).
+
+## Source whitelist + licences (summary)
+
+| ID | Dataset | Role | Licence |
+|----|---------|------|---------|
+| **S6** | ART circulations IDFM | **Primary delay facts** | Licence Ouverte Etalab |
+| S4 / S3 / S5 | IDFM arrêts, gares, GTFS | Refs + theoretical windows | ODbL / Licence Mobilité |
+| S1 | SNCF ponctualité mensuelle | Cross-check / browse macro | ODbL |
+| S7 | AlertesRER | Historical PoC only | LOV2 — not ETL |
 
 ## Go / No-go
 
-- [ ] Matrix complete for slice DoD rows
-- [ ] Corridor named in `intent/`
-- [ ] UI promises match statuses
-- [ ] Licence attribution listed
-- [ ] Human signature
+- [x] Matrix complete for slice DoD rows (ART-backed)
+- [x] Corridor named in `intent/` — **RER D — Branche Melun**
+- [x] UI promises match statuses — human OK 2026-09-27
+- [x] Licence attribution listed
+- [x] Human signature — 2026-09-27
+
+## Recommended human decisions (gate E)
+
+1. Confirm corridor **RER D — Branche Melun (Paris-Gare-de-Lyon ↔ Melun)**.
+2. Confirm primary source **ART S6** (Licence Ouverte) + attribution footer.
+3. Confirm policy on estimated times: include with flag **or** exclude from score.
+4. Confirm `N_min` proposal (30 / 100 / 300 circulations per cell) → `docs/03`.
+5. **OK Phase 2** → ETL hash→partition + agg for this corridor.

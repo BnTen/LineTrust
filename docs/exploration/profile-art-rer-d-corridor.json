@@ -1,0 +1,246 @@
+{
+  "corridor": "Paris-Gare-de-Lyon (Banlieue) ↔ Melun",
+  "year": "2024",
+  "od_counts": {
+    "Melun → Paris-Gare-de-Lyon (Banlieue)": 3452,
+    "Paris-Gare-de-Lyon (Banlieue) → Melun": 4217
+  },
+  "total_circulations": 7669,
+  "weekday_weekend": {
+    "weekend": 2037,
+    "weekday": 5632
+  },
+  "distinct_half_hour_depart_slots": 0,
+  "top_depart_slots": [],
+  "stations_ordered_by_distance": [
+    {
+      "name": "Paris-Gare-de-Lyon (Banlieue)",
+      "code_ci": "686030",
+      "jalon_rows": 8032,
+      "min_distance_m": 0
+    },
+    {
+      "name": "Melun",
+      "code_ci": "682005",
+      "jalon_rows": 7420,
+      "min_distance_m": 0
+    },
+    {
+      "name": "Paris-Gare-de-Lyon",
+      "code_ci": "686006",
+      "jalon_rows": 17,
+      "min_distance_m": 0
+    },
+    {
+      "name": "Le Mée",
+      "code_ci": "682179",
+      "jalon_rows": 14414,
+      "min_distance_m": 2754
+    },
+    {
+      "name": "Maisons-Alfort-Alfortville",
+      "code_ci": "681155",
+      "jalon_rows": 9803,
+      "min_distance_m": 6226
+    },
+    {
+      "name": "Cesson",
+      "code_ci": "682161",
+      "jalon_rows": 14414,
+      "min_distance_m": 6384
+    },
+    {
+      "name": "Le Vert-de-Maisons",
+      "code_ci": "681247",
+      "jalon_rows": 1194,
+      "min_distance_m": 7802
+    },
+    {
+      "name": "Créteil-Pompadour",
+      "code_ci": "608802",
+      "jalon_rows": 9309,
+      "min_distance_m": 9715
+    },
+    {
+      "name": "Savigny-le-Temple-Nandy",
+      "code_ci": "682187",
+      "jalon_rows": 14413,
+      "min_distance_m": 9787
+    },
+    {
+      "name": "Villeneuve-St-Georges-Triage",
+      "code_ci": "681809",
+      "jalon_rows": 1311,
+      "min_distance_m": 12741
+    },
+    {
+      "name": "Lieusaint-Moissy",
+      "code_ci": "682153",
+      "jalon_rows": 14691,
+      "min_distance_m": 13579
+    },
+    {
+      "name": "Villeneuve-St-Georges",
+      "code_ci": "681825",
+      "jalon_rows": 14836,
+      "min_distance_m": 14386
+    },
+    {
+      "name": "Montgeron-Crosne",
+      "code_ci": "682104",
+      "jalon_rows": 14458,
+      "min_distance_m": 17450
+    },
+    {
+      "name": "Combs-la-Ville-Quincy",
+      "code_ci": "682146",
+      "jalon_rows": 14842,
+      "min_distance_m": 18212
+    },
+    {
+      "name": "Yerres",
+      "code_ci": "682112",
+      "jalon_rows": 14459,
+      "min_distance_m": 19064
+    },
+    {
+      "name": "Boussy-St-Antoine",
+      "code_ci": "682138",
+      "jalon_rows": 14454,
+      "min_distance_m": 20118
+    },
+    {
+      "name": "Brunoy",
+      "code_ci": "682120",
+      "jalon_rows": 14461,
+      "min_distance_m": 21102
+    }
+  ],
+  "typical_path_stations": [
+    {
+      "name": "Paris-Gare-de-Lyon (Banlieue)",
+      "code_ci": "686030",
+      "jalon_rows": 8032,
+      "min_distance_m": 0,
+      "presence_pct": 7.0
+    },
+    {
+      "name": "Melun",
+      "code_ci": "682005",
+      "jalon_rows": 7420,
+      "min_distance_m": 0,
+      "presence_pct": 6.5
+    },
+    {
+      "name": "Le Mée",
+      "code_ci": "682179",
+      "jalon_rows": 14414,
+      "min_distance_m": 2754,
+      "presence_pct": 12.5
+    },
+    {
+      "name": "Maisons-Alfort-Alfortville",
+      "code_ci": "681155",
+      "jalon_rows": 9803,
+      "min_distance_m": 6226,
+      "presence_pct": 8.5
+    },
+    {
+      "name": "Cesson",
+      "code_ci": "682161",
+      "jalon_rows": 14414,
+      "min_distance_m": 6384,
+      "presence_pct": 12.5
+    },
+    {
+      "name": "Créteil-Pompadour",
+      "code_ci": "608802",
+      "jalon_rows": 9309,
+      "min_distance_m": 9715,
+      "presence_pct": 8.1
+    },
+    {
+      "name": "Savigny-le-Temple-Nandy",
+      "code_ci": "682187",
+      "jalon_rows": 14413,
+      "min_distance_m": 9787,
+      "presence_pct": 12.5
+    },
+    {
+      "name": "Lieusaint-Moissy",
+      "code_ci": "682153",
+      "jalon_rows": 14691,
+      "min_distance_m": 13579,
+      "presence_pct": 12.8
+    },
+    {
+      "name": "Villeneuve-St-Georges",
+      "code_ci": "681825",
+      "jalon_rows": 14836,
+      "min_distance_m": 14386,
+      "presence_pct": 12.9
+    },
+    {
+      "name": "Montgeron-Crosne",
+      "code_ci": "682104",
+      "jalon_rows": 14458,
+      "min_distance_m": 17450,
+      "presence_pct": 12.6
+    },
+    {
+      "name": "Combs-la-Ville-Quincy",
+      "code_ci": "682146",
+      "jalon_rows": 14842,
+      "min_distance_m": 18212,
+      "presence_pct": 12.9
+    },
+    {
+      "name": "Yerres",
+      "code_ci": "682112",
+      "jalon_rows": 14459,
+      "min_distance_m": 19064,
+      "presence_pct": 12.6
+    },
+    {
+      "name": "Boussy-St-Antoine",
+      "code_ci": "682138",
+      "jalon_rows": 14454,
+      "min_distance_m": 20118,
+      "presence_pct": 12.6
+    },
+    {
+      "name": "Brunoy",
+      "code_ci": "682120",
+      "jalon_rows": 14461,
+      "min_distance_m": 21102,
+      "presence_pct": 12.6
+    }
+  ],
+  "station_count_ordered": 17,
+  "examples": [
+    {
+      "date_circ": "2024-01-14",
+      "orig": "Melun",
+      "dest": "Paris-Gare-de-Lyon (Banlieue)",
+      "num_marche": "150266",
+      "jalon": "Brunoy",
+      "type_horaire": "D"
+    },
+    {
+      "date_circ": "2024-01-01",
+      "orig": "Paris-Gare-de-Lyon (Banlieue)",
+      "dest": "Melun",
+      "num_marche": "153059",
+      "jalon": "Boussy-St-Antoine",
+      "type_horaire": "D"
+    },
+    {
+      "date_circ": "2024-01-01",
+      "orig": "Paris-Gare-de-Lyon (Banlieue)",
+      "dest": "Melun",
+      "num_marche": "153057",
+      "jalon": "Paris-Gare-de-Lyon (Banlieue)",
+      "type_horaire": "D"
+    }
+  ]
+}

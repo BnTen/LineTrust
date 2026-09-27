@@ -1,6 +1,6 @@
 # Intent — LineTrust MVP (MonTER)
 
-Status: **locked** (Phase H)  
+Status: **locked** (Phase H) · Phase E gate signed 2026-09-27 · next = Phase 2  
 Last updated: 2026-09-27
 
 ## One-liner
@@ -34,7 +34,8 @@ Un usager choisit 2 gares du **corridor pilote IDF**, voit score + couleur + inc
 | Indexing | `noindex` until data gate signed |
 | Neon | Clean useful data only (refs + agg_* + watermarks + weights) |
 | Dirty data | Quarantine + alert — never silent imputation |
-| Corridor | Named in Phase E (not “all IDF at once”) |
+| Corridor | **RER D — Branche Melun (Paris-Gare-de-Lyon ↔ Melun)** · IDFM:C01728 · ART `tct=TBD` · ~17 stops — **gate E signed** |
+| Honest score grain (Phase E) | **Pair × sens × day_type × fenêtre 30 min** via ART Infocentre (S6) — calculable; S1 line×month = cross-check only |
 
 ## Scoring (locked)
 
@@ -73,6 +74,8 @@ Auth, native app, live realtime, freemium, France outside IDF, early indexing, h
 
 ## Open (resolved in later phases)
 
-- Pilot corridor name → Phase E
-- `N_min` uncertainty thresholds → Phase E → `docs/03`
-- Exact open-data source whitelist → Phase E
+- Pilot corridor → **RER D Branche Melun** (gate E signed 2026-09-27)
+- Score grain → **pair × window** via ART S6 (signed)
+- `N_min` → freeze **30 / 100 / 300** in `docs/03` during Phase 2
+- Estimated times → include with `used_est` flag (default); document in `docs/04` Phase 2
+- Whitelist → `docs/exploration/source-whitelist.md` (S6 ART primary)

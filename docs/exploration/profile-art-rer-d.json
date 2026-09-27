@@ -1,0 +1,850 @@
+[
+  {
+    "year": "2023",
+    "total_rows": 31534444,
+    "rer_d_rows": 4897212,
+    "rer_d_pct_of_file": 15.53,
+    "tct_codes": {
+      "TBD": 4897212
+    },
+    "lib_tct_samples": [
+      "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+    ],
+    "date_min": "2023-01-01",
+    "date_max": "2023-12-31",
+    "distinct_origins": 55,
+    "distinct_destinations": 57,
+    "distinct_jalon_stations": 64,
+    "distinct_circulations": 147703,
+    "obs_null_pct": 17.81,
+    "est_only_pct": 17.81,
+    "obs_present_pct": 82.19,
+    "weekday_circ_count": 115120,
+    "weekend_circ_count": 32583,
+    "month_counts": {
+      "2023-01": 445807,
+      "2023-02": 380516,
+      "2023-03": 266848,
+      "2023-04": 417046,
+      "2023-05": 448001,
+      "2023-06": 426405,
+      "2023-07": 393709,
+      "2023-08": 385067,
+      "2023-09": 434426,
+      "2023-10": 459137,
+      "2023-11": 429631,
+      "2023-12": 410619
+    },
+    "top_od_pairs": [
+      [
+        [
+          "Goussainville",
+          "Melun"
+        ],
+        15017
+      ],
+      [
+        [
+          "Melun",
+          "Goussainville"
+        ],
+        14570
+      ],
+      [
+        [
+          "Orry-la-Ville-Coye",
+          "Corbeil-Essonnes"
+        ],
+        10318
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Orry-la-Ville-Coye"
+        ],
+        10114
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Villiers-le-Bel-Gonesse"
+        ],
+        8809
+      ],
+      [
+        [
+          "Villiers-le-Bel-Gonesse",
+          "Corbeil-Essonnes"
+        ],
+        8043
+      ],
+      [
+        [
+          "Malesherbes",
+          "Juvisy"
+        ],
+        6462
+      ],
+      [
+        [
+          "Melun",
+          "Corbeil-Essonnes"
+        ],
+        6246
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Melun"
+        ],
+        5617
+      ],
+      [
+        [
+          "Paris-Gare-de-Lyon (Banlieue)",
+          "Melun"
+        ],
+        4199
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Juvisy"
+        ],
+        3998
+      ],
+      [
+        [
+          "Paris-Gare-de-Lyon (Banlieue)",
+          "Corbeil-Essonnes"
+        ],
+        3855
+      ],
+      [
+        [
+          "Villeneuve-St-Georges",
+          "Malesherbes"
+        ],
+        3780
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Paris-Gare-de-Lyon (Banlieue)"
+        ],
+        3691
+      ],
+      [
+        [
+          "Creil",
+          "Corbeil-Essonnes"
+        ],
+        3555
+      ],
+      [
+        [
+          "Melun",
+          "Paris-Gare-de-Lyon (Banlieue)"
+        ],
+        3523
+      ],
+      [
+        [
+          "Juvisy",
+          "Malesherbes"
+        ],
+        3099
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Creil"
+        ],
+        3067
+      ],
+      [
+        [
+          "Melun",
+          "Juvisy"
+        ],
+        2285
+      ],
+      [
+        [
+          "Villiers-le-Bel-Gonesse",
+          "Juvisy"
+        ],
+        1762
+      ],
+      [
+        [
+          "Juvisy",
+          "Melun"
+        ],
+        1708
+      ],
+      [
+        [
+          "Villeneuve-St-Georges",
+          "Corbeil-Essonnes"
+        ],
+        1603
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Malesherbes"
+        ],
+        1533
+      ],
+      [
+        [
+          "Malesherbes",
+          "Corbeil-Essonnes"
+        ],
+        1400
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Stade-de-France-St-Denis"
+        ],
+        1329
+      ]
+    ],
+    "arrival_dest_rows": 143735,
+    "arrival_dest_delay_ok": 143735,
+    "origin_depart_rows": 139494,
+    "delay_negative": 52235,
+    "delay_over_120": 54,
+    "delay_samples": [
+      {
+        "date_circ": "2023-01-01",
+        "orig": "Paris-Gare-de-Lyon (Banlieue)",
+        "dest": "Villiers-le-Bel-Gonesse",
+        "jalon": "Villiers-le-Bel-Gonesse",
+        "delay_min": -0.8,
+        "used_est": false
+      },
+      {
+        "date_circ": "2023-01-01",
+        "orig": "Paris-Gare-de-Lyon (Banlieue)",
+        "dest": "Villiers-le-Bel-Gonesse",
+        "jalon": "Villiers-le-Bel-Gonesse",
+        "delay_min": -0.3,
+        "used_est": false
+      },
+      {
+        "date_circ": "2023-01-01",
+        "orig": "Melun",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": 0.2,
+        "used_est": false
+      },
+      {
+        "date_circ": "2023-01-01",
+        "orig": "Melun",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": -0.5,
+        "used_est": false
+      },
+      {
+        "date_circ": "2023-01-01",
+        "orig": "Melun",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": -0.9,
+        "used_est": false
+      }
+    ],
+    "branch_jalon_hits": {
+      "melun": {
+        "Melun": 57651,
+        "Le Mée": 80576,
+        "Juvisy": 139303,
+        "Vigneux-sur-Seine": 114921
+      },
+      "corbeil": {
+        "Corbeil-Essonnes": 114000,
+        "Juvisy": 139303,
+        "Vigneux-sur-Seine": 114921
+      },
+      "orry": {
+        "Goussainville": 93776,
+        "Louvres": 60723
+      },
+      "creil": {
+        "Goussainville": 93776,
+        "Creil": 7783
+      }
+    },
+    "branch_od": {
+      "melun": {},
+      "corbeil": {},
+      "orry": {},
+      "creil": {}
+    },
+    "examples": [
+      {
+        "date_circ": "2023-01-02",
+        "id_circ": "76056143",
+        "num_marche": "158436",
+        "code_ci_origine": "684415",
+        "code_ch_origine": "BV",
+        "lib_ci_origine": "Malesherbes",
+        "code_ci_destination": "545244",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Juvisy",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2023-01-24",
+        "id_circ": "76429004",
+        "num_marche": "150202",
+        "code_ci_origine": "682005",
+        "code_ch_origine": "BV",
+        "lib_ci_origine": "Melun",
+        "code_ci_destination": "686030",
+        "code_ch_destination": "00",
+        "lib_ci_destination": "Paris-Gare-de-Lyon (Banlieue)",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2023-01-01",
+        "id_circ": "76025234",
+        "num_marche": "127003",
+        "code_ci_origine": "686030",
+        "code_ch_origine": "00",
+        "lib_ci_origine": "Paris-Gare-de-Lyon (Banlieue)",
+        "code_ci_destination": "276220",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Villiers-le-Bel-Gonesse",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2023-01-01",
+        "id_circ": "76025234",
+        "num_marche": "127003",
+        "code_ci_origine": "686030",
+        "code_ch_origine": "00",
+        "lib_ci_origine": "Paris-Gare-de-Lyon (Banlieue)",
+        "code_ci_destination": "276220",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Villiers-le-Bel-Gonesse",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2023-01-01",
+        "id_circ": "76025234",
+        "num_marche": "127003",
+        "code_ci_origine": "686030",
+        "code_ch_origine": "00",
+        "lib_ci_origine": "Paris-Gare-de-Lyon (Banlieue)",
+        "code_ci_destination": "276220",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Villiers-le-Bel-Gonesse",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      }
+    ],
+    "origins_sample": [
+      "",
+      "Boigneville",
+      "Boussy-St-Antoine",
+      "Brunoy",
+      "Buno-Gironville",
+      "Cesson",
+      "Chantilly-Gouvieux",
+      "Chatelet-les-Halles",
+      "Combs-la-Ville-Quincy",
+      "Corbeil-Essonnes",
+      "Creil",
+      "Créteil-Pompadour",
+      "Essonnes-Robinson",
+      "Garges",
+      "Goussainville",
+      "Grigny-Centre",
+      "Grigny-Val-de-Seine",
+      "Juvisy",
+      "La Borne-Blanche",
+      "Le Bras-de-fer",
+      "Le Mée",
+      "Le Plessis-Chenet",
+      "Le Vert-de-Maisons",
+      "Les Noues",
+      "Lieusaint-Moissy",
+      "Maisons-Alfort-Alfortville",
+      "Maisse",
+      "Malesherbes",
+      "Melun",
+      "Mennecy"
+    ],
+    "destinations_sample": [
+      "",
+      "Ballancourt",
+      "Boigneville",
+      "Boussy-St-Antoine",
+      "Brunoy",
+      "Cesson",
+      "Chantilly-Gouvieux",
+      "Chatelet-les-Halles",
+      "Combs-la-Ville-Quincy",
+      "Corbeil-Essonnes",
+      "Coudray-Montceaux",
+      "Creil",
+      "Créteil-Pompadour",
+      "Essonnes-Robinson",
+      "Garges",
+      "Goussainville",
+      "Grand-Bourg (Essonne)",
+      "Grigny-Centre",
+      "Grigny-Val-de-Seine",
+      "Juvisy",
+      "La Ferté-Alais",
+      "La Plaine-Stade-de-France",
+      "Le Bras-de-fer",
+      "Le Mée",
+      "Le Plessis-Chenet",
+      "Le Vert-de-Maisons",
+      "Lieusaint-Moissy",
+      "Louvres",
+      "Maisons-Alfort-Alfortville",
+      "Malesherbes"
+    ]
+  },
+  {
+    "year": "2024",
+    "total_rows": 34568951,
+    "rer_d_rows": 5310303,
+    "rer_d_pct_of_file": 15.36,
+    "tct_codes": {
+      "TBD": 5310303
+    },
+    "lib_tct_samples": [
+      "Train transport Ile-de-France Mobilités à charge, ligne D du RER"
+    ],
+    "date_min": "2024-01-01",
+    "date_max": "2024-12-31",
+    "distinct_origins": 55,
+    "distinct_destinations": 59,
+    "distinct_jalon_stations": 82,
+    "distinct_circulations": 159652,
+    "obs_null_pct": 12.91,
+    "est_only_pct": 12.91,
+    "obs_present_pct": 87.09,
+    "weekday_circ_count": 124925,
+    "weekend_circ_count": 34727,
+    "month_counts": {
+      "2024-01": 443619,
+      "2024-02": 433174,
+      "2024-03": 440760,
+      "2024-04": 444260,
+      "2024-05": 450991,
+      "2024-06": 435649,
+      "2024-07": 442445,
+      "2024-08": 431766,
+      "2024-09": 479450,
+      "2024-10": 469252,
+      "2024-11": 431880,
+      "2024-12": 407057
+    },
+    "top_od_pairs": [
+      [
+        [
+          "Goussainville",
+          "Melun"
+        ],
+        16298
+      ],
+      [
+        [
+          "Melun",
+          "Goussainville"
+        ],
+        15825
+      ],
+      [
+        [
+          "Orry-la-Ville-Coye",
+          "Corbeil-Essonnes"
+        ],
+        11027
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Orry-la-Ville-Coye"
+        ],
+        10738
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Villiers-le-Bel-Gonesse"
+        ],
+        9907
+      ],
+      [
+        [
+          "Villiers-le-Bel-Gonesse",
+          "Corbeil-Essonnes"
+        ],
+        9084
+      ],
+      [
+        [
+          "Malesherbes",
+          "Juvisy"
+        ],
+        8328
+      ],
+      [
+        [
+          "Melun",
+          "Corbeil-Essonnes"
+        ],
+        5972
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Juvisy"
+        ],
+        5849
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Melun"
+        ],
+        5319
+      ],
+      [
+        [
+          "",
+          "Malesherbes"
+        ],
+        5120
+      ],
+      [
+        [
+          "Juvisy",
+          "Malesherbes"
+        ],
+        4263
+      ],
+      [
+        [
+          "Paris-Gare-de-Lyon (Banlieue)",
+          "Melun"
+        ],
+        4162
+      ],
+      [
+        [
+          "Creil",
+          "Corbeil-Essonnes"
+        ],
+        3780
+      ],
+      [
+        [
+          "Paris-Gare-de-Lyon (Banlieue)",
+          "Corbeil-Essonnes"
+        ],
+        3732
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Creil"
+        ],
+        3318
+      ],
+      [
+        [
+          "Melun",
+          "Paris-Gare-de-Lyon (Banlieue)"
+        ],
+        3258
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Paris-Gare-de-Lyon (Banlieue)"
+        ],
+        3210
+      ],
+      [
+        [
+          "Melun",
+          "Juvisy"
+        ],
+        2628
+      ],
+      [
+        [
+          "",
+          "Corbeil-Essonnes"
+        ],
+        2306
+      ],
+      [
+        [
+          "Juvisy",
+          "Melun"
+        ],
+        2047
+      ],
+      [
+        [
+          "Juvisy",
+          "Corbeil-Essonnes"
+        ],
+        1940
+      ],
+      [
+        [
+          "Villiers-le-Bel-Gonesse",
+          "Juvisy"
+        ],
+        1873
+      ],
+      [
+        [
+          "Corbeil-Essonnes",
+          "Stade-de-France-St-Denis"
+        ],
+        1334
+      ],
+      [
+        [
+          "Melun",
+          "Paris-Gare-de-Lyon"
+        ],
+        1252
+      ]
+    ],
+    "arrival_dest_rows": 157686,
+    "arrival_dest_delay_ok": 157686,
+    "origin_depart_rows": 151461,
+    "delay_negative": 50400,
+    "delay_over_120": 43,
+    "delay_samples": [
+      {
+        "date_circ": "2024-01-01",
+        "orig": "Paris-Gare-de-Lyon (Banlieue)",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": 31.8,
+        "used_est": false
+      },
+      {
+        "date_circ": "2024-01-01",
+        "orig": "Paris-Gare-de-Lyon (Banlieue)",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": 6.6,
+        "used_est": false
+      },
+      {
+        "date_circ": "2024-01-01",
+        "orig": "Paris-Gare-de-Lyon (Banlieue)",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": 4.3,
+        "used_est": false
+      },
+      {
+        "date_circ": "2024-01-01",
+        "orig": "Paris-Gare-de-Lyon (Banlieue)",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": 0.3,
+        "used_est": false
+      },
+      {
+        "date_circ": "2024-01-01",
+        "orig": "Melun",
+        "dest": "Goussainville",
+        "jalon": "Goussainville",
+        "delay_min": -0.9,
+        "used_est": false
+      }
+    ],
+    "branch_jalon_hits": {
+      "melun": {
+        "Melun": 60692,
+        "Le Mée": 87119,
+        "Juvisy": 162600,
+        "Vigneux-sur-Seine": 122835
+      },
+      "corbeil": {
+        "Corbeil-Essonnes": 127877,
+        "Juvisy": 162600,
+        "Vigneux-sur-Seine": 122835
+      },
+      "orry": {
+        "Goussainville": 99045,
+        "Louvres": 63494
+      },
+      "creil": {
+        "Goussainville": 99045,
+        "Creil": 8197
+      }
+    },
+    "branch_od": {
+      "melun": {},
+      "corbeil": {},
+      "orry": {},
+      "creil": {}
+    },
+    "examples": [
+      {
+        "date_circ": "2024-01-14",
+        "id_circ": "82782858",
+        "num_marche": "150266",
+        "code_ci_origine": "682005",
+        "code_ch_origine": "BV",
+        "lib_ci_origine": "Melun",
+        "code_ci_destination": "686030",
+        "code_ch_destination": "00",
+        "lib_ci_destination": "Paris-Gare-de-Lyon (Banlieue)",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2024-01-01",
+        "id_circ": "82516372",
+        "num_marche": "127003",
+        "code_ci_origine": "686030",
+        "code_ch_origine": "00",
+        "lib_ci_origine": "Paris-Gare-de-Lyon (Banlieue)",
+        "code_ci_destination": "276246",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Goussainville",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2024-01-01",
+        "id_circ": "82516372",
+        "num_marche": "127003",
+        "code_ci_origine": "686030",
+        "code_ch_origine": "00",
+        "lib_ci_origine": "Paris-Gare-de-Lyon (Banlieue)",
+        "code_ci_destination": "276246",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Goussainville",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2024-01-01",
+        "id_circ": "82516372",
+        "num_marche": "127003",
+        "code_ci_origine": "686030",
+        "code_ch_origine": "00",
+        "lib_ci_origine": "Paris-Gare-de-Lyon (Banlieue)",
+        "code_ci_destination": "276246",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Goussainville",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      },
+      {
+        "date_circ": "2024-01-01",
+        "id_circ": "82516372",
+        "num_marche": "127003",
+        "code_ci_origine": "686030",
+        "code_ch_origine": "00",
+        "lib_ci_origine": "Paris-Gare-de-Lyon (Banlieue)",
+        "code_ci_destination": "276246",
+        "code_ch_destination": "BV",
+        "lib_ci_destination": "Goussainville",
+        "ui": "1287",
+        "lib_ui": "SNCF-TRANSILIEN",
+        "tct": "TBD"
+      }
+    ],
+    "origins_sample": [
+      "",
+      "Ballancourt",
+      "Boussy-St-Antoine",
+      "Boutigny",
+      "Brunoy",
+      "Buno-Gironville",
+      "Cesson",
+      "Chantilly-Gouvieux",
+      "Chatelet-les-Halles",
+      "Combs-la-Ville-Quincy",
+      "Corbeil-Essonnes",
+      "Creil",
+      "Créteil-Pompadour",
+      "Essonnes-Robinson",
+      "Garges",
+      "Goussainville",
+      "Grand-Bourg (Essonne)",
+      "Grigny-Centre",
+      "Grigny-Val-de-Seine",
+      "Juvisy",
+      "La Borne-Blanche",
+      "La Ferté-Alais",
+      "Le Bras-de-fer",
+      "Le Vert-de-Maisons",
+      "Les Noues",
+      "Lieusaint-Moissy",
+      "Louvres",
+      "Maisons-Alfort-Alfortville",
+      "Maisse",
+      "Malesherbes"
+    ],
+    "destinations_sample": [
+      "Ballancourt",
+      "Boigneville",
+      "Boussy-St-Antoine",
+      "Boutigny",
+      "Brunoy",
+      "Cesson",
+      "Chantilly-Gouvieux",
+      "Chatelet-les-Halles",
+      "Combs-la-Ville-Quincy",
+      "Corbeil-Essonnes",
+      "Creil",
+      "Créteil-Pompadour",
+      "Essonnes-Robinson",
+      "Garges",
+      "Goussainville",
+      "Grand-Bourg (Essonne)",
+      "Grigny-Centre",
+      "Juvisy",
+      "La Borne-Blanche",
+      "La Ferté-Alais",
+      "Le Bras-de-fer",
+      "Le Mée",
+      "Le Vert-de-Maisons",
+      "Les Noues",
+      "Lieusaint-Moissy",
+      "Louvres",
+      "Maisons-Alfort-Alfortville",
+      "Malesherbes",
+      "Melun",
+      "Mennecy"
+    ]
+  }
+]
